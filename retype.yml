@@ -1,15 +1,14 @@
 input: .
 output: .retype
 
-url: docs.example.com # Use your website address here
-
-start:
-  # Uncomment the next line to try Retype Pro features
-  # pro: true
+url: docs.example.com
 
 branding:
   title: My Documentation
   label: Docs
 
+navigation:
+  collapse: true
+
 footer:
-  copyright: "&copy; Copyright {{ year }}. All rights reserved."
+  copyright: "&copy; {{ year }} My Company. All rights reserved."

@@ -1,1 +1,5 @@
+---
+hidden: true
+---
+
 # myDocumentation
