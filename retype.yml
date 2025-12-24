@@ -1,0 +1,15 @@
+input: .
+output: .retype
+
+url: docs.example.com # Use your website address here
+
+start:
+  # Uncomment the next line to try Retype Pro features
+  # pro: true
+
+branding:
+  title: My Documentation
+  label: Docs
+
+footer:
+  copyright: "&copy; Copyright {{ year }}. All rights reserved."
