@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.820073312395">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>1 Delta Lake Interview Preparation Notes</title>
+    <meta name="title" content="1 Delta Lake Interview Preparation Notes">
+    <meta name="description" content="What is Delta Lake?">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://docs.example.com/delta-format/delta_format/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.example.com/delta-format/delta_format/">
+    <meta property="og:title" content="1 Delta Lake Interview Preparation Notes">
+    <meta property="og:description" content="What is Delta Lake?">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://docs.example.com/delta-format/delta_format/">
+    <meta property="twitter:title" content="1 Delta Lake Interview Preparation Notes">
+    <meta property="twitter:description" content="What is Delta Lake?">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.820073312395" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820073312395" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820073312395" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820073312395" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
+                        </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="1-delta-lake-interview-preparation-notes" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-delta-lake-interview-preparation-notes">#</doc-anchor-trigger>
+        <span>1 Delta Lake Interview Preparation Notes</span>
+    </h1>
+</doc-anchor-target>
+<doc-anchor-target id="1-delta-lake--delta-format-introduction">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-delta-lake--delta-format-introduction">#</doc-anchor-trigger>
+        <span>1. Delta Lake / Delta Format Introduction</span>
+    </h2>
+</doc-anchor-target>
+<p><strong>What is Delta Lake?</strong></p>
+<ul>
+<li>Open-source storage framework that brings ACID transactions to data lakes</li>
+<li>Built on top of Parquet files with a transaction log</li>
+<li>Not a separate storage system—it&#x27;s a layer on top of existing object stores (S3, ADLS, GCS, HDFS)</li>
+<li>Provides table abstraction over data lake files</li>
+</ul>
+<p><strong>What is Delta Format?</strong></p>
+<ul>
+<li>File format specification for storing data with ACID guarantees</li>
+<li>Consists of:
+<ul>
+<li><strong>Data files</strong>: Parquet files containing actual data</li>
+<li><strong>Transaction log</strong>: JSON files tracking all changes (the <code v-pre>_delta_log</code> directory)</li>
+</ul>
+</li>
+<li>Delta Table = Delta Format + APIs to read/write</li>
+</ul>
+<p><strong>Key Point for Interviews:</strong></p>
+<ul>
+<li>Delta Lake is NOT a database—it&#x27;s a storage layer</li>
+<li>No separate compute engine required—works with Spark, Presto, Trino, Flink, etc.</li>
+</ul>
+<hr>
+<doc-anchor-target id="2-data-storage-evolution">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-data-storage-evolution">#</doc-anchor-trigger>
+        <span>2. Data Storage Evolution</span>
+    </h2>
+</doc-anchor-target>
+<p><strong>Traditional Data Warehouse (Pre-2010)</strong></p>
+<ul>
+<li>Structured data only</li>
+<li>Proprietary formats</li>
+<li>Expensive, limited scalability</li>
+<li>Strong ACID guarantees</li>
+</ul>
+<p><strong>Data Lake Era (2010-2015)</strong></p>
+<ul>
+<li>Store raw data (structured, semi-structured, unstructured)</li>
+<li>Open formats (Parquet, ORC, Avro)</li>
+<li>Cheap storage (S3, ADLS)</li>
+<li><strong>Problems:</strong>
+<ul>
+<li>No ACID transactions</li>
+<li>No schema enforcement</li>
+<li>Data quality issues</li>
+<li>Difficult to maintain consistency</li>
+<li>Small file problem</li>
+</ul>
+</li>
+</ul>
+<p><strong>Lakehouse Era (2019-present)</strong></p>
+<ul>
+<li>Combines data lake flexibility with warehouse reliability</li>
+<li>Delta Lake, Apache Iceberg, Apache Hudi</li>
+<li>ACID transactions + schema enforcement on data lakes</li>
+<li>Delta Lake specifically introduced by Databricks in 2019, open-sourced immediately</li>
+</ul>
+<p><strong>Interview Trap:</strong></p>
+<ul>
+<li>Be clear: Delta Lake doesn&#x27;t replace data lakes—it enhances them</li>
+<li>Still uses same underlying storage (S3/ADLS/etc.)</li>
+</ul>
+<hr>
+<doc-anchor-target id="3-why-delta-lake">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-why-delta-lake">#</doc-anchor-trigger>
+        <span>3. Why Delta Lake?</span>
+    </h2>
+</doc-anchor-target>
+<p><strong>Problems Delta Lake Solves:</strong></p>
+<ol>
+<li><p><strong>No ACID Transactions in Data Lakes</strong></p>
+<ul>
+<li>Reading while writing = inconsistent data</li>
+<li>Failed jobs leave partial writes</li>
+<li>No rollback mechanism</li>
+</ul>
+</li>
+<li><p><strong>Data Quality Issues</strong></p>
+<ul>
+<li>No schema enforcement</li>
+<li>Schema evolution without validation</li>
+<li>Bad data ingestion with no guarantees</li>
+</ul>
+</li>
+<li><p><strong>Performance Problems</strong></p>
+<ul>
+<li>Small file problem (millions of tiny files)</li>
+<li>No data clustering</li>
+<li>Full table scans for updates/deletes</li>
+</ul>
+</li>
+<li><p><strong>Operational Complexity</strong></p>
+<ul>
+<li>Manual compaction needed</li>
+<li>Difficult to handle late-arriving data</li>
+<li>Time travel not possible</li>
+<li>No audit trail</li>
+</ul>
+</li>
+</ol>
+<p><strong>Delta Lake Solutions:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Problem</th>
+<th>Delta Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No ACID</td>
+<td>Transaction log with optimistic concurrency</td>
+</tr>
+<tr>
+<td>Bad data quality</td>
+<td>Schema validation, constraints, enforcement</td>
+</tr>
+<tr>
+<td>Small files</td>
+<td>Auto-optimize, Z-ordering</td>
+</tr>
+<tr>
+<td>No updates/deletes</td>
+<td>MERGE, UPDATE, DELETE support</td>
+</tr>
+<tr>
+<td>No time travel</td>
+<td>Version history in transaction log</td>
+</tr>
+<tr>
+<td>No audit</td>
+<td>DESCRIBE HISTORY command</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="4-features-of-delta-lake">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-features-of-delta-lake">#</doc-anchor-trigger>
+        <span>4. Features of Delta Lake</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="41-acid-transactions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#41-acid-transactions">#</doc-anchor-trigger>
+        <span>4.1 ACID Transactions</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>Atomicity</strong>: All or nothing writes</li>
+<li><strong>Consistency</strong>: Schema validation before write</li>
+<li><strong>Isolation</strong>: Serializable isolation level (strongest)</li>
+<li><strong>Durability</strong>: Once committed, guaranteed to persist</li>
+</ul>
+<p><strong>Code Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Two concurrent writes - both succeed or both fail
+# Writer 1
+df1.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/table&quot;)
+
+# Writer 2 (concurrent)
+df2.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/table&quot;)
+
+# Both commits recorded in transaction log atomically</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="42-schema-enforcement--evolution">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#42-schema-enforcement--evolution">#</doc-anchor-trigger>
+        <span>4.2 Schema Enforcement &amp; Evolution</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Schema Enforcement (default):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Initial schema: id (INT), name (STRING)
+df1 = spark.createDataFrame([(1, &quot;Alice&quot;)], [&quot;id&quot;, &quot;name&quot;])
+df1.write.format(&quot;delta&quot;).save(&quot;/data/users&quot;)
+
+# This FAILS - mismatched schema
+df2 = spark.createDataFrame([(2, &quot;Bob&quot;, 30)], [&quot;id&quot;, &quot;name&quot;, &quot;age&quot;])
+df2.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/users&quot;)
+# Error: Schema mismatch detected</code></pre>
+</doc-codeblock></div>
+<p><strong>Schema Evolution:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Allow schema evolution
+df2.write.format(&quot;delta&quot;) \
+    .option(&quot;mergeSchema&quot;, &quot;true&quot;) \
+    .mode(&quot;append&quot;) \
+    .save(&quot;/data/users&quot;)
+
+# Now schema includes 'age' column (NULL for existing rows)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li><code v-pre>mergeSchema=true</code> adds new columns, doesn&#x27;t remove or change types</li>
+<li>Type changes require explicit ALTER TABLE</li>
+</ul>
+<doc-anchor-target id="43-time-travel-data-versioning">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#43-time-travel-data-versioning">#</doc-anchor-trigger>
+        <span>4.3 Time Travel (Data Versioning)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Every write creates a new version:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Version 0: Initial data
+df1.write.format(&quot;delta&quot;).save(&quot;/data/orders&quot;)
+
+# Version 1: Append
+df2.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/orders&quot;)
+
+# Version 2: Update
+spark.sql(&quot;UPDATE delta.`/data/orders` SET status='shipped' WHERE id=1&quot;)
+
+# Read specific version
+df_v0 = spark.read.format(&quot;delta&quot;).option(&quot;versionAsOf&quot;, 0).load(&quot;/data/orders&quot;)
+df_v1 = spark.read.format(&quot;delta&quot;).option(&quot;versionAsOf&quot;, 1).load(&quot;/data/orders&quot;)
+
+# Read as of timestamp
+df_historical = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;timestampAsOf&quot;, &quot;2024-01-01&quot;) \
+    .load(&quot;/data/orders&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Trap:</strong></p>
+<ul>
+<li>Versions retained based on retention period (default: 30 days)</li>
+<li>After VACUUM, old versions unreadable</li>
+<li>Time travel uses transaction log, not data file copies</li>
+</ul>
+<doc-anchor-target id="44-merge-upsert-operations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#44-merge-upsert-operations">#</doc-anchor-trigger>
+        <span>4.4 MERGE (UPSERT) Operations</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+# Target table
+target = DeltaTable.forPath(spark, &quot;/data/customers&quot;)
+
+# Source updates
+updates = spark.createDataFrame([
+    (1, &quot;Alice Updated&quot;, &quot;alice@new.com&quot;),
+    (3, &quot;Charlie New&quot;, &quot;charlie@new.com&quot;)
+], [&quot;id&quot;, &quot;name&quot;, &quot;email&quot;])
+
+# MERGE logic
+target.alias(&quot;t&quot;).merge(
+    updates.alias(&quot;s&quot;),
+    &quot;t.id = s.id&quot;
+).whenMatchedUpdate(set={
+    &quot;name&quot;: &quot;s.name&quot;,
+    &quot;email&quot;: &quot;s.email&quot;
+}).whenNotMatchedInsert(values={
+    &quot;id&quot;: &quot;s.id&quot;,
+    &quot;name&quot;: &quot;s.name&quot;,
+    &quot;email&quot;: &quot;s.email&quot;
+}).execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>SQL Equivalent:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">MERGE INTO delta.`/data/customers` AS t
+USING updates AS s
+ON t.id = s.id
+WHEN MATCHED THEN UPDATE SET t.name = s.name, t.email = s.email
+WHEN NOT MATCHED THEN INSERT (id, name, email) VALUES (s.id, s.name, s.email)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="45-delete-and-update">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#45-delete-and-update">#</doc-anchor-trigger>
+        <span>4.5 DELETE and UPDATE</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+dt = DeltaTable.forPath(spark, &quot;/data/orders&quot;)
+
+# DELETE
+dt.delete(&quot;status = 'cancelled'&quot;)
+
+# UPDATE
+dt.update(
+    condition=&quot;order_date &lt; '2023-01-01'&quot;,
+    set={&quot;status&quot;: &quot;'archived'&quot;}
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">DELETE FROM delta.`/data/orders` WHERE status = 'cancelled';
+UPDATE delta.`/data/orders` SET status = 'archived' WHERE order_date &lt; '2023-01-01';</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>DELETE/UPDATE not in-place—creates new Parquet files</li>
+<li>Old files marked as removed in transaction log</li>
+<li>Requires rewriting affected data files</li>
+</ul>
+<doc-anchor-target id="46-unified-batch-and-streaming">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#46-unified-batch-and-streaming">#</doc-anchor-trigger>
+        <span>4.6 Unified Batch and Streaming</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Batch write
+df_batch.write.format(&quot;delta&quot;).save(&quot;/data/events&quot;)
+
+# Streaming write to same table
+df_stream = spark.readStream.format(&quot;kafka&quot;).load()
+df_stream.writeStream \
+    .format(&quot;delta&quot;) \
+    .outputMode(&quot;append&quot;) \
+    .option(&quot;checkpointLocation&quot;, &quot;/checkpoints/events&quot;) \
+    .start(&quot;/data/events&quot;)
+
+# Streaming read
+df_stream_read = spark.readStream.format(&quot;delta&quot;).load(&quot;/data/events&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>Same table accessed by batch and streaming—no separate pipelines</li>
+<li>Streaming writes are also ACID</li>
+<li>No &quot;exactly-once&quot; issues with proper checkpointing</li>
+</ul>
+<doc-anchor-target id="47-automatic-file-management">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#47-automatic-file-management">#</doc-anchor-trigger>
+        <span>4.7 Automatic File Management</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>OPTIMIZE (Compaction):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+dt = DeltaTable.forPath(spark, &quot;/data/sales&quot;)
+
+# Compact small files
+dt.optimize().executeCompaction()</code></pre>
+</doc-codeblock></div>
+<p><strong>Z-ORDER (Data Clustering):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Z-order by frequently filtered columns
+dt.optimize().executeZOrderBy(&quot;date&quot;, &quot;region&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>VACUUM (Cleanup):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Remove files older than retention period
+dt.vacuum(168)  # 168 hours = 7 days (default: 7 days)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Trap:</strong></p>
+<ul>
+<li>OPTIMIZE doesn&#x27;t run automatically (unless Auto-Optimize enabled)</li>
+<li>VACUUM deletes physical files—time travel stops working for vacuumed versions</li>
+<li>Minimum retention: 7 days (safety check to prevent breaking time travel)</li>
+</ul>
+<doc-anchor-target id="48-audit-history">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#48-audit-history">#</doc-anchor-trigger>
+        <span>4.8 Audit History</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">DESCRIBE HISTORY delta.`/data/orders`;</code></pre>
+</doc-codeblock></div>
+<p><strong>Output Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">version | timestamp           | operation | operationParameters
+--------|---------------------|-----------|--------------------
+3       | 2024-12-26 10:00:00 | MERGE     | predicate: [id=1]
+2       | 2024-12-26 09:00:00 | UPDATE    | predicate: [status='pending']
+1       | 2024-12-26 08:00:00 | WRITE     | mode: Append
+0       | 2024-12-26 07:00:00 | WRITE     | mode: Overwrite</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="49-data-quality-constraints">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#49-data-quality-constraints">#</doc-anchor-trigger>
+        <span>4.9 Data Quality Constraints</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>NOT NULL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">ALTER TABLE delta.`/data/users` ALTER COLUMN email SET NOT NULL;</code></pre>
+</doc-codeblock></div>
+<p><strong>CHECK Constraints:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">ALTER TABLE delta.`/data/orders`
+ADD CONSTRAINT valid_amount CHECK (amount &gt;= 0);</code></pre>
+</doc-codeblock></div>
+<p><strong>Code Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># This write will FAIL
+df_invalid = spark.createDataFrame([(-100, &quot;order1&quot;)], [&quot;amount&quot;, &quot;order_id&quot;])
+df_invalid.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/orders&quot;)
+# Error: CHECK constraint valid_amount violated</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>Constraints enforced at write time</li>
+<li>Constraint violations fail the entire transaction</li>
+<li>Not all SQL constraints supported (e.g., FOREIGN KEY not supported)</li>
+</ul>
+<hr>
+<doc-anchor-target id="5-delta-lake-architecture">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#5-delta-lake-architecture">#</doc-anchor-trigger>
+        <span>5. Delta Lake Architecture</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="51-physical-storage-layout">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#51-physical-storage-layout">#</doc-anchor-trigger>
+        <span>5.1 Physical Storage Layout</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Directory Structure:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">/data/users/
+├── _delta_log/
+│   ├── 00000000000000000000.json    # Version 0
+│   ├── 00000000000000000001.json    # Version 1
+│   ├── 00000000000000000002.json    # Version 2
+│   ├── 00000000000000000010.checkpoint.parquet  # Checkpoint
+│   └── _last_checkpoint                         # Pointer to last checkpoint
+├── part-00000-&lt;uuid&gt;.snappy.parquet  # Data file 1
+├── part-00001-&lt;uuid&gt;.snappy.parquet  # Data file 2
+└── part-00002-&lt;uuid&gt;.snappy.parquet  # Data file 3</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="52-transaction-log-_delta_log">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#52-transaction-log-_delta_log">#</doc-anchor-trigger>
+        <span>5.2 Transaction Log (<code v-pre>_delta_log</code>)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Core Concept:</strong></p>
+<ul>
+<li>Single source of truth for table state</li>
+<li>Ordered sequence of JSON files</li>
+<li>Each file = one atomic transaction</li>
+<li>Version number = sequential commit</li>
+</ul>
+<p><strong>Transaction Log Entry Structure:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">{
+  &quot;commitInfo&quot;: {
+    &quot;timestamp&quot;: 1672531200000,
+    &quot;operation&quot;: &quot;WRITE&quot;,
+    &quot;operationParameters&quot;: { &quot;mode&quot;: &quot;Append&quot; },
+    &quot;readVersion&quot;: 0,
+    &quot;isBlindAppend&quot;: true
+  },
+  &quot;add&quot;: {
+    &quot;path&quot;: &quot;part-00000-&lt;uuid&gt;.snappy.parquet&quot;,
+    &quot;size&quot;: 534,
+    &quot;partitionValues&quot;: {},
+    &quot;modificationTime&quot;: 1672531200000,
+    &quot;dataChange&quot;: true,
+    &quot;stats&quot;: &quot;{\&quot;numRecords\&quot;:100,\&quot;minValues\&quot;:{\&quot;id\&quot;:1},\&quot;maxValues\&quot;:{\&quot;id\&quot;:100}}&quot;
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Key Actions in Log:</strong></p>
+<ul>
+<li><code v-pre>add</code>: New file added</li>
+<li><code v-pre>remove</code>: File logically deleted (not physically)</li>
+<li><code v-pre>metaData</code>: Schema changes</li>
+<li><code v-pre>protocol</code>: Protocol version</li>
+<li><code v-pre>commitInfo</code>: Transaction metadata</li>
+</ul>
+<doc-anchor-target id="53-checkpoints">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#53-checkpoints">#</doc-anchor-trigger>
+        <span>5.3 Checkpoints</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Why Checkpoints?</strong></p>
+<ul>
+<li>Reading 10,000 JSON files = slow</li>
+<li>Checkpoint = snapshot of entire table state at version N</li>
+<li>Parquet format (faster to read)</li>
+</ul>
+<p><strong>Checkpoint Creation:</strong></p>
+<ul>
+<li>Automatic every 10 commits by default</li>
+<li>Contains all <code v-pre>add</code> actions (active files) at that version</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Version 0-9: JSON files
+Version 10: Checkpoint created (00000000000000000010.checkpoint.parquet)
+Version 11-19: JSON files
+Version 20: Checkpoint created</code></pre>
+</doc-codeblock></div>
+<p><strong>How Table State is Reconstructed:</strong></p>
+<ol>
+<li>Read latest checkpoint</li>
+<li>Replay JSON commits after checkpoint</li>
+<li>Build current list of active files</li>
+</ol>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>Checkpoint interval configurable: <code v-pre>delta.checkpointInterval</code></li>
+<li>Without checkpoints, reads get slower as versions grow</li>
+<li>Checkpoints don&#x27;t replace JSON files—both coexist</li>
+</ul>
+<doc-anchor-target id="54-optimistic-concurrency-control">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#54-optimistic-concurrency-control">#</doc-anchor-trigger>
+        <span>5.4 Optimistic Concurrency Control</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>How Concurrent Writes Work:</strong></p>
+<ol>
+<li><strong>Writer A</strong> reads current version (v5)</li>
+<li><strong>Writer B</strong> reads current version (v5)</li>
+<li><strong>Writer A</strong> attempts commit to v6:
+<ul>
+<li>Checks if anyone committed v6 already → No</li>
+<li>Writes transaction log file <code v-pre>00000000000000000006.json</code></li>
+<li>Success</li>
+</ul>
+</li>
+<li><strong>Writer B</strong> attempts commit to v6:
+<ul>
+<li>Checks if anyone committed v6 already → Yes (Writer A did)</li>
+<li>Checks for conflicts</li>
+<li>If conflict: Retry from latest version (v6)</li>
+<li>If no conflict: Write as v7</li>
+</ul>
+</li>
+</ol>
+<p><strong>Conflict Detection:</strong></p>
+<ul>
+<li>Two writes conflict if they modify the same data files</li>
+<li>Append-only writes rarely conflict</li>
+<li>UPDATE/DELETE/MERGE on same partitions = conflict</li>
+</ul>
+<p><strong>Code Example - Conflict:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Writer 1 and Writer 2 both try to update same partition
+# Only one succeeds initially, other retries
+
+# Writer 1
+spark.sql(&quot;UPDATE delta.`/data/sales` SET status='processed' WHERE date='2024-01-01'&quot;)
+
+# Writer 2 (concurrent)
+spark.sql(&quot;UPDATE delta.`/data/sales` SET amount=amount*1.1 WHERE date='2024-01-01'&quot;)
+
+# One commits first, other detects conflict and retries</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Trap:</strong></p>
+<ul>
+<li>&quot;Optimistic&quot; means: assume no conflicts, check at commit time</li>
+<li>NOT pessimistic locking (no table locks during write)</li>
+<li>Retries are automatic, transparent to user</li>
+</ul>
+<doc-anchor-target id="55-read-and-write-flow">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#55-read-and-write-flow">#</doc-anchor-trigger>
+        <span>5.5 Read and Write Flow</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Write Flow:</strong></p>
+<ol>
+<li>Schema validation</li>
+<li>Write data as Parquet files</li>
+<li>Compute file statistics (min/max, count)</li>
+<li>Check for conflicts (read latest version)</li>
+<li>Write transaction log JSON file</li>
+<li>Atomic commit by successfully writing log file</li>
+</ol>
+<p><strong>Read Flow (Current Version):</strong></p>
+<ol>
+<li>List <code v-pre>_delta_log</code> directory</li>
+<li>Find latest checkpoint</li>
+<li>Read checkpoint (active files at checkpoint version)</li>
+<li>Replay commits after checkpoint</li>
+<li>Build final list of active files</li>
+<li>Read Parquet files from list</li>
+</ol>
+<p><strong>Read Flow (Historical Version):</strong></p>
+<ol>
+<li>Replay transaction log from v0 to requested version</li>
+<li>Build active files list at that version</li>
+<li>Read those Parquet files</li>
+</ol>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>Reads don&#x27;t lock table</li>
+<li>Multiple readers can read different versions simultaneously</li>
+<li>&quot;Active files list&quot; = files added but not removed in log</li>
+</ul>
+<doc-anchor-target id="56-metadata-and-statistics">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#56-metadata-and-statistics">#</doc-anchor-trigger>
+        <span>5.6 Metadata and Statistics</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>File-level Statistics (in Transaction Log):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">&quot;stats&quot;: {
+  &quot;numRecords&quot;: 1000,
+  &quot;minValues&quot;: {&quot;id&quot;: 1, &quot;date&quot;: &quot;2024-01-01&quot;},
+  &quot;maxValues&quot;: {&quot;id&quot;: 1000, &quot;date&quot;: &quot;2024-12-31&quot;},
+  &quot;nullCount&quot;: {&quot;id&quot;: 0, &quot;date&quot;: 0}
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Data skipping: Skip files not matching query predicates</li>
+<li>Example: <code v-pre>SELECT * FROM table WHERE id = 500</code>
+<ul>
+<li>Delta reads stats, skips files where max(id) &lt; 500 or min(id) &gt; 500</li>
+</ul>
+</li>
+</ul>
+<p><strong>Interview Point:</strong></p>
+<ul>
+<li>Stats collected automatically during write</li>
+<li>Only for first 32 columns by default</li>
+<li>Critical for query performance—enables data skipping without reading files</li>
+</ul>
+<doc-anchor-target id="57-data-skipping">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#57-data-skipping">#</doc-anchor-trigger>
+        <span>5.7 Data Skipping</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>How It Works:</strong></p>
+<ol>
+<li>Query: <code v-pre>SELECT * FROM orders WHERE date = '2024-01-15'</code></li>
+<li>Delta reads transaction log stats</li>
+<li>Skips files where:
+<ul>
+<li><code v-pre>max(date) &lt; '2024-01-15'</code> OR</li>
+<li><code v-pre>min(date) &gt; '2024-01-15'</code></li>
+</ul>
+</li>
+<li>Only reads files where <code v-pre>'2024-01-15'</code> falls in <code v-pre>[min, max]</code> range</li>
+</ol>
+<p><strong>Z-Ordering Impact:</strong></p>
+<ul>
+<li>Co-locates similar values in same files</li>
+<li>Improves data skipping effectiveness</li>
+<li>Example: Z-order by <code v-pre>date</code> → all records for same date mostly in same file</li>
+</ul>
+<p><strong>Code Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Without Z-order: 100 files, each has mixed dates → reads many files
+# With Z-order by date: 100 files, each has narrow date range → reads few files
+
+dt = DeltaTable.forPath(spark, &quot;/data/orders&quot;)
+dt.optimize().executeZOrderBy(&quot;date&quot;)
+
+# Query now reads fewer files
+spark.sql(&quot;SELECT * FROM delta.`/data/orders` WHERE date = '2024-01-15'&quot;)</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="key-interview-points-summary">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-interview-points-summary">#</doc-anchor-trigger>
+        <span>Key Interview Points Summary</span>
+    </h2>
+</doc-anchor-target>
+<ol>
+<li><p><strong>Delta Lake = Parquet + Transaction Log</strong></p>
+<ul>
+<li>Not a separate storage system</li>
+<li>Transaction log in <code v-pre>_delta_log</code> is the single source of truth</li>
+</ul>
+</li>
+<li><p><strong>ACID via Optimistic Concurrency</strong></p>
+<ul>
+<li>No locks during write</li>
+<li>Conflict detection at commit time</li>
+<li>Automatic retries on conflict</li>
+</ul>
+</li>
+<li><p><strong>Time Travel via Versions</strong></p>
+<ul>
+<li>Every commit = new version</li>
+<li>Retained for 30 days by default</li>
+<li>VACUUM deletes old data files</li>
+</ul>
+</li>
+<li><p><strong>Schema Enforcement vs Evolution</strong></p>
+<ul>
+<li>Default: strict enforcement</li>
+<li><code v-pre>mergeSchema=true</code>: allow evolution</li>
+<li>Constraints enforced at write time</li>
+</ul>
+</li>
+<li><p><strong>MERGE/UPDATE/DELETE Not In-Place</strong></p>
+<ul>
+<li>Rewrite affected files</li>
+<li>Mark old files as removed in log</li>
+<li>VACUUM deletes physical files later</li>
+</ul>
+</li>
+<li><p><strong>Performance Features</strong></p>
+<ul>
+<li>Data skipping via file statistics</li>
+<li>Z-ordering for better clustering</li>
+<li>Checkpoints for faster reads</li>
+<li>OPTIMIZE for small file compaction</li>
+</ul>
+</li>
+<li><p><strong>Common Pitfall:</strong></p>
+<ul>
+<li>VACUUM before retention period → breaks time travel</li>
+<li>Forgetting to OPTIMIZE → small file problem</li>
+<li>Not Z-ordering frequently filtered columns → poor data skipping</li>
+</ul>
+</li>
+</ol>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/architecture/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">02 Databricks Architecture & Core Roles</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../delta-format/delta_log/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">2 Delta Lake Transaction Log & ACID Implementation</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>© 2025 My Company. All rights reserved.</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "1 Delta Lake Interview Preparation Notes", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>

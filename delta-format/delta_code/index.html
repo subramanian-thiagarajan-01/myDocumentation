@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.820073312395">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>3 Delta Lake / Delta Format Code</title>
+    <meta name="title" content="3 Delta Lake / Delta Format Code">
+    <meta name="description" content="Using SQL (CREATE TABLE)">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://docs.example.com/delta-format/delta_code/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.example.com/delta-format/delta_code/">
+    <meta property="og:title" content="3 Delta Lake / Delta Format Code">
+    <meta property="og:description" content="Using SQL (CREATE TABLE)">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://docs.example.com/delta-format/delta_code/">
+    <meta property="twitter:title" content="3 Delta Lake / Delta Format Code">
+    <meta property="twitter:description" content="Using SQL (CREATE TABLE)">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.820073312395" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820073312395" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820073312395" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820073312395" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
+                        </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="3-delta-lake--delta-format-code" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-delta-lake--delta-format-code">#</doc-anchor-trigger>
+        <span>3 Delta Lake / Delta Format Code</span>
+    </h1>
+</doc-anchor-target>
+<doc-anchor-target id="1-creating-delta-tables">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-creating-delta-tables">#</doc-anchor-trigger>
+        <span>1. Creating Delta Tables</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="11-basic-delta-table-creation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#11-basic-delta-table-creation">#</doc-anchor-trigger>
+        <span>1.1 Basic Delta Table Creation</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Using SQL (CREATE TABLE)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create managed Delta table
+CREATE TABLE employees (
+    id INT,
+    name STRING,
+    salary DECIMAL(10,2),
+    hire_date DATE
+) USING DELTA;
+
+-- Create external Delta table with location
+CREATE TABLE employees_external (
+    id INT,
+    name STRING,
+    salary DECIMAL(10,2)
+) USING DELTA
+LOCATION '/mnt/delta/employees';
+
+-- Create table with partitioning
+CREATE TABLE events (
+    event_id STRING,
+    event_date DATE,
+    user_id INT
+) USING DELTA
+PARTITIONED BY (event_date);
+
+-- Create table with table properties
+CREATE TABLE transactions (
+    txn_id STRING,
+    amount DECIMAL(10,2)
+) USING DELTA
+TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true'
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>Using PySpark DataFrame API</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+
+spark = SparkSession.builder.getOrCreate()
+
+# Create DataFrame
+schema = StructType([
+    StructField(&quot;id&quot;, IntegerType(), False),
+    StructField(&quot;name&quot;, StringType(), True),
+    StructField(&quot;salary&quot;, DecimalType(10,2), True),
+    StructField(&quot;hire_date&quot;, DateType(), True)
+])
+
+df = spark.createDataFrame([
+    (1, &quot;Alice&quot;, 75000.00, &quot;2020-01-15&quot;),
+    (2, &quot;Bob&quot;, 80000.00, &quot;2019-06-20&quot;)
+], schema)
+
+# Write as Delta table
+df.write.format(&quot;delta&quot;).mode(&quot;overwrite&quot;).saveAsTable(&quot;employees&quot;)
+
+# Write to specific location
+df.write.format(&quot;delta&quot;).mode(&quot;overwrite&quot;).save(&quot;/mnt/delta/employees&quot;)
+
+# With partitioning
+df.write.format(&quot;delta&quot;) \
+    .mode(&quot;overwrite&quot;) \
+    .partitionBy(&quot;hire_date&quot;) \
+    .saveAsTable(&quot;employees_partitioned&quot;)
+
+# With table properties
+df.write.format(&quot;delta&quot;) \
+    .mode(&quot;overwrite&quot;) \
+    .option(&quot;delta.autoOptimize.optimizeWrite&quot;, &quot;true&quot;) \
+    .saveAsTable(&quot;employees_optimized&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Using DeltaTableBuilder API</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+DeltaTable.create(spark) \
+    .tableName(&quot;employees_builder&quot;) \
+    .addColumn(&quot;id&quot;, &quot;INT&quot;, nullable=False) \
+    .addColumn(&quot;name&quot;, &quot;STRING&quot;) \
+    .addColumn(&quot;salary&quot;, &quot;DECIMAL(10,2)&quot;) \
+    .addColumn(&quot;hire_date&quot;, &quot;DATE&quot;) \
+    .property(&quot;delta.autoOptimize.optimizeWrite&quot;, &quot;true&quot;) \
+    .execute()
+
+# With location
+DeltaTable.createIfNotExists(spark) \
+    .tableName(&quot;employees_external&quot;) \
+    .addColumn(&quot;id&quot;, &quot;INT&quot;) \
+    .addColumn(&quot;name&quot;, &quot;STRING&quot;) \
+    .location(&quot;/mnt/delta/employees_external&quot;) \
+    .partitionedBy(&quot;hire_date&quot;) \
+    .execute()</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="12-identity-columns-auto-increment">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-identity-columns-auto-increment">#</doc-anchor-trigger>
+        <span>1.2 Identity Columns (Auto-increment)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li>Identity columns auto-generate unique, monotonically increasing values</li>
+<li>Introduced in Delta Lake 2.3.0 / DBR 11.3 LTS</li>
+<li>Guarantees: uniqueness, monotonicity (not gapless)</li>
+<li>Cannot be updated manually</li>
+<li>Survives MERGE, INSERT operations</li>
+</ul>
+<p><strong>SQL Syntax</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table with identity column
+CREATE TABLE orders (
+    order_id BIGINT GENERATED ALWAYS AS IDENTITY,
+    customer_id INT,
+    order_date DATE,
+    amount DECIMAL(10,2)
+) USING DELTA;
+
+-- With START and INCREMENT
+CREATE TABLE orders_custom (
+    order_id BIGINT GENERATED ALWAYS AS IDENTITY (START WITH 1000 INCREMENT BY 1),
+    customer_id INT,
+    amount DECIMAL(10,2)
+) USING DELTA;
+
+-- GENERATED BY DEFAULT (allows manual values)
+CREATE TABLE orders_flexible (
+    order_id BIGINT GENERATED BY DEFAULT AS IDENTITY,
+    customer_id INT,
+    amount DECIMAL(10,2)
+) USING DELTA;</code></pre>
+</doc-codeblock></div>
+<p><strong>Using DeltaTableBuilder</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+DeltaTable.create(spark) \
+    .tableName(&quot;orders&quot;) \
+    .addColumn(&quot;order_id&quot;, &quot;BIGINT&quot;, generatedAlwaysAs=&quot;GENERATED ALWAYS AS IDENTITY&quot;) \
+    .addColumn(&quot;customer_id&quot;, &quot;INT&quot;) \
+    .addColumn(&quot;amount&quot;, &quot;DECIMAL(10,2)&quot;) \
+    .execute()
+
+# With START and INCREMENT
+DeltaTable.create(spark) \
+    .tableName(&quot;orders_custom&quot;) \
+    .addColumn(&quot;order_id&quot;, &quot;BIGINT&quot;,
+               generatedAlwaysAs=&quot;GENERATED ALWAYS AS IDENTITY (START WITH 1000 INCREMENT BY 1)&quot;) \
+    .addColumn(&quot;customer_id&quot;, &quot;INT&quot;) \
+    .execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>Insert Examples</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Identity column auto-populates
+INSERT INTO orders (customer_id, order_date, amount)
+VALUES (101, '2024-01-15', 250.00);
+
+-- GENERATED BY DEFAULT allows explicit values
+INSERT INTO orders_flexible (order_id, customer_id, amount)
+VALUES (5000, 101, 250.00);</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># PySpark - Identity column omitted
+df = spark.createDataFrame([
+    (101, &quot;2024-01-15&quot;, 250.00),
+    (102, &quot;2024-01-16&quot;, 300.00)
+], [&quot;customer_id&quot;, &quot;order_date&quot;, &quot;amount&quot;])
+
+df.write.format(&quot;delta&quot;).mode(&quot;append&quot;).saveAsTable(&quot;orders&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>Identity values are NOT gapless (gaps occur after failures, MERGE operations)</li>
+<li>Identity column cannot be part of PARTITION BY</li>
+<li>Cannot manually INSERT into GENERATED ALWAYS columns</li>
+<li>Identity state stored in Delta table metadata</li>
+<li>High-water mark persists across sessions</li>
+</ul>
+<doc-anchor-target id="13-generatedcomputed-columns">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#13-generatedcomputed-columns">#</doc-anchor-trigger>
+        <span>1.3 Generated/Computed Columns</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Key Concepts:</strong></p>
+<ul>
+<li>Values computed from expressions based on other columns</li>
+<li>Computed at write time, stored physically (not virtual)</li>
+<li>Immutable - cannot be updated directly</li>
+<li>Useful for partitioning, indexing, data quality</li>
+</ul>
+<p><strong>SQL Syntax</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table with generated column
+CREATE TABLE events (
+    event_id STRING,
+    event_timestamp TIMESTAMP,
+    event_date DATE GENERATED ALWAYS AS (CAST(event_timestamp AS DATE)),
+    user_id INT
+) USING DELTA;
+
+-- Multiple generated columns
+CREATE TABLE transactions (
+    txn_id STRING,
+    txn_timestamp TIMESTAMP,
+    amount DECIMAL(10,2),
+    txn_date DATE GENERATED ALWAYS AS (CAST(txn_timestamp AS DATE)),
+    txn_year INT GENERATED ALWAYS AS (YEAR(txn_timestamp)),
+    txn_month INT GENERATED ALWAYS AS (MONTH(txn_timestamp))
+) USING DELTA
+PARTITIONED BY (txn_year, txn_month);
+
+-- String manipulation
+CREATE TABLE users (
+    user_id INT,
+    email STRING,
+    email_domain STRING GENERATED ALWAYS AS (SUBSTRING_INDEX(email, '@', -1))
+) USING DELTA;</code></pre>
+</doc-codeblock></div>
+<p><strong>Using DeltaTableBuilder</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+DeltaTable.create(spark) \
+    .tableName(&quot;events&quot;) \
+    .addColumn(&quot;event_id&quot;, &quot;STRING&quot;) \
+    .addColumn(&quot;event_timestamp&quot;, &quot;TIMESTAMP&quot;) \
+    .addColumn(&quot;event_date&quot;, &quot;DATE&quot;, generatedAlwaysAs=&quot;CAST(event_timestamp AS DATE)&quot;) \
+    .addColumn(&quot;user_id&quot;, &quot;INT&quot;) \
+    .execute()
+
+# With partitioning on generated column
+DeltaTable.create(spark) \
+    .tableName(&quot;transactions&quot;) \
+    .addColumn(&quot;txn_id&quot;, &quot;STRING&quot;) \
+    .addColumn(&quot;txn_timestamp&quot;, &quot;TIMESTAMP&quot;) \
+    .addColumn(&quot;amount&quot;, &quot;DECIMAL(10,2)&quot;) \
+    .addColumn(&quot;txn_year&quot;, &quot;INT&quot;, generatedAlwaysAs=&quot;YEAR(txn_timestamp)&quot;) \
+    .addColumn(&quot;txn_month&quot;, &quot;INT&quot;, generatedAlwaysAs=&quot;MONTH(txn_timestamp)&quot;) \
+    .partitionedBy(&quot;txn_year&quot;, &quot;txn_month&quot;) \
+    .execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>Insert Examples</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Generated columns auto-populate
+INSERT INTO events (event_id, event_timestamp, user_id)
+VALUES ('evt_001', '2024-01-15 10:30:00', 101);
+
+-- Cannot explicitly insert into generated column
+-- This will FAIL:
+-- INSERT INTO events VALUES ('evt_002', '2024-01-15 11:00:00', '2024-01-15', 102);</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># PySpark - Generated column omitted
+from pyspark.sql.functions import current_timestamp
+
+df = spark.createDataFrame([
+    (&quot;evt_001&quot;, &quot;2024-01-15 10:30:00&quot;, 101),
+    (&quot;evt_002&quot;, &quot;2024-01-15 11:00:00&quot;, 102)
+], [&quot;event_id&quot;, &quot;event_timestamp&quot;, &quot;user_id&quot;])
+
+df.write.format(&quot;delta&quot;).mode(&quot;append&quot;).saveAsTable(&quot;events&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>Generated columns are computed at WRITE time (not read time)</li>
+<li>Values are physically stored in data files</li>
+<li>Cannot violate the generation expression</li>
+<li>Expression must be deterministic</li>
+<li>Common use case: partition pruning with derived date columns</li>
+<li>Schema evolution compatible - can add generated columns via ALTER TABLE</li>
+</ul>
+<hr>
+<doc-anchor-target id="2-reading-delta-format-vs-delta-table">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-reading-delta-format-vs-delta-table">#</doc-anchor-trigger>
+        <span>2. Reading Delta Format vs Delta Table</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="21-delta-table-metastore-registered">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#21-delta-table-metastore-registered">#</doc-anchor-trigger>
+        <span>2.1 Delta Table (Metastore-Registered)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>What It Is:</strong></p>
+<ul>
+<li>Table registered in Hive metastore or Unity Catalog</li>
+<li>Metadata includes table name, schema, location, properties</li>
+<li>Supports SQL DDL operations (ALTER, DROP)</li>
+</ul>
+<p><strong>SQL Read</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Read by table name
+SELECT * FROM employees;
+
+-- Time travel by version
+SELECT * FROM employees VERSION AS OF 5;
+
+-- Time travel by timestamp
+SELECT * FROM employees TIMESTAMP AS OF '2024-01-15 10:00:00';
+
+-- Read specific version
+SELECT * FROM employees@v5;</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark Read</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Read current version
+df = spark.table(&quot;employees&quot;)
+
+# Time travel by version
+df = spark.read.format(&quot;delta&quot;).option(&quot;versionAsOf&quot;, 5).table(&quot;employees&quot;)
+
+# Time travel by timestamp
+df = spark.read.format(&quot;delta&quot;).option(&quot;timestampAsOf&quot;, &quot;2024-01-15&quot;).table(&quot;employees&quot;)
+
+# Using DeltaTable API
+from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+df = delta_table.toDF()
+
+# Time travel
+df = delta_table.history().select(&quot;version&quot;, &quot;timestamp&quot;, &quot;operation&quot;).show()</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="22-delta-format-path-based">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#22-delta-format-path-based">#</doc-anchor-trigger>
+        <span>2.2 Delta Format (Path-Based)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>What It Is:</strong></p>
+<ul>
+<li>Direct read from file path (no metastore entry)</li>
+<li>Access underlying Delta log and data files</li>
+<li>Useful for external tables, ad-hoc analysis</li>
+</ul>
+<p><strong>SQL Read</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Read by path
+SELECT * FROM delta.`/mnt/delta/employees`;
+
+-- Time travel by version
+SELECT * FROM delta.`/mnt/delta/employees@v5`;
+
+-- Time travel by timestamp
+SELECT * FROM delta.`/mnt/delta/employees` TIMESTAMP AS OF '2024-01-15';</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark Read</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Read by path
+df = spark.read.format(&quot;delta&quot;).load(&quot;/mnt/delta/employees&quot;)
+
+# Time travel by version
+df = spark.read.format(&quot;delta&quot;).option(&quot;versionAsOf&quot;, 5).load(&quot;/mnt/delta/employees&quot;)
+
+# Time travel by timestamp
+df = spark.read.format(&quot;delta&quot;).option(&quot;timestampAsOf&quot;, &quot;2024-01-15&quot;).load(&quot;/mnt/delta/employees&quot;)
+
+# Using DeltaTable API
+from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forPath(spark, &quot;/mnt/delta/employees&quot;)
+df = delta_table.toDF()</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="23-key-differences">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#23-key-differences">#</doc-anchor-trigger>
+        <span>2.3 Key Differences</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Delta Table</th>
+<th>Delta Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registration</td>
+<td>Metastore entry required</td>
+<td>No registration needed</td>
+</tr>
+<tr>
+<td>Access</td>
+<td><code v-pre>spark.table(&quot;name&quot;)</code></td>
+<td><code v-pre>spark.read.format(&quot;delta&quot;).load(&quot;path&quot;)</code></td>
+</tr>
+<tr>
+<td>DDL Operations</td>
+<td>ALTER, DROP supported</td>
+<td>Not supported</td>
+</tr>
+<tr>
+<td>Table Properties</td>
+<td>Stored in metastore</td>
+<td>Only in <code v-pre>_delta_log</code></td>
+</tr>
+<tr>
+<td>Permissions</td>
+<td>Metastore-level ACLs</td>
+<td>File system permissions only</td>
+</tr>
+<tr>
+<td>Discoverability</td>
+<td>SHOW TABLES lists it</td>
+<td>Must know path</td>
+</tr>
+<tr>
+<td>Unity Catalog</td>
+<td>Full governance support</td>
+<td>Limited governance</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="24-reading-delta-transaction-log">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#24-reading-delta-transaction-log">#</doc-anchor-trigger>
+        <span>2.4 Reading Delta Transaction Log</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Structure:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">/mnt/delta/employees/
+├── _delta_log/
+│   ├── 00000000000000000000.json       # Version 0
+│   ├── 00000000000000000001.json       # Version 1
+│   ├── 00000000000000000002.json       # Version 2
+│   └── 00000000000000000010.checkpoint.parquet
+├── part-00000-xxx.snappy.parquet
+└── part-00001-xxx.snappy.parquet</code></pre>
+</doc-codeblock></div>
+<p><strong>Reading Transaction Log Directly</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Read a specific version's commit file
+log_df = spark.read.json(&quot;/mnt/delta/employees/_delta_log/00000000000000000001.json&quot;)
+log_df.show(truncate=False)
+
+# Common fields in transaction log:
+# - add: files added
+# - remove: files removed
+# - metaData: table metadata
+# - protocol: Delta protocol version
+# - commitInfo: commit metadata</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>Delta Format = raw files + <code v-pre>_delta_log</code></li>
+<li>Delta Table = Delta Format + metastore metadata</li>
+<li>Both use the same underlying format</li>
+<li>Path-based reads bypass metastore, useful for data recovery</li>
+<li>Delta Format can be read by non-Databricks Spark with Delta Lake library</li>
+</ul>
+<hr>
+<doc-anchor-target id="3-upsertmerge-operations-scd-type-1--2">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-upsertmerge-operations-scd-type-1--2">#</doc-anchor-trigger>
+        <span>3. Upsert/Merge Operations (SCD Type 1 &amp; 2)</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="31-merge-syntax-basics">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#31-merge-syntax-basics">#</doc-anchor-trigger>
+        <span>3.1 MERGE Syntax Basics</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>SQL MERGE</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">MERGE INTO target_table AS target
+USING source_table AS source
+ON target.id = source.id
+WHEN MATCHED THEN UPDATE SET *
+WHEN NOT MATCHED THEN INSERT *;</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark MERGE</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+target = DeltaTable.forName(spark, &quot;target_table&quot;)
+source = spark.table(&quot;source_table&quot;)
+
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.id = source.id&quot;
+).whenMatchedUpdateAll() \
+ .whenNotMatchedInsertAll() \
+ .execute()</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="32-scd-type-1-overwrite-changes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#32-scd-type-1-overwrite-changes">#</doc-anchor-trigger>
+        <span>3.2 SCD Type 1 (Overwrite Changes)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Scenario:</strong> Update customer records, overwriting old values</p>
+<p><strong>SQL</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Source data
+CREATE OR REPLACE TEMP VIEW customer_updates AS
+SELECT 1 AS customer_id, 'Alice' AS name, 'alice@new.com' AS email, 30 AS age
+UNION ALL
+SELECT 3 AS customer_id, 'Charlie' AS name, 'charlie@example.com' AS email, 28 AS age;
+
+-- SCD Type 1 Merge
+MERGE INTO customers AS target
+USING customer_updates AS source
+ON target.customer_id = source.customer_id
+WHEN MATCHED THEN
+    UPDATE SET
+        target.name = source.name,
+        target.email = source.email,
+        target.age = source.age
+WHEN NOT MATCHED THEN
+    INSERT (customer_id, name, email, age)
+    VALUES (source.customer_id, source.name, source.email, source.age);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+# Source DataFrame
+source = spark.createDataFrame([
+    (1, &quot;Alice&quot;, &quot;alice@new.com&quot;, 30),
+    (3, &quot;Charlie&quot;, &quot;charlie@example.com&quot;, 28)
+], [&quot;customer_id&quot;, &quot;name&quot;, &quot;email&quot;, &quot;age&quot;])
+
+# Target Delta Table
+target = DeltaTable.forName(spark, &quot;customers&quot;)
+
+# SCD Type 1 Merge
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.customer_id = source.customer_id&quot;
+).whenMatchedUpdate(set={
+    &quot;name&quot;: &quot;source.name&quot;,
+    &quot;email&quot;: &quot;source.email&quot;,
+    &quot;age&quot;: &quot;source.age&quot;
+}).whenNotMatchedInsert(values={
+    &quot;customer_id&quot;: &quot;source.customer_id&quot;,
+    &quot;name&quot;: &quot;source.name&quot;,
+    &quot;email&quot;: &quot;source.email&quot;,
+    &quot;age&quot;: &quot;source.age&quot;
+}).execute()
+
+# Shorthand using updateAll/insertAll
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.customer_id = source.customer_id&quot;
+).whenMatchedUpdateAll() \
+ .whenNotMatchedInsertAll() \
+ .execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>Result:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Before:
+customer_id | name    | email              | age
+1           | Alice   | alice@old.com      | 25
+2           | Bob     | bob@example.com    | 35
+
+After:
+customer_id | name    | email              | age
+1           | Alice   | alice@new.com      | 30  (updated)
+2           | Bob     | bob@example.com    | 35  (unchanged)
+3           | Charlie | charlie@example.com| 28  (inserted)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="33-scd-type-2-maintain-history">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#33-scd-type-2-maintain-history">#</doc-anchor-trigger>
+        <span>3.3 SCD Type 2 (Maintain History)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Scenario:</strong> Track historical changes with effective dates</p>
+<p><strong>SQL</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Target table with SCD Type 2 columns
+CREATE TABLE customers_scd2 (
+    customer_id INT,
+    name STRING,
+    email STRING,
+    age INT,
+    effective_start_date DATE,
+    effective_end_date DATE,
+    is_current BOOLEAN
+) USING DELTA;
+
+-- Insert initial records
+INSERT INTO customers_scd2 VALUES
+(1, 'Alice', 'alice@old.com', 25, '2020-01-01', '9999-12-31', true),
+(2, 'Bob', 'bob@example.com', 35, '2020-01-01', '9999-12-31', true);
+
+-- SCD Type 2 Merge
+MERGE INTO customers_scd2 AS target
+USING (
+    SELECT
+        customer_id,
+        name,
+        email,
+        age,
+        CURRENT_DATE() AS effective_start_date
+    FROM customer_updates
+) AS source
+ON target.customer_id = source.customer_id
+   AND target.is_current = true
+WHEN MATCHED AND (
+    target.name != source.name OR
+    target.email != source.email OR
+    target.age != source.age
+) THEN UPDATE SET
+    target.effective_end_date = CURRENT_DATE(),
+    target.is_current = false
+WHEN NOT MATCHED THEN
+    INSERT (customer_id, name, email, age, effective_start_date, effective_end_date, is_current)
+    VALUES (source.customer_id, source.name, source.email, source.age,
+            source.effective_start_date, CAST('9999-12-31' AS DATE), true);
+
+-- Insert new versions (separate INSERT after MERGE)
+INSERT INTO customers_scd2
+SELECT
+    source.customer_id,
+    source.name,
+    source.email,
+    source.age,
+    CURRENT_DATE() AS effective_start_date,
+    CAST('9999-12-31' AS DATE) AS effective_end_date,
+    true AS is_current
+FROM customer_updates AS source
+JOIN customers_scd2 AS target
+    ON source.customer_id = target.customer_id
+    AND target.effective_end_date = CURRENT_DATE();</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark (Better Approach)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+from pyspark.sql.functions import current_date, lit, col
+
+# Source data
+source = spark.createDataFrame([
+    (1, &quot;Alice&quot;, &quot;alice@new.com&quot;, 30),
+    (3, &quot;Charlie&quot;, &quot;charlie@example.com&quot;, 28)
+], [&quot;customer_id&quot;, &quot;name&quot;, &quot;email&quot;, &quot;age&quot;])
+
+target = DeltaTable.forName(spark, &quot;customers_scd2&quot;)
+
+# Step 1: Expire old records (set is_current = false)
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.customer_id = source.customer_id AND target.is_current = true&quot;
+).whenMatchedUpdate(
+    condition=&quot;target.name != source.name OR target.email != source.email OR target.age != source.age&quot;,
+    set={
+        &quot;effective_end_date&quot;: &quot;current_date()&quot;,
+        &quot;is_current&quot;: &quot;false&quot;
+    }
+).execute()
+
+# Step 2: Insert new versions
+new_records = source.alias(&quot;source&quot;).join(
+    target.toDF().alias(&quot;target&quot;),
+    (col(&quot;source.customer_id&quot;) == col(&quot;target.customer_id&quot;)) &amp;
+    (col(&quot;target.effective_end_date&quot;) == current_date()),
+    &quot;inner&quot;
+).select(
+    col(&quot;source.customer_id&quot;),
+    col(&quot;source.name&quot;),
+    col(&quot;source.email&quot;),
+    col(&quot;source.age&quot;),
+    current_date().alias(&quot;effective_start_date&quot;),
+    lit(&quot;9999-12-31&quot;).cast(&quot;date&quot;).alias(&quot;effective_end_date&quot;),
+    lit(True).alias(&quot;is_current&quot;)
+)
+
+new_records.write.format(&quot;delta&quot;).mode(&quot;append&quot;).saveAsTable(&quot;customers_scd2&quot;)
+
+# Step 3: Insert completely new customers
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.customer_id = source.customer_id&quot;
+).whenNotMatchedInsert(values={
+    &quot;customer_id&quot;: &quot;source.customer_id&quot;,
+    &quot;name&quot;: &quot;source.name&quot;,
+    &quot;email&quot;: &quot;source.email&quot;,
+    &quot;age&quot;: &quot;source.age&quot;,
+    &quot;effective_start_date&quot;: &quot;current_date()&quot;,
+    &quot;effective_end_date&quot;: &quot;cast('9999-12-31' as date)&quot;,
+    &quot;is_current&quot;: &quot;true&quot;
+}).execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>Result:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Before:
+customer_id | name  | email           | age | start_date | end_date   | is_current
+1           | Alice | alice@old.com   | 25  | 2020-01-01 | 9999-12-31 | true
+2           | Bob   | bob@example.com | 35  | 2020-01-01 | 9999-12-31 | true
+
+After:
+customer_id | name    | email              | age | start_date | end_date   | is_current
+1           | Alice   | alice@old.com      | 25  | 2020-01-01 | 2024-01-15 | false (expired)
+1           | Alice   | alice@new.com      | 30  | 2024-01-15 | 9999-12-31 | true  (new version)
+2           | Bob     | bob@example.com    | 35  | 2020-01-01 | 9999-12-31 | true  (unchanged)
+3           | Charlie | charlie@example.com| 28  | 2024-01-15 | 9999-12-31 | true  (new customer)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="34-advanced-merge-patterns">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#34-advanced-merge-patterns">#</doc-anchor-trigger>
+        <span>3.4 Advanced MERGE Patterns</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Conditional MERGE</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Update only if value changed
+MERGE INTO target
+USING source
+ON target.id = source.id
+WHEN MATCHED AND target.value != source.value THEN
+    UPDATE SET target.value = source.value, target.updated_at = current_timestamp()
+WHEN NOT MATCHED THEN INSERT *;</code></pre>
+</doc-codeblock></div>
+<p><strong>Delete on MERGE</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Soft delete pattern
+MERGE INTO target
+USING source
+ON target.id = source.id
+WHEN MATCHED AND source.is_deleted = true THEN
+    UPDATE SET target.is_active = false
+WHEN MATCHED AND source.is_deleted = false THEN
+    UPDATE SET target.value = source.value
+WHEN NOT MATCHED THEN INSERT *;</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># PySpark with DELETE
+target.alias(&quot;target&quot;).merge(
+    source.alias(&quot;source&quot;),
+    &quot;target.id = source.id&quot;
+).whenMatchedDelete(
+    condition=&quot;source.is_deleted = true&quot;
+).whenMatchedUpdate(
+    condition=&quot;source.is_deleted = false&quot;,
+    set={&quot;value&quot;: &quot;source.value&quot;}
+).whenNotMatchedInsert(values={
+    &quot;id&quot;: &quot;source.id&quot;,
+    &quot;value&quot;: &quot;source.value&quot;
+}).execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>MERGE is atomic (all-or-nothing)</li>
+<li>MERGE creates a single transaction version</li>
+<li>Each record in target matched at most once (no duplicates)</li>
+<li>Order of clauses matters: WHEN MATCHED before WHEN NOT MATCHED</li>
+<li>Can have multiple WHEN MATCHED clauses with different conditions</li>
+<li>MERGE INTO requires target to be Delta table</li>
+<li>Source can be any DataFrame/Table/View</li>
+</ul>
+<hr>
+<doc-anchor-target id="4-table-utility-commands">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-table-utility-commands">#</doc-anchor-trigger>
+        <span>4. Table Utility Commands</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="41-describe-commands">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#41-describe-commands">#</doc-anchor-trigger>
+        <span>4.1 DESCRIBE Commands</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>DESCRIBE (Basic Schema)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">DESCRIBE employees;</code></pre>
+</doc-codeblock></div>
+<p><strong>Output:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">col_name    | data_type | comment
+id          | int       | null
+name        | string    | null
+salary      | decimal   | null
+hire_date   | date      | null</code></pre>
+</doc-codeblock></div>
+<p><strong>DESCRIBE EXTENDED (Full Metadata)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">DESCRIBE EXTENDED employees;</code></pre>
+</doc-codeblock></div>
+<p><strong>Output:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">col_name                | data_type           | comment
+id                      | int                 | null
+name                    | string              | null
+...
+# Detailed Table Information
+Database                | default
+Table                   | employees
+Owner                   | user@databricks.com
+Created Time            | 2024-01-15 10:00:00
+Last Access             | 2024-01-15 15:30:00
+Type                    | MANAGED
+Provider                | delta
+Location                | dbfs:/user/hive/warehouse/employees
+Table Properties        | [delta.minReaderVersion=1,delta.minWriterVersion=2]</code></pre>
+</doc-codeblock></div>
+<p><strong>DESCRIBE DETAIL (Delta-Specific Metadata)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">DESCRIBE DETAIL employees;</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># DESCRIBE
+spark.sql(&quot;DESCRIBE employees&quot;).show()
+
+# DESCRIBE EXTENDED
+spark.sql(&quot;DESCRIBE EXTENDED employees&quot;).show(truncate=False)
+
+# DESCRIBE DETAIL
+spark.sql(&quot;DESCRIBE DETAIL employees&quot;).show(truncate=False)
+
+# Using DeltaTable API
+from delta.tables import DeltaTable
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+delta_table.detail().show(truncate=False)</code></pre>
+</doc-codeblock></div>
+<p><strong>DESCRIBE DETAIL Output:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">format | id        | name      | location | createdAt           | numFiles | sizeInBytes | partitionColumns
+delta  | uuid-1234 | employees | /path    | 2024-01-15 10:00:00 | 10       | 1024000     | [hire_date]</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="42-history">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#42-history">#</doc-anchor-trigger>
+        <span>4.2 HISTORY</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Full history
+DESCRIBE HISTORY employees;
+
+-- Limit results
+DESCRIBE HISTORY employees LIMIT 10;</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Using SQL
+spark.sql(&quot;DESCRIBE HISTORY employees&quot;).show(truncate=False)
+
+# Using DeltaTable API
+from delta.tables import DeltaTable
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+delta_table.history().show(truncate=False)
+
+# Filter by specific versions
+delta_table.history(10).show()  # Last 10 versions</code></pre>
+</doc-codeblock></div>
+<p><strong>Output:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">version | timestamp           | operation | operationParameters      | readVersion | isolationLevel
+5       | 2024-01-15 10:30:00 | MERGE     | {predicate: &quot;id = ...&quot;}  | 4           | Serializable
+4       | 2024-01-15 10:00:00 | UPDATE    | {predicate: &quot;...&quot;}       | 3           | Serializable
+3       | 2024-01-14 15:00:00 | DELETE    | {predicate: &quot;...&quot;}       | 2           | Serializable
+2       | 2024-01-14 10:00:00 | WRITE     | {mode: Append}           | 1           | Serializable
+1       | 2024-01-13 10:00:00 | WRITE     | {mode: Overwrite}        | 0           | Serializable
+0       | 2024-01-12 10:00:00 | CREATE    | {}                       | null        | Serializable</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>History stored in <code v-pre>_delta_log</code> transaction log</li>
+<li>Each version is immutable</li>
+<li>History enables time travel</li>
+<li>History does NOT show data-level changes (use CDF for that)</li>
+</ul>
+<doc-anchor-target id="43-restore">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#43-restore">#</doc-anchor-trigger>
+        <span>4.3 RESTORE</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Restore to Specific Version</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Restore by version number
+RESTORE TABLE employees TO VERSION AS OF 5;
+
+-- Restore by timestamp
+RESTORE TABLE employees TO TIMESTAMP AS OF '2024-01-15 10:00:00';</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># SQL approach
+spark.sql(&quot;RESTORE TABLE employees TO VERSION AS OF 5&quot;)
+
+# Using DeltaTable API
+from delta.tables import DeltaTable
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+
+# Restore to version
+delta_table.restoreToVersion(5)
+
+# Restore to timestamp
+delta_table.restoreToTimestamp(&quot;2024-01-15 10:00:00&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>What Happens:</strong></p>
+<ul>
+<li>Creates new version in transaction log</li>
+<li>Does NOT delete data files (VACUUM needed for cleanup)</li>
+<li>Metadata points to files from target version</li>
+<li>Restores schema, partitioning, table properties</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Current version: 10
+-- Restore to version 5
+RESTORE TABLE employees TO VERSION AS OF 5;
+-- New version created: 11 (points to files from version 5)
+
+-- Check history
+DESCRIBE HISTORY employees;
+-- Version 11: RESTORE operation</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>RESTORE is metadata operation (fast)</li>
+<li>No data duplication</li>
+<li>Old versions remain accessible until VACUUM</li>
+<li>Cannot restore if target version VACUUMed</li>
+<li>RESTORE creates a new version</li>
+</ul>
+<doc-anchor-target id="44-table-properties-tblproperties">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#44-table-properties-tblproperties">#</doc-anchor-trigger>
+        <span>4.4 Table Properties (TBLPROPERTIES)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>View Properties</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SHOW TBLPROPERTIES employees;</code></pre>
+</doc-codeblock></div>
+<p><strong>Set Properties</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Using ALTER TABLE
+ALTER TABLE employees SET TBLPROPERTIES (
+    'delta.autoOptimize.optimizeWrite' = 'true',
+    'delta.autoOptimize.autoCompact' = 'true',
+    'delta.deletedFileRetentionDuration' = 'interval 7 days',
+    'delta.logRetentionDuration' = 'interval 30 days'
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># View properties
+spark.sql(&quot;SHOW TBLPROPERTIES employees&quot;).show(truncate=False)
+
+# Set properties
+spark.sql(&quot;&quot;&quot;
+    ALTER TABLE employees SET TBLPROPERTIES (
+        'delta.autoOptimize.optimizeWrite' = 'true',
+        'delta.autoOptimize.autoCompact' = 'true'
+    )
+&quot;&quot;&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Common Table Properties:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Retention settings
+'delta.deletedFileRetentionDuration' = 'interval 7 days'
+'delta.logRetentionDuration' = 'interval 30 days'
+
+-- Auto-optimization
+'delta.autoOptimize.optimizeWrite' = 'true'  -- Small file compaction on write
+'delta.autoOptimize.autoCompact' = 'true'    -- Auto OPTIMIZE
+
+-- Change Data Feed
+'delta.enableChangeDataFeed' = 'true'
+
+-- Column Mapping
+'delta.columnMapping.mode' = 'name'
+
+-- Constraints
+'delta.constraints.check_salary' = 'salary &gt; 0'
+
+-- Data Skipping
+'delta.dataSkippingNumIndexedCols' = '32'</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="45-vacuum">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#45-vacuum">#</doc-anchor-trigger>
+        <span>4.5 VACUUM</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Permanently delete data files not required by recent versions</li>
+<li>Reclaim storage space</li>
+<li>Remove uncommitted files</li>
+</ul>
+<p><strong>SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Vacuum with default retention (7 days)
+VACUUM employees;
+
+-- Vacuum with custom retention
+VACUUM employees RETAIN 168 HOURS;  -- 7 days
+
+-- Dry run (see what would be deleted)
+VACUUM employees DRY RUN;
+
+-- Override retention check (DANGEROUS)
+SET spark.databricks.delta.retentionDurationCheck.enabled = false;
+VACUUM employees RETAIN 0 HOURS;
+SET spark.databricks.delta.retentionDurationCheck.enabled = true;</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+
+# Vacuum with default retention
+delta_table.vacuum()
+
+# Vacuum with custom retention
+delta_table.vacuum(168)  # hours
+
+# Dry run
+spark.conf.set(&quot;spark.databricks.delta.vacuum.logging.enabled&quot;, &quot;true&quot;)
+delta_table.vacuum()  # Check logs
+
+# Override retention (DANGEROUS)
+spark.conf.set(&quot;spark.databricks.delta.retentionDurationCheck.enabled&quot;, &quot;false&quot;)
+delta_table.vacuum(0)
+spark.conf.set(&quot;spark.databricks.delta.retentionDurationCheck.enabled&quot;, &quot;true&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Retention Periods:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Default: 7 days
+VACUUM employees;
+
+-- Custom retention
+VACUUM employees RETAIN 336 HOURS;  -- 14 days
+VACUUM employees RETAIN 24 HOURS;   -- 1 day
+
+-- Table property (permanent setting)
+ALTER TABLE employees SET TBLPROPERTIES (
+    'delta.deletedFileRetentionDuration' = 'interval 14 days'
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>What Gets Deleted:</strong></p>
+<ul>
+<li>Data files not referenced by any version within retention</li>
+<li>Uncommitted files (from failed writes)</li>
+<li>Checkpoint files older than retention</li>
+</ul>
+<p><strong>What Survives:</strong></p>
+<ul>
+<li>Files referenced by versions within retention</li>
+<li>Transaction log JSON files</li>
+<li>Latest checkpoint</li>
+</ul>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>VACUUM is irreversible</li>
+<li>Default 7-day retention protects time travel</li>
+<li>Cannot time travel beyond VACUUMed versions</li>
+<li>VACUUM runs in two phases: identify files, delete files</li>
+<li>Long-running queries reading old versions can fail during VACUUM</li>
+<li>Set <code v-pre>spark.databricks.delta.retentionDurationCheck.enabled = false</code> to override (risky)</li>
+</ul>
+<doc-anchor-target id="46-clone-shallow-vs-deep">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#46-clone-shallow-vs-deep">#</doc-anchor-trigger>
+        <span>4.6 CLONE (Shallow vs Deep)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Shallow Clone (Metadata Only)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create shallow clone
+CREATE TABLE employees_clone
+SHALLOW CLONE employees;
+
+-- Shallow clone from specific version
+CREATE TABLE employees_clone
+SHALLOW CLONE employees VERSION AS OF 5;
+
+-- Shallow clone to specific location
+CREATE TABLE employees_clone
+SHALLOW CLONE employees
+LOCATION '/mnt/delta/employees_clone';</code></pre>
+</doc-codeblock></div>
+<p><strong>What Happens:</strong></p>
+<ul>
+<li>Copies transaction log only</li>
+<li>References same data files as source</li>
+<li>Fast and space-efficient</li>
+<li>Independent table metadata</li>
+</ul>
+<p><strong>Deep Clone (Full Copy)</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create deep clone
+CREATE TABLE employees_backup
+DEEP CLONE employees;
+
+-- Deep clone from specific version
+CREATE TABLE employees_backup
+DEEP CLONE employees VERSION AS OF 5;</code></pre>
+</doc-codeblock></div>
+<p><strong>What Happens:</strong></p>
+<ul>
+<li>Copies transaction log AND data files</li>
+<li>Full independent copy</li>
+<li>Slower and space-consuming</li>
+<li>Complete isolation from source</li>
+</ul>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+# Shallow clone
+spark.sql(&quot;CREATE TABLE employees_clone SHALLOW CLONE employees&quot;)
+
+# Deep clone
+spark.sql(&quot;CREATE TABLE employees_backup DEEP CLONE employees&quot;)
+
+# Using DeltaTable API
+source = DeltaTable.forName(spark, &quot;employees&quot;)
+
+# Clone not directly supported in API - use SQL
+spark.sql(&quot;CREATE TABLE employees_clone SHALLOW CLONE employees&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Key Differences:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Shallow Clone</th>
+<th>Deep Clone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Files</td>
+<td>Referenced (shared)</td>
+<td>Copied (independent)</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Fast (metadata only)</td>
+<td>Slow (copies data)</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Minimal overhead</td>
+<td>Full copy</td>
+</tr>
+<tr>
+<td>Independence</td>
+<td>Shares files with source</td>
+<td>Fully independent</td>
+</tr>
+<tr>
+<td>Source VACUUM</td>
+<td>Affects clone</td>
+<td>No impact</td>
+</tr>
+<tr>
+<td>Use Cases</td>
+<td>Testing, dev/staging</td>
+<td>Backups, disaster recovery</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Use Cases:</strong></p>
+<p><strong>Shallow Clone:</strong></p>
+<ul>
+<li>Quick environment setup (dev, staging, test)</li>
+<li>Data exploration without duplication</li>
+<li>Creating table variants with different properties</li>
+<li>Testing schema changes</li>
+</ul>
+<p><strong>Deep Clone:</strong></p>
+<ul>
+<li>Production backups</li>
+<li>Disaster recovery</li>
+<li>Data archival</li>
+<li>Migrating tables across workspaces/regions</li>
+<li>Complete isolation from source changes</li>
+</ul>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>Shallow clones become &quot;dangling&quot; if source VACUUMed</li>
+<li>Deep clones survive source VACUUM/deletion</li>
+<li>Clones are independent tables (separate history)</li>
+<li>Clones can have different properties, schema evolution</li>
+<li>REPLACE TABLE with CLONE syntax overwrites target</li>
+</ul>
+<doc-anchor-target id="47-change-data-feed-cdf">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#47-change-data-feed-cdf">#</doc-anchor-trigger>
+        <span>4.7 Change Data Feed (CDF)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Enable CDF</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Enable on existing table
+ALTER TABLE employees SET TBLPROPERTIES (
+    'delta.enableChangeDataFeed' = 'true'
+);
+
+-- Enable during table creation
+CREATE TABLE employees (
+    id INT,
+    name STRING,
+    salary DECIMAL(10,2)
+) USING DELTA
+TBLPROPERTIES ('delta.enableChangeDataFeed' = 'true');</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Enable CDF
+spark.sql(&quot;&quot;&quot;
+    ALTER TABLE employees SET TBLPROPERTIES (
+        'delta.enableChangeDataFeed' = 'true'
+    )
+&quot;&quot;&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Reading CDF</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Read changes between versions
+SELECT * FROM table_changes('employees', 2, 5);
+
+-- Read changes by timestamp
+SELECT * FROM table_changes('employees',
+    '2024-01-15 10:00:00',
+    '2024-01-15 15:00:00'
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Read changes by version
+df = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingVersion&quot;, 2) \
+    .option(&quot;endingVersion&quot;, 5) \
+    .table(&quot;employees&quot;)
+
+# Read changes by timestamp
+df = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingTimestamp&quot;, &quot;2024-01-15 10:00:00&quot;) \
+    .option(&quot;endingTimestamp&quot;, &quot;2024-01-15 15:00:00&quot;) \
+    .table(&quot;employees&quot;)
+
+# Latest changes since version
+df = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingVersion&quot;, 5) \
+    .table(&quot;employees&quot;)
+
+# Show changes
+df.show()</code></pre>
+</doc-codeblock></div>
+<p><strong>CDF Output Schema:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Original columns + CDF metadata columns
+id | name  | salary | _change_type | _commit_version | _commit_timestamp
+1  | Alice | 75000  | insert       | 3               | 2024-01-15 10:00:00
+2  | Bob   | 80000  | update_preimage  | 4           | 2024-01-15 11:00:00
+2  | Bob   | 85000  | update_postimage | 4           | 2024-01-15 11:00:00
+3  | Carol | 70000  | delete       | 5               | 2024-01-15 12:00:00</code></pre>
+</doc-codeblock></div>
+<p><strong>Change Types:</strong></p>
+<ul>
+<li><code v-pre>insert</code>: New row added</li>
+<li><code v-pre>update_preimage</code>: Old value before update</li>
+<li><code v-pre>update_postimage</code>: New value after update</li>
+<li><code v-pre>delete</code>: Row deleted</li>
+</ul>
+<p><strong>CDF Use Cases:</strong></p>
+<p><strong>1. Incremental ETL</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Read only new changes since last processed version
+last_processed_version = 10
+
+df_changes = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingVersion&quot;, last_processed_version + 1) \
+    .table(&quot;source_table&quot;)
+
+# Process only changes
+df_changes.write.format(&quot;delta&quot;).mode(&quot;append&quot;).saveAsTable(&quot;target_table&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>2. Audit/Compliance</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Track who changed what and when
+SELECT
+    id,
+    name,
+    _change_type,
+    _commit_version,
+    _commit_timestamp
+FROM table_changes('employees', 0, 100)
+WHERE _change_type IN ('update_preimage', 'update_postimage', 'delete')
+ORDER BY _commit_timestamp;</code></pre>
+</doc-codeblock></div>
+<p><strong>3. Replication to External Systems</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Stream changes to Kafka/downstream systems
+df_stream = spark.readStream.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingVersion&quot;, 0) \
+    .table(&quot;employees&quot;)
+
+df_stream.writeStream \
+    .format(&quot;kafka&quot;) \
+    .option(&quot;kafka.bootstrap.servers&quot;, &quot;localhost:9092&quot;) \
+    .option(&quot;topic&quot;, &quot;employee_changes&quot;) \
+    .start()</code></pre>
+</doc-codeblock></div>
+<p><strong>4. Slowly Changing Dimensions</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Extract only updates for SCD processing
+updates = spark.read.format(&quot;delta&quot;) \
+    .option(&quot;readChangeFeed&quot;, &quot;true&quot;) \
+    .option(&quot;startingVersion&quot;, 5) \
+    .table(&quot;employees&quot;) \
+    .filter(&quot;_change_type IN ('update_preimage', 'update_postimage')&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>CDF adds ~5-10% storage overhead</li>
+<li>CDF requires Delta Lake 2.0+</li>
+<li>Changes tracked at row level</li>
+<li>Cannot enable CDF retroactively for past versions</li>
+<li>CDF data retained per <code v-pre>delta.deletedFileRetentionDuration</code></li>
+<li>CDF useful for CDC, incremental processing, audit logs</li>
+</ul>
+<doc-anchor-target id="48-optimize">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#48-optimize">#</doc-anchor-trigger>
+        <span>4.8 OPTIMIZE</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Compact small files into larger files</li>
+<li>Improve read performance</li>
+<li>Reduce metadata overhead</li>
+</ul>
+<p><strong>SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Optimize entire table
+OPTIMIZE employees;
+
+-- Optimize specific partition
+OPTIMIZE employees WHERE hire_date = '2024-01-15';
+
+-- Optimize with Z-ORDER
+OPTIMIZE employees ZORDER BY (department, salary);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+
+# Optimize entire table
+delta_table.optimize().executeCompaction()
+
+# Optimize specific partition
+delta_table.optimize().where(&quot;hire_date = '2024-01-15'&quot;).executeCompaction()
+
+# Optimize with Z-ORDER
+delta_table.optimize().executeZOrderBy(&quot;department&quot;, &quot;salary&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>How OPTIMIZE Works (Internals):</strong></p>
+<p><strong>1. File Selection</strong></p>
+<ul>
+<li>Identifies small files (&lt; <code v-pre>targetFileSize</code>)</li>
+<li>Default <code v-pre>targetFileSize</code> = 128 MB</li>
+<li>Groups files by partition</li>
+</ul>
+<p><strong>2. Coalesce/Repartition</strong></p>
+<ul>
+<li>Reads small files into DataFrame</li>
+<li>Coalesces into fewer, larger files</li>
+<li>Writes new files</li>
+</ul>
+<p><strong>3. Transaction Commit</strong></p>
+<ul>
+<li>Adds new large files to transaction log</li>
+<li>Marks old small files as removed</li>
+<li>Atomic operation</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Before OPTIMIZE:
+part-00001.parquet (10 MB)
+part-00002.parquet (5 MB)
+part-00003.parquet (8 MB)
+part-00004.parquet (12 MB)
+Total: 4 files, 35 MB
+
+After OPTIMIZE:
+part-00005.parquet (35 MB)
+Total: 1 file, 35 MB</code></pre>
+</doc-codeblock></div>
+<p><strong>OPTIMIZE Configuration:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Set target file size
+spark.conf.set(&quot;spark.databricks.delta.optimize.maxFileSize&quot;, 134217728)  # 128 MB
+spark.conf.set(&quot;spark.databricks.delta.optimize.minFileSize&quot;, 10485760)   # 10 MB
+
+# Auto-optimize on write
+spark.sql(&quot;&quot;&quot;
+    ALTER TABLE employees SET TBLPROPERTIES (
+        'delta.autoOptimize.optimizeWrite' = 'true',
+        'delta.autoOptimize.autoCompact' = 'true'
+    )
+&quot;&quot;&quot;)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="49-zorder">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#49-zorder">#</doc-anchor-trigger>
+        <span>4.9 ZORDER</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Co-locate related data in files</li>
+<li>Improve data skipping</li>
+<li>Reduce data scanning for filtered queries</li>
+</ul>
+<p><strong>SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Z-ORDER by single column
+OPTIMIZE employees ZORDER BY (department);
+
+-- Z-ORDER by multiple columns
+OPTIMIZE employees ZORDER BY (department, hire_date, salary);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from delta.tables import DeltaTable
+
+delta_table = DeltaTable.forName(spark, &quot;employees&quot;)
+
+# Z-ORDER by single column
+delta_table.optimize().executeZOrderBy(&quot;department&quot;)
+
+# Z-ORDER by multiple columns
+delta_table.optimize().executeZOrderBy(&quot;department&quot;, &quot;hire_date&quot;, &quot;salary&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>How Z-ORDER Works:</strong></p>
+<p><strong>1. Data Arrangement</strong></p>
+<ul>
+<li>Uses space-filling Z-curve algorithm</li>
+<li>Co-locates rows with similar values</li>
+<li>Multi-dimensional clustering</li>
+</ul>
+<p><strong>2. Column Statistics</strong></p>
+<ul>
+<li>Collects min/max stats per file per column</li>
+<li>Stores stats in transaction log (<code v-pre>add</code> action)</li>
+<li>Enables data skipping during reads</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">Employees Table:
+department | hire_date  | salary
+Sales      | 2024-01-15 | 50000
+Sales      | 2024-02-20 | 55000
+Eng        | 2024-01-10 | 80000
+Eng        | 2024-03-05 | 90000
+
+Without Z-ORDER:
+File 1: Sales(2024-01-15), Eng(2024-01-10)
+File 2: Sales(2024-02-20), Eng(2024-03-05)
+
+With Z-ORDER BY (department):
+File 1: Sales(2024-01-15), Sales(2024-02-20)
+File 2: Eng(2024-01-10), Eng(2024-03-05)
+
+Query: WHERE department = 'Sales'
+Without Z-ORDER: Reads 2 files
+With Z-ORDER: Reads 1 file (50% reduction)</code></pre>
+</doc-codeblock></div>
+<p><strong>Column Stats Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">{
+  &quot;add&quot;: {
+    &quot;path&quot;: &quot;part-00001.parquet&quot;,
+    &quot;stats&quot;: {
+      &quot;numRecords&quot;: 1000,
+      &quot;minValues&quot;: { &quot;department&quot;: &quot;Eng&quot;, &quot;salary&quot;: 50000 },
+      &quot;maxValues&quot;: { &quot;department&quot;: &quot;Sales&quot;, &quot;salary&quot;: 150000 }
+    }
+  }
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Z-ORDER vs Default Behavior:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Default (No Z-ORDER)</th>
+<th>With Z-ORDER</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File Organization</td>
+<td>Arbitrary/insertion order</td>
+<td>Clustered by Z-ORDER columns</td>
+</tr>
+<tr>
+<td>Data Skipping</td>
+<td>Basic (partition-level)</td>
+<td>Advanced (file-level)</td>
+</tr>
+<tr>
+<td>Column Stats</td>
+<td>Collected</td>
+<td>Enhanced for Z-ORDER columns</td>
+</tr>
+<tr>
+<td>Query Performance</td>
+<td>Standard</td>
+<td>Improved for filtered queries</td>
+</tr>
+<tr>
+<td>Write Performance</td>
+<td>Fast</td>
+<td>Slower (Z-ORDER computation)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Choosing Z-ORDER Columns:</strong></p>
+<ul>
+<li>High-cardinality columns (department, user_id)</li>
+<li>Frequently filtered columns (WHERE clauses)</li>
+<li>Low-to-medium cardinality better than very high</li>
+<li>Order matters: most selective column first</li>
+<li>Limit to 3-4 columns (diminishing returns)</li>
+</ul>
+<p><strong>Interview Points:</strong></p>
+<ul>
+<li>Z-ORDER is a one-time operation (must re-run after new writes)</li>
+<li>Z-ORDER requires full table rewrite</li>
+<li>Z-ORDER incompatible with partitioning on same columns</li>
+<li>Z-ORDER leverages Delta&#x27;s data skipping</li>
+<li>Stats stored in <code v-pre>_delta_log</code> JSON files</li>
+<li>Z-ORDER improves read, slows write</li>
+</ul>
+<doc-anchor-target id="410-liquid-clustering">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#410-liquid-clustering">#</doc-anchor-trigger>
+        <span>4.10 Liquid Clustering</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Automatic incremental clustering (no manual OPTIMIZE needed)</li>
+<li>Replaces manual Z-ORDER for clustering</li>
+<li>Optimizes both read and write performance</li>
+</ul>
+<p><strong>Enable Liquid Clustering</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table with Liquid Clustering
+CREATE TABLE employees_clustered (
+    id INT,
+    name STRING,
+    department STRING,
+    hire_date DATE,
+    salary DECIMAL(10,2)
+) USING DELTA
+CLUSTER BY (department, hire_date);
+
+-- Convert existing table
+ALTER TABLE employees CLUSTER BY (department, hire_date);</code></pre>
+</doc-codeblock></div>
+<p><strong>PySpark:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Create table with Liquid Clustering
+spark.sql(&quot;&quot;&quot;
+    CREATE TABLE employees_clustered (
+        id INT,
+        name STRING,
+        department STRING,
+        hire_date DATE,
+        salary DECIMAL(10,2)
+    ) USING DELTA
+    CLUSTER BY (department, hire_date)
+&quot;&quot;&quot;)
+
+# Using DeltaTableBuilder
+from delta.tables import DeltaTable
+
+DeltaTable.create(spark) \
+    .tableName(&quot;employees_clustered&quot;) \
+    .addColumn(&quot;id&quot;, &quot;INT&quot;) \
+    .addColumn(&quot;name&quot;, &quot;STRING&quot;) \
+    .addColumn(&quot;department&quot;, &quot;STRING&quot;) \
+    .addColumn(&quot;hire_date&quot;, &quot;DATE&quot;) \
+    .addColumn(&quot;salary&quot;, &quot;DECIMAL(10,2)&quot;) \
+    .clusterBy(&quot;department&quot;, &quot;hire_date&quot;) \
+    .execute()</code></pre>
+</doc-codeblock></div>
+<p><strong>How Liquid Clustering Works:</strong></p>
+<p><strong>1. Automatic Clustering on Write</strong></p>
+<ul>
+<li>Clusters data during INSERT/MERGE/UPDATE</li>
+<li>No manual OPTIMIZE needed</li>
+<li>Incremental clustering</li>
+</ul>
+<p><strong>2. Adaptive Layout</strong></p>
+<ul>
+<li>Dynamically adjusts clustering layout</li>
+<li>Learns from query patterns</li>
+<li>Self-tunes over time</li>
+</ul>
+<p><strong>3. Z-ORDER Replacement</strong></p>
+<ul>
+<li>More efficient than manual Z-ORDER</li>
+<li>Lower maintenance overhead</li>
+<li>Better for high-volume writes</li>
+</ul>
+<p><strong>Key Differences: Z-ORDER vs Liquid Clustering</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Z-ORDER</th>
+<th>Liquid Clustering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trigger</td>
+<td>Manual OPTIMIZE</td>
+<td>Automatic on write</td>
+</tr>
+<tr>
+<td>Incremental</td>
+<td>No (full rewrite)</td>
+<td>Yes (incremental)</td>
+</tr>
+<tr>
+<td>Maintenance</td>
+<td>Manual re-run needed</td>
+<td>Self-maintaining</td>
+</tr>
+<tr>
+<td>Write Performance</td>
+<td>Slows writes</td>
+<td>Minimal impact</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>Batch-optimized tables</td>
+<td>High-volume streaming</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../delta-format/delta_log/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">2 Delta Lake Transaction Log & ACID Implementation</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"><p>© 2025 My Company. All rights reserved.</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "3 Delta Lake / Delta Format Code", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>
