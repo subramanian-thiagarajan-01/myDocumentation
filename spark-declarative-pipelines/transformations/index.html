@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>5. Transformations</title>
+    <meta name="title" content="5. Transformations">
+    <meta name="description" content="SQL Pipeline (notebook .sql file):">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/transformations/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/transformations/">
+    <meta property="og:title" content="5. Transformations">
+    <meta property="og:description" content="SQL Pipeline (notebook .sql file):">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/transformations/">
+    <meta property="twitter:title" content="5. Transformations">
+    <meta property="twitter:description" content="SQL Pipeline (notebook .sql file):">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,96 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="5-transformations" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#5-transformations">#</doc-anchor-trigger>
+        <span>5. Transformations</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="51-sql-vs-python-dlt-pipelines">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#51-sql-vs-python-dlt-pipelines">#</doc-anchor-trigger>
+        <span>5.1 SQL vs Python DLT Pipelines</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>SQL Pipeline (notebook .sql file)</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE STREAMING TABLE raw_orders AS
+SELECT * FROM stream(catalog.schema.external_table);
+
+CREATE LIVE TABLE cleaned_orders (
+  CONSTRAINT no_negative_amount EXPECT (amount &gt; 0) ON VIOLATION DROP ROW
+) AS
+SELECT id, customer_id, amount, order_date
+FROM STREAM(raw_orders)
+WHERE amount &gt; 0 AND order_date &lt;= current_date();
+
+CREATE MATERIALIZED VIEW daily_revenue AS
+SELECT DATE(order_date) as order_date, SUM(amount) as revenue
+FROM live.cleaned_orders
+GROUP BY DATE(order_date);</code></pre>
+</doc-codeblock></div>
+<p><strong>Python Pipeline</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">import dlt
+
+@dlt.create_streaming_table(name=&quot;raw_orders&quot;)
+def raw_orders():
+    return spark.readStream.table(&quot;external_orders&quot;)
+
+@dlt.table
+@dlt.expect_or_drop(&quot;no_negative_amount&quot;, &quot;amount &gt; 0&quot;)
+def cleaned_orders():
+    return dlt.read_stream(&quot;raw_orders&quot;) \
+        .filter(&quot;amount &gt; 0&quot;) \
+        .filter(&quot;order_date &lt;= current_date()&quot;)
+
+@dlt.table
+def daily_revenue():
+    return dlt.read(&quot;cleaned_orders&quot;) \
+        .groupBy(&quot;order_date&quot;) \
+        .agg({&quot;amount&quot;: &quot;sum&quot;})</code></pre>
+</doc-codeblock></div>
+<p><strong>Key difference</strong>: Python allows for complex logic, loops, conditionals; SQL is pure declarative.</p>
+<doc-anchor-target id="52-incremental-transformations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#52-incremental-transformations">#</doc-anchor-trigger>
+        <span>5.2 Incremental Transformations</span>
+    </h3>
+</doc-anchor-target>
+<p>For stateless operations (filters, selects), all table types are inherently incremental. For stateful operations (aggregations, joins), only streaming tables guarantee true incremental processing on classic compute.</p>
+<p><strong>Serverless compute</strong> (as of 2025): Materialized views get incremental refresh via cost-based optimizer.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def incremental_aggregation():
+    # On serverless, only processes new/changed data (if underlying table changed)
+    return dlt.read(&quot;silver_events&quot;) \
+        .groupBy(&quot;user_id&quot;, &quot;date&quot;) \
+        .agg(count(&quot;*&quot;).alias(&quot;event_count&quot;))</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="53-aggregations-and-joins">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#53-aggregations-and-joins">#</doc-anchor-trigger>
+        <span>5.3 Aggregations and Joins</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Aggregations in streaming tables</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.create_streaming_table(name=&quot;streaming_user_events&quot;)
+def streaming_user_events():
+    return spark.readStream.format(&quot;cloudFiles&quot;) \
+        .load(&quot;s3://events/&quot;).withWatermark(&quot;event_time&quot;, &quot;1 hour&quot;)
+
+@dlt.create_streaming_table(name=&quot;user_event_count&quot;)
+def user_event_count():
+    return dlt.read_stream(&quot;streaming_user_events&quot;) \
+        .groupBy(
+            F.window(&quot;event_time&quot;, &quot;5 minutes&quot;),
+            &quot;user_id&quot;
+        ) \
+        .agg(count(&quot;*&quot;).alias(&quot;event_count&quot;))</code></pre>
+</doc-codeblock></div>
+<p><strong>Joins</strong>: Streaming table + streaming table requires watermarks. Streaming + static is safe.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +247,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/data-ingestion/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">4. Data Ingestion</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/streaming-concepts/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">6. Streaming Concepts in DLT</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +306,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "5. Transformations", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

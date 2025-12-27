@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>3. Pipeline Configuration</title>
+    <meta name="title" content="3. Pipeline Configuration">
+    <meta name="description" content="Key fields:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/pipeline-config/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/pipeline-config/">
+    <meta property="og:title" content="3. Pipeline Configuration">
+    <meta property="og:description" content="Key fields:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/pipeline-config/">
+    <meta property="twitter:title" content="3. Pipeline Configuration">
+    <meta property="twitter:description" content="Key fields:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,126 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="3-pipeline-configuration" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-pipeline-configuration">#</doc-anchor-trigger>
+        <span>3. Pipeline Configuration</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="31-json-configuration-structure">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#31-json-configuration-structure">#</doc-anchor-trigger>
+        <span>3.1 JSON Configuration Structure</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">{
+  &quot;id&quot;: &quot;my-pipeline-id&quot;,
+  &quot;name&quot;: &quot;my-pipeline&quot;,
+  &quot;storage&quot;: &quot;/mnt/my_storage/dlt&quot;,
+  &quot;configuration&quot;: {
+    &quot;spark.databricks.photon.enabled&quot;: &quot;true&quot;,
+    &quot;spark.sql.shuffle.partitions&quot;: &quot;200&quot;
+  },
+  &quot;clusters&quot;: [
+    {
+      &quot;label&quot;: &quot;default&quot;,
+      &quot;numWorkers&quot;: 2,
+      &quot;nodeTypeId&quot;: &quot;i3.xlarge&quot;
+    }
+  ],
+  &quot;libraries&quot;: [
+    {
+      &quot;notebook&quot;: {
+        &quot;path&quot;: &quot;/Repos/my-org/dlt-pipelines/notebook&quot;
+      }
+    }
+  ],
+  &quot;continuous&quot;: false,
+  &quot;development&quot;: false
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Key fields</strong>:</p>
+<ul>
+<li><code v-pre>storage</code>: Root path for output tables + checkpoints + event logs</li>
+<li><code v-pre>configuration</code>: Spark configs (applied to all clusters)</li>
+<li><code v-pre>continuous</code> vs <code v-pre>development</code> vs <code v-pre>production</code> modes (mutually exclusive scheduling)</li>
+</ul>
+<doc-anchor-target id="32-development-vs-production-mode">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#32-development-vs-production-mode">#</doc-anchor-trigger>
+        <span>3.2 Development vs Production Mode</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Development</th>
+<th>Production</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster persistence</td>
+<td>Persists between updates</td>
+<td>Terminated after update</td>
+</tr>
+<tr>
+<td>Retry behavior</td>
+<td>Limited (faster feedback)</td>
+<td>Full retry logic</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Lower (shared clusters)</td>
+<td>Higher (dedicated clusters)</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>Dashboard accessible</td>
+<td>Same as dev</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td>Manual or scheduled</td>
+<td>Scheduled only</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Interview note</strong>: Development mode speeds iteration; always validate in production mode before deploying.</p>
+<doc-anchor-target id="33-continuous-vs-triggered-execution">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#33-continuous-vs-triggered-execution">#</doc-anchor-trigger>
+        <span>3.3 Continuous vs Triggered Execution</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li><strong>Continuous</strong>: Cluster always running, processes data as it arrives</li>
+<li><strong>Triggered</strong>: Cluster starts only on schedule or manual trigger</li>
+</ul>
+<p>Cost/latency tradeoff: Continuous = lower latency but constant DBU burn.</p>
+<doc-anchor-target id="34-autoscaling-and-photon">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#34-autoscaling-and-photon">#</doc-anchor-trigger>
+        <span>3.4 Autoscaling and Photon</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">&quot;autoscale&quot;: {
+  &quot;min_workers&quot;: 1,
+  &quot;max_workers&quot;: 10
+}</code></pre>
+</doc-codeblock></div>
+<p><strong>Photon</strong>: Vectorized query execution engine</p>
+<ul>
+<li>2-4x speedup for ETL workloads</li>
+<li>Higher cost (~2x DBU multiplier)</li>
+<li>Best for aggregations, joins; not I/O-bound operations</li>
+</ul>
+<p><strong>When NOT to use Photon</strong>: Data extraction, lightweight ingestion, single-node Python code.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +277,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/dlt-basics/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">2. Delta Live Tables Basics</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/data-ingestion/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">4. Data Ingestion</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +336,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "3. Pipeline Configuration", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

@@ -9,29 +9,30 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>03 Query Filtering &amp; Sorting</title>
+    <meta name="title" content="03 Query Filtering & Sorting">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_filtering/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_filtering/">
+    <meta property="og:title" content="03 Query Filtering & Sorting">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_filtering/">
+    <meta property="twitter:title" content="03 Query Filtering & Sorting">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +47,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +147,97 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="03-query-filtering--sorting" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#03-query-filtering--sorting">#</doc-anchor-trigger>
+        <span>03 Query Filtering &amp; Sorting</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="logical-operators-and-or-not">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#logical-operators-and-or-not">#</doc-anchor-trigger>
+        <span>Logical Operators (AND, OR, NOT)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- AND (all conditions must be true)
+SELECT * FROM employees
+WHERE salary &gt; 50000 AND department_id = 2 AND hire_date &gt; '2020-01-01';
+
+-- OR (at least one condition is true)
+SELECT * FROM employees
+WHERE department_id = 1 OR department_id = 2 OR department_id = 3;
+
+-- NOT
+SELECT * FROM employees WHERE NOT status = 'inactive';
+
+-- Combining AND/OR (pay attention to operator precedence)
+SELECT * FROM employees
+WHERE (department_id = 1 OR department_id = 2)
+  AND salary &gt; 50000;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="in-between-like-operators">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#in-between-like-operators">#</doc-anchor-trigger>
+        <span>IN, BETWEEN, LIKE Operators</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- IN operator
+SELECT * FROM employees WHERE employee_id IN (101, 102, 103);
+
+-- NOT IN (be careful with NULL!)
+-- If subquery returns NULL, result is always UNKNOWN
+SELECT * FROM employees
+WHERE employee_id NOT IN (
+    SELECT employee_id FROM inactive_employees
+);
+-- Better approach with NOT EXISTS to avoid NULL issues:
+SELECT * FROM employees e
+WHERE NOT EXISTS (
+    SELECT 1 FROM inactive_employees i
+    WHERE i.employee_id = e.employee_id
+);
+
+-- BETWEEN (inclusive on both ends)
+SELECT * FROM employees WHERE salary BETWEEN 40000 AND 80000;
+
+-- LIKE with wildcards
+SELECT * FROM employees
+WHERE email LIKE '%@company.com';
+
+-- ILIKE (case-insensitive, PostgreSQL specific)
+SELECT * FROM employees
+WHERE first_name ILIKE 'john%';</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="advanced-filtering">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#advanced-filtering">#</doc-anchor-trigger>
+        <span>Advanced Filtering</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- CASE statements for conditional filtering
+SELECT employee_id, first_name,
+    CASE
+        WHEN salary &lt; 40000 THEN 'Entry Level'
+        WHEN salary BETWEEN 40000 AND 70000 THEN 'Mid Level'
+        WHEN salary &gt; 70000 THEN 'Senior Level'
+        ELSE 'Unknown'
+    END AS salary_level
+FROM employees;
+
+-- Filtering with window functions
+SELECT * FROM (
+    SELECT
+        employee_id,
+        first_name,
+        salary,
+        RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS rank
+    FROM employees
+) ranked_employees
+WHERE rank &lt;= 3;  -- Top 3 per department</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +245,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/basic_sql_syntax/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">02 Basic SQL Syntax & Operations</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/data_aggregation/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">04 Data Aggregation Functions</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +304,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "03 Query Filtering & Sorting", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

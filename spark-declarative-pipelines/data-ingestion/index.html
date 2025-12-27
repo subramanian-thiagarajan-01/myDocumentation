@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>4. Data Ingestion</title>
+    <meta name="title" content="4. Data Ingestion">
+    <meta name="description" content="Auto Loader is the streaming source for cloud storage with built-in:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/data-ingestion/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/data-ingestion/">
+    <meta property="og:title" content="4. Data Ingestion">
+    <meta property="og:description" content="Auto Loader is the streaming source for cloud storage with built-in:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/data-ingestion/">
+    <meta property="twitter:title" content="4. Data Ingestion">
+    <meta property="twitter:description" content="Auto Loader is the streaming source for cloud storage with built-in:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,103 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="4-data-ingestion" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-data-ingestion">#</doc-anchor-trigger>
+        <span>4. Data Ingestion</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="41-auto-loader-cloudfiles">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#41-auto-loader-cloudfiles">#</doc-anchor-trigger>
+        <span>4.1 Auto Loader (cloudFiles)</span>
+    </h3>
+</doc-anchor-target>
+<p>Auto Loader is the streaming source for cloud storage with built-in:</p>
+<ul>
+<li>Incremental file discovery</li>
+<li>Schema inference/evolution</li>
+<li>Exactly-once delivery</li>
+<li>Rescue column for unexpected data</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.create_streaming_table(name=&quot;bronze_events&quot;)
+def bronze_events():
+    return spark.readStream \
+        .format(&quot;cloudFiles&quot;) \
+        .option(&quot;cloudFiles.format&quot;, &quot;json&quot;) \
+        .option(&quot;cloudFiles.schemaLocation&quot;, &quot;/mnt/schemas/events&quot;) \
+        .option(&quot;cloudFiles.inferColumnTypes&quot;, &quot;true&quot;) \
+        .option(&quot;cloudFiles.rescuedDataColumn&quot;, &quot;_rescued_data&quot;) \
+        .load(&quot;s3://my-bucket/events/&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Schema inference</strong>: Samples first 50GB or 1000 files (whichever limit crossed first). Stores inferred schema in <code v-pre>_schemas/</code> directory.</p>
+<p><strong>Schema evolution</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">.option(&quot;cloudFiles.schemaEvolutionMode&quot;, &quot;additive&quot;)  # or failOnNewColumns, rescue, evolutionKillBits</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="42-streaming-vs-batch-ingestion-trade-offs">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#42-streaming-vs-batch-ingestion-trade-offs">#</doc-anchor-trigger>
+        <span>4.2 Streaming vs Batch Ingestion Trade-offs</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Streaming</th>
+<th>Batch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Latency</td>
+<td>Low (seconds to minutes)</td>
+<td>High (hours to days)</td>
+</tr>
+<tr>
+<td>State management</td>
+<td>Checkpoints required</td>
+<td>Not needed</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Variable (per-micro-batch overhead)</td>
+<td>Predictable (full scans)</td>
+</tr>
+<tr>
+<td>Failure recovery</td>
+<td>Checkpoint-based; may require manual cleanup</td>
+<td>Simple; just rerun</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Real-time data, continuous sources</td>
+<td>Historical loads, one-time migrations</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Interview insight</strong>: Streaming ingestion is stateful; batch is stateless. State corruption is the #1 streaming failure mode.</p>
+<doc-anchor-target id="43-handling-late-and-out-of-order-data">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#43-handling-late-and-out-of-order-data">#</doc-anchor-trigger>
+        <span>4.3 Handling Late and Out-of-Order Data</span>
+    </h3>
+</doc-anchor-target>
+<p>Streaming tables without watermarks process all data; with watermarking:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.create_streaming_table(name=&quot;events_with_watermark&quot;)
+def events_with_watermark():
+    return spark.readStream \
+        .format(&quot;cloudFiles&quot;) \
+        .option(&quot;cloudFiles.format&quot;, &quot;json&quot;) \
+        .load(&quot;s3://bucket/events/&quot;) \
+        .withWatermark(&quot;event_time&quot;, &quot;10 minutes&quot;)  # Events within 10 min of max event time processed</code></pre>
+</doc-codeblock></div>
+<p>Watermarks only affect <strong>stateful operations</strong> (windows, joins). For append-only ingestion, watermarks have no effect.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +254,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/pipeline-config/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">3. Pipeline Configuration</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/transformations/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">5. Transformations</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +313,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "4. Data Ingestion", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

@@ -9,29 +9,30 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>17 Security &amp; Permissions</title>
+    <meta name="title" content="17 Security & Permissions">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
+    <meta property="og:title" content="17 Security & Permissions">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
+    <meta property="twitter:title" content="17 Security & Permissions">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +47,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +147,162 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="17-security--permissions" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#17-security--permissions">#</doc-anchor-trigger>
+        <span>17 Security &amp; Permissions</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="user-and-role-management">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#user-and-role-management">#</doc-anchor-trigger>
+        <span>User and Role Management</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create user (role without login)
+CREATE ROLE data_analyst;
+
+-- Create user (role with login)
+CREATE USER app_user WITH PASSWORD 'secure_password';
+
+-- Create user with additional options
+CREATE USER report_user WITH
+    PASSWORD 'temp_password'
+    VALID UNTIL '2026-12-31'
+    CREATEDB;  -- Can create databases
+
+-- Change password
+ALTER USER app_user WITH PASSWORD 'new_password';
+
+-- Grant login privilege
+ALTER ROLE data_analyst WITH LOGIN;
+
+-- Drop user
+DROP USER app_user;
+
+-- List users
+SELECT * FROM pg_user;
+\du  -- In psql</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="grant-permissions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#grant-permissions">#</doc-anchor-trigger>
+        <span>GRANT Permissions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Grant SELECT on table
+GRANT SELECT ON employees TO app_user;
+
+-- Grant SELECT and UPDATE
+GRANT SELECT, UPDATE ON employees TO app_user;
+
+-- Grant all privileges
+GRANT ALL PRIVILEGES ON employees TO app_user;
+
+-- Grant on schema
+GRANT USAGE ON SCHEMA public TO app_user;
+
+-- Grant on all tables in schema
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO app_user;
+
+-- Grant default privileges (for future objects)
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT ON TABLES TO app_user;
+
+-- Grant execution on functions
+GRANT EXECUTE ON FUNCTION calculate_bonus(INT, NUMERIC) TO app_user;
+
+-- Grant create privilege
+GRANT CREATE ON DATABASE mydb TO app_user;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="revoke-permissions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#revoke-permissions">#</doc-anchor-trigger>
+        <span>REVOKE Permissions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Revoke specific privilege
+REVOKE UPDATE ON employees FROM app_user;
+
+-- Revoke all privileges
+REVOKE ALL PRIVILEGES ON employees FROM app_user;
+
+-- Revoke with cascade (revokes dependent grants)
+REVOKE SELECT ON employees FROM app_user CASCADE;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="row-level-security-postgresql-specific">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#row-level-security-postgresql-specific">#</doc-anchor-trigger>
+        <span>Row-Level Security (PostgreSQL specific)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    salary NUMERIC,
+    department_id INT
+);
+
+-- Create policy: employees can only see their own records
+CREATE POLICY emp_select_policy ON employees
+    FOR SELECT
+    USING (employee_id = CURRENT_USER_ID);  -- Requires user tracking
+
+-- Enable RLS on table
+ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
+
+-- Create policy for management (can see all)
+CREATE ROLE manager;
+CREATE POLICY manager_policy ON employees
+    FOR SELECT
+    TO manager
+    USING (TRUE);  -- Managers see all rows</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="auditing-and-logging">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#auditing-and-logging">#</doc-anchor-trigger>
+        <span>Auditing and Logging</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Enable statement logging
+SET log_statement = 'all';  -- or 'mod' for modifications only
+
+-- Log slow queries
+SET log_min_duration_statement = 1000;  -- Log queries &gt; 1 second
+
+-- Log connection attempts
+SET log_connections = on;
+SET log_disconnections = on;
+
+-- View logs (typically in data directory/log/)
+-- Or use pg_log_*() functions
+
+-- Application-level auditing (via triggers)
+CREATE TABLE audit_log (
+    audit_id SERIAL PRIMARY KEY,
+    table_name VARCHAR(50),
+    operation VARCHAR(10),
+    user_name VARCHAR(50),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    old_values JSONB,
+    new_values JSONB
+);
+
+CREATE OR REPLACE FUNCTION audit_function()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO audit_log (table_name, operation, user_name, old_values, new_values)
+    VALUES (TG_TABLE_NAME, TG_OP, CURRENT_USER, row_to_json(OLD), row_to_json(NEW));
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +310,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/query_optimization/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">16 Query Optimization</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/date_time/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">18 Date & Time Functions</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +369,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "17 Security & Permissions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

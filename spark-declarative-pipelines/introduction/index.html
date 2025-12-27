@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>1. Introduction</title>
+    <meta name="title" content="1. Introduction">
+    <meta name="description" content="Imperative (traditional Spark jobs):">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/introduction/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/introduction/">
+    <meta property="og:title" content="1. Introduction">
+    <meta property="og:description" content="Imperative (traditional Spark jobs):">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/introduction/">
+    <meta property="twitter:title" content="1. Introduction">
+    <meta property="twitter:description" content="Imperative (traditional Spark jobs):">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,94 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="1-introduction" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-introduction">#</doc-anchor-trigger>
+        <span>1. Introduction</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="1-core-concepts">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-core-concepts">#</doc-anchor-trigger>
+        <span>1. Core Concepts</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="11-declarative-vs-imperative-paradigm">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#11-declarative-vs-imperative-paradigm">#</doc-anchor-trigger>
+        <span>1.1 Declarative vs Imperative Paradigm</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Imperative (traditional Spark jobs):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Traditional approach: explicitly manage orchestration
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName(&quot;ETL&quot;).getOrCreate()
+
+# Read, transform, write - manual sequencing
+raw_df = spark.read.parquet(&quot;s3://bucket/raw&quot;)
+cleaned_df = raw_df.filter(&quot;id IS NOT NULL&quot;)
+cleaned_df.write.mode(&quot;overwrite&quot;).parquet(&quot;s3://bucket/cleaned&quot;)
+
+result_df = spark.read.parquet(&quot;s3://bucket/cleaned&quot;).groupBy(&quot;category&quot;).count()
+result_df.write.mode(&quot;overwrite&quot;).parquet(&quot;s3://bucket/results&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Declarative (DLT):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">import dlt
+from pyspark.sql import functions as F
+
+@dlt.table
+def raw_data():
+    return spark.read.parquet(&quot;s3://bucket/raw&quot;)
+
+@dlt.table
+def cleaned_data():
+    return dlt.read(&quot;raw_data&quot;).filter(&quot;id IS NOT NULL&quot;)
+
+@dlt.table
+def results():
+    return dlt.read(&quot;cleaned_data&quot;).groupBy(&quot;category&quot;).count()</code></pre>
+</doc-codeblock></div>
+<p>Key difference: DLT infers dependency graph and handles orchestration. You declare <em>what</em>, not <em>how</em>.</p>
+<doc-anchor-target id="12-streaming-first-design">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-streaming-first-design">#</doc-anchor-trigger>
+        <span>1.2 Streaming-First Design</span>
+    </h3>
+</doc-anchor-target>
+<p>DLT is built on Spark Structured Streaming fundamentals, enabling:</p>
+<ul>
+<li>Exactly-once semantics via checkpointing</li>
+<li>Incremental processing of append-only data</li>
+<li>Unified batch/stream execution model</li>
+</ul>
+<p><strong>Critical insight:</strong> Streaming tables process each record once (assuming append-only source). Materialized views compute full state on each trigger.</p>
+<doc-anchor-target id="13-pipeline-lifecycle">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#13-pipeline-lifecycle">#</doc-anchor-trigger>
+        <span>1.3 Pipeline Lifecycle</span>
+    </h3>
+</doc-anchor-target>
+<ol>
+<li><strong>Create Update</strong>: DLT analyzes code, discovers tables/views, builds DAG</li>
+<li><strong>Initialize</strong>: First run processes all historical data (full refresh)</li>
+<li><strong>Incremental Updates</strong>: Subsequent runs process only new/changed data</li>
+<li><strong>State Persistence</strong>: Checkpoints saved at <code v-pre>storage_location/system/checkpoints/{table_name}</code></li>
+</ol>
+<p><strong>Not officially guaranteed</strong>: Exactly how DLT decides when to do full vs incremental refresh for materialized views depends on cost-based optimizer (varies by version).</p>
+<doc-anchor-target id="14-medallion-architecture-in-dlt">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#14-medallion-architecture-in-dlt">#</doc-anchor-trigger>
+        <span>1.4 Medallion Architecture in DLT</span>
+    </h3>
+</doc-anchor-target>
+<p>Bronze → Silver → Gold pattern fits naturally:</p>
+<ul>
+<li><strong>Bronze</strong>: Raw ingestion via streaming tables with minimal validation</li>
+<li><strong>Silver</strong>: Cleaned, deduplicated tables with Expectations; mix of streaming tables and MVs</li>
+<li><strong>Gold</strong>: Aggregated/curated tables; typically MVs for performance</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +245,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../delta-format/delta_code/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">3 Delta Lake / Delta Format Code</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/dlt-basics/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">2. Delta Live Tables Basics</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +304,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "1. Introduction", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

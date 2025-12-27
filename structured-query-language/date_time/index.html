@@ -9,29 +9,30 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>18 Date &amp; Time Functions</title>
+    <meta name="title" content="18 Date & Time Functions">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/date_time/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/date_time/">
+    <meta property="og:title" content="18 Date & Time Functions">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/date_time/">
+    <meta property="twitter:title" content="18 Date & Time Functions">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +47,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +147,151 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="18-date--time-functions" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#18-date--time-functions">#</doc-anchor-trigger>
+        <span>18 Date &amp; Time Functions</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="datetime-types-and-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#datetime-types-and-functions">#</doc-anchor-trigger>
+        <span>Date/Time Types and Functions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Current date/time functions
+SELECT
+    CURRENT_DATE AS today,              -- Just date
+    CURRENT_TIME AS time,               -- Time with TZ
+    CURRENT_TIMESTAMP AS now,           -- Date + time + TZ
+    NOW() AS now_alias,                 -- Alias for CURRENT_TIMESTAMP
+    LOCALTIME AS local_time,            -- No TZ
+    LOCALTIMESTAMP AS local_timestamp;  -- No TZ
+
+-- Extracting components
+SELECT
+    EXTRACT(YEAR FROM TIMESTAMP '2025-11-09 14:30:00') AS year,      -- 2025
+    EXTRACT(MONTH FROM NOW()) AS month,                               -- 11
+    EXTRACT(DAY FROM NOW()) AS day,                                   -- 9
+    EXTRACT(HOUR FROM NOW()) AS hour,
+    EXTRACT(MINUTE FROM NOW()) AS minute,
+    EXTRACT(SECOND FROM NOW()) AS second,
+    EXTRACT(DOW FROM NOW()) AS day_of_week,                          -- 0=Sunday
+    EXTRACT(QUARTER FROM NOW()) AS quarter;                          -- 1-4
+
+-- DATE_PART alternative syntax
+SELECT
+    DATE_PART('year', hire_date) AS year,
+    DATE_PART('month', hire_date) AS month,
+    DATE_PART('day', hire_date) AS day;
+
+-- Date truncation
+SELECT
+    DATE_TRUNC('year', NOW()) AS year_start,      -- 2025-01-01 00:00:00
+    DATE_TRUNC('month', NOW()) AS month_start,    -- 2025-11-01 00:00:00
+    DATE_TRUNC('day', NOW()) AS day_start,        -- 2025-11-09 00:00:00
+    DATE_TRUNC('hour', NOW()) AS hour_start;      -- 2025-11-09 14:00:00
+
+-- Age calculation
+SELECT
+    AGE(NOW(), hire_date) AS time_employed,
+    AGE(hire_date) AS age_from_epoch;  -- From '1900-01-01'
+
+-- Date arithmetic with INTERVAL
+SELECT
+    NOW() + INTERVAL '1 day' AS tomorrow,
+    NOW() - INTERVAL '1 month' AS last_month,
+    NOW() + INTERVAL '2 hours 30 minutes' AS in_2_5_hours,
+    NOW() + (salary::INTEGER || ' days')::INTERVAL AS future_date;
+
+-- INTERVAL types
+SELECT
+    INTERVAL '1 day' AS one_day,
+    INTERVAL '1 week' AS one_week,
+    INTERVAL '1 month' AS one_month,
+    INTERVAL '1 year' AS one_year,
+    INTERVAL '1 day 02:03:04' AS complex_interval;
+
+-- Convert string to timestamp
+SELECT
+    TO_TIMESTAMP('2025-11-09', 'YYYY-MM-DD') AS date_converted,
+    TO_TIMESTAMP('2025-11-09 14:30:00', 'YYYY-MM-DD HH24:MI:SS') AS full_timestamp,
+    TO_DATE('09/11/2025', 'DD/MM/YYYY') AS european_date;
+
+-- Format timestamp to string
+SELECT
+    TO_CHAR(NOW(), 'YYYY-MM-DD') AS date_format,
+    TO_CHAR(NOW(), 'Day, Month DD, YYYY') AS long_format,  -- Saturday, November 09, 2025
+    TO_CHAR(NOW(), 'MM/DD/YY HH24:MI:SS') AS time_format;
+
+-- Date comparison
+SELECT * FROM events
+WHERE event_date &gt;= CURRENT_DATE - INTERVAL '30 days'
+  AND event_date &lt; CURRENT_DATE + INTERVAL '1 day';
+
+-- Business day calculation
+SELECT
+    hire_date,
+    hire_date + (working_days || ' days')::INTERVAL AS end_date
+FROM employees;
+
+-- Time zone handling
+SELECT
+    NOW() AT TIME ZONE 'America/New_York' AS ny_time,
+    NOW() AT TIME ZONE 'Europe/London' AS london_time,
+    NOW() AT TIME ZONE 'Asia/Tokyo' AS tokyo_time;
+
+-- Interview trick: Date edge cases
+SELECT
+    DATE_TRUNC('month', NOW())::DATE + INTERVAL '1 month' - INTERVAL '1 day' AS last_day_of_month,
+    EXTRACT(DAYS FROM INTERVAL '1 month') AS month_length,  -- NULL (variable)
+    EXTRACT(DAYS FROM (DATE_TRUNC('month', NOW()) + INTERVAL '1 month' - DATE_TRUNC('month', NOW()))) AS days_in_month;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="common-datetime-patterns">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-datetime-patterns">#</doc-anchor-trigger>
+        <span>Common Date/Time Patterns</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Last day of month
+SELECT DATE_TRUNC('month', NOW())::DATE + INTERVAL '1 month' - INTERVAL '1 day';
+
+-- First day of month
+SELECT DATE_TRUNC('month', NOW())::DATE;
+
+-- Last day of quarter
+SELECT DATE_TRUNC('quarter', NOW())::DATE + INTERVAL '3 months' - INTERVAL '1 day';
+
+-- Next Monday
+SELECT
+    DATE_TRUNC('week', NOW() + INTERVAL '1 day')::DATE + INTERVAL '1 day' AS next_monday;
+
+-- Number of days between dates
+SELECT DATE_PART('day', end_date - start_date) AS days_difference;
+
+-- Business days (excluding weekends)
+SELECT
+    COUNT(*) FILTER (WHERE EXTRACT(DOW FROM date) NOT IN (0, 6)) AS business_days
+FROM (
+    SELECT DATE_TRUNC('day', generate_series(start_date, end_date, '1 day'))::DATE AS date
+) t;
+
+-- Month-over-month comparison
+SELECT
+    EXTRACT(MONTH FROM order_date) AS month,
+    COUNT(*) AS orders,
+    LAG(COUNT(*)) OVER (ORDER BY EXTRACT(MONTH FROM order_date)) AS prev_month_orders
+FROM orders
+GROUP BY EXTRACT(MONTH FROM order_date);
+
+-- Year-to-date totals
+SELECT
+    SUM(order_amount) FILTER (WHERE order_date &gt;= DATE_TRUNC('year', NOW())) AS ytd_sales,
+    SUM(order_amount) FILTER (WHERE order_date &lt; DATE_TRUNC('year', NOW())) AS prior_year_sales
+FROM orders;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +299,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/security/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">17 Security & Permissions</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/misc/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">19 Misc</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +358,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "18 Date & Time Functions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>7. Data Quality &amp; Expectations</title>
+    <meta name="title" content="7. Data Quality & Expectations">
+    <meta name="description" content="EXPECT(default): Log violations; write valid + invalid records">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/expectations/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/expectations/">
+    <meta property="og:title" content="7. Data Quality & Expectations">
+    <meta property="og:description" content="EXPECT(default): Log violations; write valid + invalid records">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/expectations/">
+    <meta property="twitter:title" content="7. Data Quality & Expectations">
+    <meta property="twitter:description" content="EXPECT(default): Log violations; write valid + invalid records">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,100 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="7-data-quality--expectations" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#7-data-quality--expectations">#</doc-anchor-trigger>
+        <span>7. Data Quality &amp; Expectations</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="71-expectations-expect-expect_or_drop-expect_or_fail">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#71-expectations-expect-expect_or_drop-expect_or_fail">#</doc-anchor-trigger>
+        <span>7.1 Expectations (EXPECT, EXPECT_OR_DROP, EXPECT_OR_FAIL)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>EXPECT</strong> (default): Log violations; write valid + invalid records</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.expect(&quot;email_valid&quot;, &quot;email LIKE '%@%.%'&quot;)
+def users():
+    return spark.read.table(&quot;raw_users&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>EXPECT_OR_DROP</strong>: Remove violating records</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.expect_or_drop(&quot;non_negative_balance&quot;, &quot;balance &gt;= 0&quot;)
+def accounts():
+    return spark.read.table(&quot;raw_accounts&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>EXPECT_OR_FAIL</strong>: Fail entire pipeline on violation</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.expect_or_fail(&quot;primary_key_not_null&quot;, &quot;customer_id IS NOT NULL&quot;)
+def customers():
+    return spark.read.table(&quot;raw_customers&quot;)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="72-advanced-group-multiple-expectations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#72-advanced-group-multiple-expectations">#</doc-anchor-trigger>
+        <span>7.2 Advanced: Group Multiple Expectations</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+@dlt.expect_all({
+    &quot;email_valid&quot;: &quot;email LIKE '%@%.%'&quot;,
+    &quot;email_not_null&quot;: &quot;email IS NOT NULL&quot;,
+    &quot;age_reasonable&quot;: &quot;age BETWEEN 0 AND 150&quot;
+})
+def users():
+    return spark.read.table(&quot;raw_users&quot;)</code></pre>
+</doc-codeblock></div>
+<p>Use <code v-pre>expect_all_or_drop</code>, <code v-pre>expect_all_or_fail</code> for grouped actions.</p>
+<doc-anchor-target id="73-metrics--monitoring">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#73-metrics--monitoring">#</doc-anchor-trigger>
+        <span>7.3 Metrics &amp; Monitoring</span>
+    </h3>
+</doc-anchor-target>
+<p>Event log stores expectation results in <code v-pre>details:flow_progress.data_quality.expectations</code>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SELECT
+    row_expectations.dataset,
+    row_expectations.name,
+    SUM(row_expectations.passed_records) as passing,
+    SUM(row_expectations.failed_records) as failing
+FROM event_log_raw,
+    LATERAL FLATTEN(
+        input =&gt; from_json(
+            details:flow_progress:data_quality:expectations,
+            &quot;array&lt;struct&lt;name: string, dataset: string, passed_records: int, failed_records: int&gt;&gt;&quot;
+        )
+    ) row_expectations
+WHERE event_type = 'flow_progress'
+GROUP BY row_expectations.dataset, row_expectations.name</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="74-quarantine-pattern-advanced">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#74-quarantine-pattern-advanced">#</doc-anchor-trigger>
+        <span>7.4 Quarantine Pattern (Advanced)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def users_quarantine():
+    df = spark.read.table(&quot;raw_users&quot;)
+    # Capture invalid rows in a separate table
+    return df.filter(
+        NOT (email LIKE '%@%.%' AND age BETWEEN 0 AND 150)
+    )
+
+@dlt.table
+@dlt.expect_all({
+    &quot;email_valid&quot;: &quot;email LIKE '%@%.%'&quot;,
+    &quot;age_reasonable&quot;: &quot;age BETWEEN 0 AND 150&quot;
+})
+def users_valid():
+    return spark.read.table(&quot;raw_users&quot;) \
+        .filter(email LIKE '%@%.%' AND age BETWEEN 0 AND 150)</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +251,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/streaming-concepts/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">6. Streaming Concepts in DLT</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/cdc/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">8. Change Data Capture (CDC)</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +310,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "7. Data Quality & Expectations", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

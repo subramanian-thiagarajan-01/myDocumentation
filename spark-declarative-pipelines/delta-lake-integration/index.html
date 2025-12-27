@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>9. Delta Lake Integration</title>
+    <meta name="title" content="9. Delta Lake Integration">
+    <meta name="description" content="DLT writes to Delta tables, inheriting ACID guarantees:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/delta-lake-integration/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/delta-lake-integration/">
+    <meta property="og:title" content="9. Delta Lake Integration">
+    <meta property="og:description" content="DLT writes to Delta tables, inheriting ACID guarantees:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/delta-lake-integration/">
+    <meta property="twitter:title" content="9. Delta Lake Integration">
+    <meta property="twitter:description" content="DLT writes to Delta tables, inheriting ACID guarantees:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,87 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="9-delta-lake-integration" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#9-delta-lake-integration">#</doc-anchor-trigger>
+        <span>9. Delta Lake Integration</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="91-acid-transactions--time-travel">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#91-acid-transactions--time-travel">#</doc-anchor-trigger>
+        <span>9.1 ACID Transactions &amp; Time Travel</span>
+    </h3>
+</doc-anchor-target>
+<p>DLT writes to Delta tables, inheriting ACID guarantees:</p>
+<ul>
+<li><strong>Atomicity</strong>: Entire table version succeeds or fails</li>
+<li><strong>Consistency</strong>: No partial updates visible</li>
+<li><strong>Isolation</strong>: Snapshot isolation; concurrent readers see consistent snapshot</li>
+<li><strong>Durability</strong>: Transaction committed to storage</li>
+</ul>
+<p>Time travel:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SELECT * FROM my_table TIMESTAMP AS OF '2025-12-27 10:00:00'
+SELECT * FROM my_table VERSION AS OF 10</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="92-optimize-and-z-ordering">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#92-optimize-and-z-ordering">#</doc-anchor-trigger>
+        <span>9.2 Optimize and Z-Ordering</span>
+    </h3>
+</doc-anchor-target>
+<p>DLT does <strong>not</strong> automatically call <code v-pre>OPTIMIZE</code>. Manual maintenance required:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">OPTIMIZE my_table ZORDER BY (customer_id, order_date)</code></pre>
+</doc-codeblock></div>
+<p>Z-ordering clusters data by columns for faster pruning.</p>
+<doc-anchor-target id="93-vacuum">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#93-vacuum">#</doc-anchor-trigger>
+        <span>9.3 Vacuum</span>
+    </h3>
+</doc-anchor-target>
+<p>Remove old data files (default: 7-day retention):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">VACUUM my_table RETAIN 7 DAYS</code></pre>
+</doc-codeblock></div>
+<p><strong>Critical</strong>: Cannot vacuum data referenced by time-travel queries. Retention period protects concurrent readers.</p>
+<doc-anchor-target id="94-schema-enforcement-vs-evolution">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#94-schema-enforcement-vs-evolution">#</doc-anchor-trigger>
+        <span>9.4 Schema Enforcement vs Evolution</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Enforcement</strong>: Strict mode; new columns rejected</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">ALTER TABLE my_table SET TBLPROPERTIES ('delta.columnMapping.mode' = 'none')</code></pre>
+</doc-codeblock></div>
+<p><strong>Evolution</strong>: New columns appended (default in DLT)</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">ALTER TABLE my_table SET TBLPROPERTIES ('delta.schema.autoMerge.enabled' = 'true')</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="95-merge-operations-in-dlt">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#95-merge-operations-in-dlt">#</doc-anchor-trigger>
+        <span>9.5 MERGE Operations in DLT</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def customer_gold():
+    updates = dlt.read(&quot;customer_silver_updates&quot;)
+    gold = dlt.read(&quot;customer_gold_current&quot;)
+
+    # DLT does not expose Spark merge directly; must use spark.sql()
+    return spark.sql(&quot;&quot;&quot;
+        MERGE INTO gold USING updates
+        ON gold.customer_id = updates.customer_id
+        WHEN MATCHED THEN UPDATE SET *
+        WHEN NOT MATCHED THEN INSERT *
+    &quot;&quot;&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Limitation</strong>: DLT tables read-only within DLT. MERGE requires raw Spark SQL outside DLT or within <code v-pre>spark.sql()</code>.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +238,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/cdc/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">8. Change Data Capture (CDC)</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/orchestration/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">10. Orchestration & Dependencies</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +297,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "9. Delta Lake Integration", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>12. Performance Optimization</title>
+    <meta name="title" content="12. Performance Optimization">
+    <meta name="description" content="Streaming tables: Always incremental (only process new data).">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/performance-optimization/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/performance-optimization/">
+    <meta property="og:title" content="12. Performance Optimization">
+    <meta property="og:description" content="Streaming tables: Always incremental (only process new data).">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/performance-optimization/">
+    <meta property="twitter:title" content="12. Performance Optimization">
+    <meta property="twitter:description" content="Streaming tables: Always incremental (only process new data).">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,92 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="12-performance-optimization" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-performance-optimization">#</doc-anchor-trigger>
+        <span>12. Performance Optimization</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="121-incremental-processing-key-to-cost-reduction">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#121-incremental-processing-key-to-cost-reduction">#</doc-anchor-trigger>
+        <span>12.1 Incremental Processing (Key to Cost Reduction)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Streaming tables</strong>: Always incremental (only process new data).</p>
+<p><strong>Materialized views on serverless</strong>: Automatically incremental refresh (cost-based optimizer).</p>
+<p><strong>Materialized views on classic compute</strong>: Full recompute by default (unless you manually write incremental logic with MERGE).</p>
+<p><strong>Benchmark</strong>: 6.5x throughput improvement and 85% lower latency with incremental MVs on serverless (200B rows).</p>
+<doc-anchor-target id="122-partitioning-strategies">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#122-partitioning-strategies">#</doc-anchor-trigger>
+        <span>12.2 Partitioning Strategies</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table(
+    partition_cols=[&quot;date&quot;]  # Partitions table by date
+)
+def events():
+    return spark.readStream.format(&quot;cloudFiles&quot;) \
+        .load(&quot;s3://events/&quot;) \
+        .withColumn(&quot;date&quot;, F.to_date(&quot;event_time&quot;))</code></pre>
+</doc-codeblock></div>
+<p>Partitioning enables:</p>
+<ul>
+<li><strong>Partition pruning</strong>: Queries filter out partitions (faster)</li>
+<li><strong>Incremental ingestion</strong>: Auto Loader discovers new partitions only</li>
+</ul>
+<doc-anchor-target id="123-join-optimization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#123-join-optimization">#</doc-anchor-trigger>
+        <span>12.3 Join Optimization</span>
+    </h3>
+</doc-anchor-target>
+<p>Best practices:</p>
+<ul>
+<li><strong>Filter early</strong>: Reduce join input size</li>
+<li><strong>Broadcast small tables</strong>: Use <code v-pre>broadcast()</code> hint for tables &lt;2GB</li>
+<li><strong>Avoid self-joins</strong>: Reframe logic to eliminate</li>
+</ul>
+<doc-anchor-target id="124-state-store-optimization-rocksdb">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#124-state-store-optimization-rocksdb">#</doc-anchor-trigger>
+        <span>12.4 State Store Optimization (RocksDB)</span>
+    </h3>
+</doc-anchor-target>
+<p>For stateful streaming (aggregations, joins with windows), enable RocksDB:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">spark.conf.set(&quot;spark.sql.streaming.stateStore.providerClass&quot;,
+    &quot;org.apache.spark.sql.streaming.state.RocksDBStateStoreProvider&quot;)</code></pre>
+</doc-codeblock></div>
+<p>Serverless automatically manages state store; classic compute requires manual configuration.</p>
+<doc-anchor-target id="125-backfill-strategies">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#125-backfill-strategies">#</doc-anchor-trigger>
+        <span>12.5 Backfill Strategies</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Full backfill</strong> (reset + reprocess):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># In UI: click &quot;Full Refresh&quot; button
+# Or via API: set refresh_all=true in update request</code></pre>
+</doc-codeblock></div>
+<p><strong>Incremental backfill</strong> (process new data only):</p>
+<ul>
+<li>Streaming tables: Automatic after recovery</li>
+<li>Materialized views: No explicit control; DLT decides</li>
+</ul>
+<p><strong>Manual incremental</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def backfill_window():
+    # Process data from specific date range
+    return spark.read.table(&quot;source&quot;) \
+        .filter(F.col(&quot;date&quot;) &gt;= F.lit(&quot;2025-01-01&quot;)) \
+        .filter(F.col(&quot;date&quot;) &lt; F.lit(&quot;2025-02-01&quot;))</code></pre>
+</doc-codeblock></div>
+<hr>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +243,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/monitoring/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">11. Monitoring & Observability</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/security/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">13. Security & Governance</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +302,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "12. Performance Optimization", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

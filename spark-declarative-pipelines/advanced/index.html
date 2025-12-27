@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>15. Advanced &amp; Edge Cases</title>
+    <meta name="title" content="15. Advanced & Edge Cases">
+    <meta name="description" content="Scenario: Historical data source added; need to reprocess last 2 years.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/advanced/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/advanced/">
+    <meta property="og:title" content="15. Advanced & Edge Cases">
+    <meta property="og:description" content="Scenario: Historical data source added; need to reprocess last 2 years.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/advanced/">
+    <meta property="twitter:title" content="15. Advanced & Edge Cases">
+    <meta property="twitter:description" content="Scenario: Historical data source added; need to reprocess last 2 years.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,163 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="15-advanced--edge-cases" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#15-advanced--edge-cases">#</doc-anchor-trigger>
+        <span>15. Advanced &amp; Edge Cases</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="151-backfills-and-reprocessing">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#151-backfills-and-reprocessing">#</doc-anchor-trigger>
+        <span>15.1 Backfills and Reprocessing</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Scenario</strong>: Historical data source added; need to reprocess last 2 years.</p>
+<p><strong>Approach 1</strong>: Full refresh (reset entire pipeline)</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># UI: Full Refresh button
+# Reprocesses all data from source; expensive but clean</code></pre>
+</doc-codeblock></div>
+<p><strong>Approach 2</strong>: Windowed incremental load</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def raw_data():
+    # Read files from specific date range
+    return spark.readStream.format(&quot;cloudFiles&quot;) \
+        .load(f&quot;s3://bucket/events/2023/&quot;) \
+        .union(spark.readStream.format(&quot;cloudFiles&quot;).load(&quot;s3://bucket/events/2024/&quot;)) \
+        .union(spark.readStream.format(&quot;cloudFiles&quot;).load(&quot;s3://bucket/events/2025/&quot;))</code></pre>
+</doc-codeblock></div>
+<p><strong>Approach 3</strong>: External orchestration
+Use Databricks Workflows to trigger multiple DLT pipeline runs with different parameters (not natively supported in DLT itself).</p>
+<doc-anchor-target id="152-schema-drift-handling">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#152-schema-drift-handling">#</doc-anchor-trigger>
+        <span>15.2 Schema Drift Handling</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Problem</strong>: Source schema changes unexpectedly; pipeline breaks.</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li><strong>Auto Loader rescue column</strong> (capture unexpected fields):</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def bronze():
+    return spark.readStream.format(&quot;cloudFiles&quot;) \
+        .option(&quot;cloudFiles.rescuedDataColumn&quot;, &quot;_rescued_data&quot;) \
+        .load(&quot;s3://bucket/&quot;)
+    # Unknown columns → JSON in _rescued_data</code></pre>
+</doc-codeblock></div>
+<ol start="2">
+<li><strong>Lenient schema inference</strong>:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">.option(&quot;cloudFiles.schemaEvolutionMode&quot;, &quot;additive&quot;)  # New columns OK</code></pre>
+</doc-codeblock></div>
+<ol start="3">
+<li><strong>Manual schema hints</strong>:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">.option(&quot;cloudFiles.schemaHints&quot;, &quot;id LONG, name STRING, amount DECIMAL(18,2)&quot;)</code></pre>
+</doc-codeblock></div>
+<ol start="4">
+<li><strong>Validate in Silver layer</strong>:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+@dlt.expect(&quot;schema_valid&quot;, &quot;SIZE(MAP_KEYS(_rescued_data)) = 0&quot;)
+def silver():
+    return dlt.read(&quot;bronze&quot;).filter(&quot;_rescued_data IS NULL&quot;)  # Fail if unknown columns</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="153-idempotency-and-deduplication">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#153-idempotency-and-deduplication">#</doc-anchor-trigger>
+        <span>15.3 Idempotency and Deduplication</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Challenge</strong>: Pipeline failure mid-run causes duplicate writes. Solution: Make transformations idempotent.</p>
+<p><strong>Idempotent pattern 1</strong>: Upsert (overwrite, not append)</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def customer_gold():
+    updates = dlt.read(&quot;customer_silver&quot;)
+    return spark.sql(&quot;&quot;&quot;
+        MERGE INTO customer_gold_target USING updates
+        ON customer_gold_target.customer_id = updates.customer_id
+        WHEN MATCHED THEN UPDATE SET *
+        WHEN NOT MATCHED THEN INSERT *
+    &quot;&quot;&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Idempotent pattern 2</strong>: Deduplication key</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def deduped_events():
+    return dlt.read(&quot;raw_events&quot;) \
+        .dropDuplicates([&quot;event_id&quot;, &quot;event_timestamp&quot;]) \
+        .repartition(&quot;date&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Not idempotent</strong>: Append-only inserts</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Avoid this for recovery scenarios
+@dlt.table
+def events_append():
+    return spark.readStream.table(&quot;raw_events&quot;)
+    # If pipeline restarts, duplicate rows inserted</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="154-checkpoint-corruption-recovery">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#154-checkpoint-corruption-recovery">#</doc-anchor-trigger>
+        <span>15.4 Checkpoint Corruption Recovery</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Symptom</strong>: Pipeline halts; error message references checkpoint.</p>
+<p><strong>Recovery</strong>:</p>
+<ol>
+<li>Stop pipeline</li>
+<li>Delete checkpoint directory: <code v-pre>storage_location/system/checkpoints/{table_name}</code></li>
+<li>Restart pipeline (triggers full reprocess of streaming table)</li>
+<li>Monitor for duplicates if logic is not idempotent</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Via Databricks CLI
+dbutils.fs.rm(&quot;s3://my-bucket/dlt/system/checkpoints/my_table&quot;, True)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="155-handling-large-stateful-operations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#155-handling-large-stateful-operations">#</doc-anchor-trigger>
+        <span>15.5 Handling Large Stateful Operations</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Problem</strong>: Window joins or large aggregations consume excessive state store memory.</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li><strong>Increase state store size</strong> (serverless auto-manages):</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">spark.conf.set(&quot;spark.sql.streaming.stateStore.rocksdb.limitCommitMemoryInMB&quot;, &quot;512&quot;)</code></pre>
+</doc-codeblock></div>
+<ol start="2">
+<li><strong>Partition state</strong>:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.table
+def windowed_events():
+    return dlt.read_stream(&quot;events&quot;) \
+        .groupBy(
+            F.window(&quot;event_time&quot;, &quot;10 minutes&quot;),
+            &quot;user_id&quot;
+        ) \
+        .agg(count(&quot;*&quot;)) \
+        .repartition(&quot;user_id&quot;)  # Spread state across partitions</code></pre>
+</doc-codeblock></div>
+<ol start="3">
+<li><strong>Reduce window size</strong> or retention period:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">.groupBy(F.window(&quot;event_time&quot;, &quot;1 minute&quot;, &quot;30 seconds&quot;))  # Smaller windows = less state</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +314,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/cicd/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">14. CI/CD & Dev​Ops</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/misc/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">16. Misc</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +373,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "15. Advanced & Edge Cases", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

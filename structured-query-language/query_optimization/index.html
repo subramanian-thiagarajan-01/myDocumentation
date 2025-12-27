@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>16 Query Optimization</title>
+    <meta name="title" content="16 Query Optimization">
+    <meta name="description" content="Understanding query execution plans is critical for optimization.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_optimization/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_optimization/">
+    <meta property="og:title" content="16 Query Optimization">
+    <meta property="og:description" content="Understanding query execution plans is critical for optimization.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/query_optimization/">
+    <meta property="twitter:title" content="16 Query Optimization">
+    <meta property="twitter:description" content="Understanding query execution plans is critical for optimization.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,208 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="16-query-optimization" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#16-query-optimization">#</doc-anchor-trigger>
+        <span>16 Query Optimization</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="explain-and-explain-analyze">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#explain-and-explain-analyze">#</doc-anchor-trigger>
+        <span>EXPLAIN and EXPLAIN ANALYZE</span>
+    </h3>
+</doc-anchor-target>
+<p>Understanding query execution plans is critical for optimization.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- EXPLAIN: shows planned execution (doesn't run query)
+EXPLAIN
+SELECT e.*, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.salary &gt; 50000;
+
+-- Output components:
+-- Seq Scan: sequential table scan (slow for large tables)
+-- Index Scan: uses index (usually faster)
+-- Nested Loop: join method (small joins)
+-- Hash Join: join method (larger joins)
+-- Merge Join: join method (pre-sorted data)
+
+-- EXPLAIN ANALYZE: executes query and shows actual statistics
+EXPLAIN ANALYZE
+SELECT * FROM employees WHERE salary &gt; 50000;
+
+-- Output includes:
+-- cost=X..Y: estimated cost (lower = faster)
+-- actual time=X..Y ms: real execution time
+-- rows=X: estimated rows / actual rows returned
+-- Loops: how many times node executed
+
+-- Full analysis with buffers
+EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
+SELECT * FROM employees WHERE department_id = 1;
+
+-- Buffers output shows:
+-- Shared Blks Hit: data from cache
+-- Shared Blks Read: data from disk
+-- Shared Blks Dirtied: data modified
+
+-- FORMAT options
+EXPLAIN (FORMAT JSON) SELECT * FROM employees;
+EXPLAIN (FORMAT XML) SELECT * FROM employees;
+EXPLAIN (FORMAT YAML) SELECT * FROM employees;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="common-performance-issues-and-solutions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-performance-issues-and-solutions">#</doc-anchor-trigger>
+        <span>Common Performance Issues and Solutions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- ISSUE 1: Sequential Scan on large table
+-- Symptom: &quot;Seq Scan on large_table&quot;
+EXPLAIN SELECT * FROM orders WHERE customer_id = 100;
+
+-- Solution: Create index
+CREATE INDEX idx_orders_customer ON orders(customer_id);
+
+-- ISSUE 2: N+1 Query problem
+-- Bad: Execute query in loop (application level)
+-- SELECT * FROM orders WHERE id = 1;
+-- SELECT * FROM orders WHERE id = 2;
+-- ... (100 times)
+
+-- Solution: Fetch all at once
+SELECT * FROM orders WHERE id IN (1, 2, 3, ...);
+
+-- ISSUE 3: Unnecessary joins
+SELECT e.*, d.*, j.*
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+JOIN jobs j ON e.job_id = j.job_id;
+
+-- Solution: Select only needed columns
+SELECT e.employee_id, e.first_name, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+-- ISSUE 4: Missing WHERE clause (full table scan)
+EXPLAIN ANALYZE SELECT * FROM large_table;
+
+-- Solution: Add filtering
+SELECT * FROM large_table WHERE status = 'active';
+
+-- ISSUE 5: Complex expressions in WHERE clause
+SELECT * FROM employees
+WHERE YEAR(hire_date) = 2020;  -- Can't use index!
+
+-- Solution: Use range for indexability
+SELECT * FROM employees
+WHERE hire_date &gt;= '2020-01-01' AND hire_date &lt; '2021-01-01';
+
+-- ISSUE 6: OR conditions preventing index usage
+SELECT * FROM employees
+WHERE first_name = 'John' OR first_name = 'Jane';
+
+-- Solution: Use IN or UNION
+SELECT * FROM employees WHERE first_name IN ('John', 'Jane');</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="query-tuning-techniques">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#query-tuning-techniques">#</doc-anchor-trigger>
+        <span>Query Tuning Techniques</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- 1. Use DISTINCT carefully (expensive operation)
+-- Bad:
+SELECT DISTINCT employee_id FROM orders;
+
+-- Better (if goal is uniqueness):
+SELECT employee_id FROM orders GROUP BY employee_id;
+
+-- 2. Limit result set early
+-- Bad:
+SELECT * FROM large_table JOIN another_table...
+-- Then limit in application
+
+-- Good:
+SELECT * FROM (
+    SELECT * FROM large_table WHERE date &gt; NOW() - INTERVAL '30 days'
+) t
+LIMIT 100;
+
+-- 3. Rewrite correlated subqueries as joins
+-- Slow (correlated):
+SELECT e.* FROM employees e
+WHERE salary &gt; (
+    SELECT AVG(salary) FROM employees WHERE department_id = e.department_id
+);
+
+-- Fast (join):
+WITH dept_avg AS (
+    SELECT department_id, AVG(salary) AS avg_sal
+    FROM employees
+    GROUP BY department_id
+)
+SELECT e.* FROM employees e
+JOIN dept_avg da ON e.department_id = da.department_id
+WHERE e.salary &gt; da.avg_sal;
+
+-- 4. Use window functions instead of self-joins
+-- Complex:
+SELECT e1.*, e2.salary AS next_higher_salary
+FROM employees e1
+LEFT JOIN employees e2 ON e2.salary &gt; e1.salary
+WHERE e2.salary = (SELECT MIN(salary) FROM employees e3 WHERE e3.salary &gt; e1.salary);
+
+-- Simple:
+SELECT *,
+    LEAD(salary) OVER (ORDER BY salary) AS next_higher_salary
+FROM employees;
+
+-- 5. Batch operations
+-- Slow:
+FOR i IN 1..1000 LOOP
+    INSERT INTO table (col1, col2) VALUES (val1, val2);
+END LOOP;
+
+-- Fast:
+INSERT INTO table (col1, col2)
+SELECT val1, val2 FROM source_table;
+
+-- 6. Use COPY for bulk loading
+COPY employees (employee_id, first_name, salary)
+FROM '/path/to/file.csv'
+WITH (FORMAT csv, HEADER true);</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="configuration-tuning">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#configuration-tuning">#</doc-anchor-trigger>
+        <span>Configuration Tuning</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Check current settings
+SHOW shared_buffers;
+SHOW work_mem;
+SHOW maintenance_work_mem;
+SHOW random_page_cost;
+
+-- Common tuning parameters (postgresql.conf or SET command)
+SET shared_buffers = '256MB';        -- 25% of RAM (restart needed)
+SET work_mem = '64MB';               -- Per operation
+SET maintenance_work_mem = '1GB';    -- For VACUUM, ANALYZE
+SET effective_cache_size = '8GB';    -- Help query planner
+SET random_page_cost = 1.1;          -- Favor index scans on SSD
+SET seq_page_cost = 1.0;             -- Cost of sequential page read
+
+-- Autovacuum settings
+SET autovacuum = on;
+SET autovacuum_vacuum_scale_factor = 0.1;
+SET autovacuum_analyze_scale_factor = 0.05;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +359,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/indexing/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">15 Indexing Strategies</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/security/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">17 Security & Permissions</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +418,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "16 Query Optimization", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

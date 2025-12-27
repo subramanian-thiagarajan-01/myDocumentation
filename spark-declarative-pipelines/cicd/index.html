@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>14. CI/CD &amp; DevOps</title>
+    <meta name="title" content="14. CI/CD & DevOps">
+    <meta name="description" content="Typical structure:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/cicd/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/cicd/">
+    <meta property="og:title" content="14. CI/CD & DevOps">
+    <meta property="og:description" content="Typical structure:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/cicd/">
+    <meta property="twitter:title" content="14. CI/CD & DevOps">
+    <meta property="twitter:description" content="Typical structure:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,127 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="14-cicd--devops" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#14-cicd--devops">#</doc-anchor-trigger>
+        <span>14. CI/CD &amp; DevOps</span>
     </h1>
 </doc-anchor-target>
+<doc-anchor-target id="141-version-control--code-organization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#141-version-control--code-organization">#</doc-anchor-trigger>
+        <span>14.1 Version Control &amp; Code Organization</span>
+    </h3>
+</doc-anchor-target>
+<p>Typical structure:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">repo/
+├── pipelines/
+│   ├── bronze.py       # Ingestion
+│   ├── silver.py       # Transformation
+│   └── gold.py         # Aggregation
+├── tests/
+│   ├── test_bronze.py
+│   └── test_silver.py
+├── config/
+│   ├── dev.json        # Development pipeline config
+│   ├── staging.json    # Staging config
+│   └── prod.json       # Production config
+└── .github/workflows/
+    └── deploy.yml      # CI/CD workflow</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="142-environment-promotion-dev--staging--prod">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#142-environment-promotion-dev--staging--prod">#</doc-anchor-trigger>
+        <span>14.2 Environment Promotion (Dev → Staging → Prod)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Strategy</strong>: Single codebase, different configs per environment.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-yaml"><code v-pre class="language-yaml"># .github/workflows/deploy.yml
+name: Deploy DLT Pipeline
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run unit tests
+        run: pytest tests/
+
+  deploy-staging:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to staging
+        env:
+          DATABRICKS_HOST: ${{ ERROR }}
+          DATABRICKS_TOKEN: ${{ ERROR }}
+        run: |
+          databricks cli pipelines upsert \
+            --config config/staging.json
+
+  deploy-prod:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to production
+        env:
+          DATABRICKS_HOST: ${{ ERROR }}
+          DATABRICKS_TOKEN: ${{ ERROR }}
+        run: |
+          databricks cli pipelines upsert \
+            --config config/prod.json</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="143-parameterization">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#143-parameterization">#</doc-anchor-trigger>
+        <span>14.3 Parameterization</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># pipeline.py
+import dlt
+import os
+
+environment = os.getenv(&quot;ENVIRONMENT&quot;, &quot;dev&quot;)
+storage_path = f&quot;s3://my-bucket/{environment}/data&quot;
+
+@dlt.table
+def raw_data():
+    return spark.readStream.format(&quot;cloudFiles&quot;) \
+        .load(f&quot;{storage_path}/raw/&quot;)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="144-testing-strategies">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#144-testing-strategies">#</doc-anchor-trigger>
+        <span>14.4 Testing Strategies</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Unit testing</strong> (locally or in notebook):</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># tests/test_transformations.py
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.master(&quot;local&quot;).appName(&quot;test&quot;).getOrCreate()
+
+def test_data_quality():
+    raw_df = spark.createDataFrame([
+        (1, &quot;Alice&quot;, 25),
+        (2, &quot;Bob&quot;, -5),  # Invalid age
+    ], [&quot;id&quot;, &quot;name&quot;, &quot;age&quot;])
+
+    # Simulate DLT expectation: age &gt;= 0
+    result = raw_df.filter(&quot;age &gt;= 0&quot;)
+    assert result.count() == 1  # Should drop one row</code></pre>
+</doc-codeblock></div>
+<p><strong>Integration testing</strong>: Deploy test pipeline to staging; validate outputs.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +278,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/security/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">13. Security & Governance</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/advanced/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">15. Advanced & Edge Cases</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +337,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "14. CI/CD & DevOps", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

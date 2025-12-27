@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>07 Window Functions</title>
+    <meta name="title" content="07 Window Functions">
+    <meta name="description" content="Window functions perform calculations over a set of rows (a \"window\") without collapsing rows like GROUP BY.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/window_functions/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/window_functions/">
+    <meta property="og:title" content="07 Window Functions">
+    <meta property="og:description" content="Window functions perform calculations over a set of rows (a \"window\") without collapsing rows like GROUP BY.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/window_functions/">
+    <meta property="twitter:title" content="07 Window Functions">
+    <meta property="twitter:description" content="Window functions perform calculations over a set of rows (a \"window\") without collapsing rows like GROUP BY.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,211 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="07-window-functions" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#07-window-functions">#</doc-anchor-trigger>
+        <span>07 Window Functions</span>
     </h1>
 </doc-anchor-target>
+<p>Window functions perform calculations over a set of rows (a &quot;window&quot;) without collapsing rows like GROUP BY.</p>
+<doc-anchor-target id="window-function-syntax">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#window-function-syntax">#</doc-anchor-trigger>
+        <span>Window Function Syntax</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SELECT
+    column1,
+    aggregate_function() OVER (
+        [PARTITION BY column_list]
+        [ORDER BY column_list [ASC|DESC]]
+        [ROWS|RANGE frame_specification]
+    ) AS window_result
+FROM table_name;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="1-ranking-window-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-ranking-window-functions">#</doc-anchor-trigger>
+        <span>1. Ranking Window Functions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- ROW_NUMBER: Unique ranking (1, 2, 3, 4, ...)
+SELECT
+    employee_id,
+    first_name,
+    salary,
+    ROW_NUMBER() OVER (ORDER BY salary DESC) AS rank
+FROM employees;
+
+-- RANK: Ties get same rank, next rank skipped (1, 2, 2, 4, ...)
+SELECT
+    employee_id,
+    first_name,
+    salary,
+    RANK() OVER (ORDER BY salary DESC) AS rank,
+    DENSE_RANK() OVER (ORDER BY salary DESC) AS dense_rank
+FROM employees;
+
+-- Top earner per department
+SELECT * FROM (
+    SELECT
+        employee_id,
+        first_name,
+        salary,
+        department_id,
+        RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS dept_rank
+    FROM employees
+) ranked
+WHERE dept_rank = 1;
+
+-- NTILE: Distribute rows into N buckets
+SELECT
+    employee_id,
+    salary,
+    NTILE(4) OVER (ORDER BY salary) AS quartile
+FROM employees;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="2-aggregate-window-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-aggregate-window-functions">#</doc-anchor-trigger>
+        <span>2. Aggregate Window Functions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Running SUM (cumulative sum)
+SELECT
+    order_date,
+    order_amount,
+    SUM(order_amount) OVER (
+        ORDER BY order_date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS cumulative_total
+FROM orders
+ORDER BY order_date;
+
+-- Moving average (last 3 rows)
+SELECT
+    date,
+    close_price,
+    AVG(close_price) OVER (
+        ORDER BY date
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ) AS moving_avg_3day
+FROM stock_prices;
+
+-- Partition with aggregate
+SELECT
+    employee_id,
+    first_name,
+    department_id,
+    salary,
+    AVG(salary) OVER (PARTITION BY department_id) AS dept_avg_salary,
+    SUM(salary) OVER (PARTITION BY department_id) AS dept_total_salary
+FROM employees;
+
+-- Comparing to aggregate (useful pattern)
+SELECT
+    employee_id,
+    first_name,
+    salary,
+    AVG(salary) OVER () AS company_avg,
+    salary - AVG(salary) OVER () AS diff_from_avg
+FROM employees;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="3-value-window-functions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-value-window-functions">#</doc-anchor-trigger>
+        <span>3. Value Window Functions</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- LEAD/LAG: Access next/previous rows
+SELECT
+    date,
+    close_price,
+    LAG(close_price) OVER (ORDER BY date) AS prev_price,
+    LEAD(close_price) OVER (ORDER BY date) AS next_price,
+    close_price - LAG(close_price) OVER (ORDER BY date) AS price_change
+FROM stock_prices;
+
+-- FIRST_VALUE / LAST_VALUE
+SELECT
+    employee_id,
+    hire_date,
+    salary,
+    FIRST_VALUE(salary) OVER (ORDER BY hire_date) AS first_salary,
+    LAST_VALUE(salary) OVER (
+        ORDER BY hire_date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    ) AS last_salary
+FROM employees;
+
+-- NTH_VALUE: Get Nth row value
+SELECT
+    employee_id,
+    salary,
+    NTH_VALUE(salary, 2) OVER (ORDER BY salary DESC) AS second_highest
+FROM employees;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="window-frame-specifications">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#window-frame-specifications">#</doc-anchor-trigger>
+        <span>Window Frame Specifications</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- ROWS BETWEEN frame
+SELECT
+    date,
+    value,
+    AVG(value) OVER (
+        ORDER BY date
+        ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING  -- 5-row window
+    ) AS avg_5row
+FROM data;
+
+-- RANGE (with expressions)
+SELECT
+    date,
+    value,
+    SUM(value) OVER (
+        ORDER BY date
+        RANGE BETWEEN INTERVAL '7 days' PRECEDING AND CURRENT ROW
+    ) AS sum_7day
+FROM data;
+
+-- Frame specifications
+ROWS/RANGE BETWEEN:
+    UNBOUNDED PRECEDING      -- From first row
+    N PRECEDING              -- N rows before
+    CURRENT ROW              -- Current row
+    N FOLLOWING              -- N rows after
+    UNBOUNDED FOLLOWING      -- To last row</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="interview-question-window-functions-vs-group-by">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#interview-question-window-functions-vs-group-by">#</doc-anchor-trigger>
+        <span>Interview Question: Window Functions vs GROUP BY</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- GROUP BY (collapses rows)
+SELECT department_id, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY department_id;
+-- Result: 10 rows (one per department)
+
+-- Window function (keeps all rows)
+SELECT
+    employee_id,
+    first_name,
+    salary,
+    AVG(salary) OVER (PARTITION BY department_id) AS dept_avg
+FROM employees;
+-- Result: 100 rows (all employees with their dept avg)</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +362,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/subqueries/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">06 Subqueries & Correlated Subqueries</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/cte/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">08 Common Table Expressions (CT​Es)</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +421,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "07 Window Functions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

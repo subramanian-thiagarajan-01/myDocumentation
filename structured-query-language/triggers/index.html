@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>12 Triggers</title>
+    <meta name="title" content="12 Triggers">
+    <meta name="description" content="Triggers execute automatically in response to database events (INSERT, UPDATE, DELETE).">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/triggers/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/triggers/">
+    <meta property="og:title" content="12 Triggers">
+    <meta property="og:description" content="Triggers execute automatically in response to database events (INSERT, UPDATE, DELETE).">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/triggers/">
+    <meta property="twitter:title" content="12 Triggers">
+    <meta property="twitter:description" content="Triggers execute automatically in response to database events (INSERT, UPDATE, DELETE).">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,174 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="12-triggers" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-triggers">#</doc-anchor-trigger>
+        <span>12 Triggers</span>
     </h1>
 </doc-anchor-target>
+<p>Triggers execute automatically in response to database events (INSERT, UPDATE, DELETE).</p>
+<doc-anchor-target id="trigger-syntax">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#trigger-syntax">#</doc-anchor-trigger>
+        <span>Trigger Syntax</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REPLACE FUNCTION trigger_function_name()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Trigger logic
+    RETURN NEW;  -- For BEFORE/AFTER INSERT/UPDATE
+    -- RETURN NULL;  -- For AFTER DELETE
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_name
+{BEFORE|AFTER|INSTEAD OF} {INSERT|UPDATE|DELETE}
+ON table_name
+FOR EACH ROW
+[WHEN (condition)]
+EXECUTE FUNCTION trigger_function_name();</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="practical-trigger-examples">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#practical-trigger-examples">#</doc-anchor-trigger>
+        <span>Practical Trigger Examples</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- 1. Audit trigger (log all changes)
+CREATE TABLE audit_log (
+    log_id SERIAL PRIMARY KEY,
+    table_name VARCHAR(50),
+    operation VARCHAR(10),
+    old_data JSONB,
+    new_data JSONB,
+    changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE OR REPLACE FUNCTION audit_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO audit_log (table_name, operation, old_data, new_data)
+    VALUES (TG_TABLE_NAME, TG_OP, row_to_json(OLD), row_to_json(NEW));
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER employees_audit
+AFTER INSERT OR UPDATE OR DELETE ON employees
+FOR EACH ROW
+EXECUTE FUNCTION audit_trigger();
+
+-- 2. Timestamp update trigger (automatically update modified_at)
+CREATE OR REPLACE FUNCTION update_modified_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at := CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER employees_update_timestamp
+BEFORE UPDATE ON employees
+FOR EACH ROW
+EXECUTE FUNCTION update_modified_timestamp();
+
+-- 3. Validation trigger
+CREATE OR REPLACE FUNCTION validate_salary()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.salary &lt;= 0 THEN
+        RAISE EXCEPTION 'Salary must be positive';
+    END IF;
+
+    IF NEW.salary &gt; 999999.99 THEN
+        RAISE WARNING 'Salary exceeds normal range';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER salary_validation
+BEFORE INSERT OR UPDATE ON employees
+FOR EACH ROW
+EXECUTE FUNCTION validate_salary();
+
+-- 4. Enforcing business rules
+CREATE OR REPLACE FUNCTION check_employee_department()
+RETURNS TRIGGER AS $$
+DECLARE
+    dept_exists INT;
+BEGIN
+    SELECT COUNT(*) INTO dept_exists
+    FROM departments
+    WHERE department_id = NEW.department_id AND is_active = TRUE;
+
+    IF dept_exists = 0 THEN
+        RAISE EXCEPTION 'Department does not exist or is inactive';
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_valid_department
+BEFORE INSERT OR UPDATE ON employees
+FOR EACH ROW
+EXECUTE FUNCTION check_employee_department();
+
+-- 5. Cascade business logic (maintaining denormalized data)
+CREATE OR REPLACE FUNCTION update_department_total()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'DELETE' THEN
+        UPDATE departments
+        SET total_salary = total_salary - OLD.salary
+        WHERE department_id = OLD.department_id;
+    ELSIF TG_OP = 'INSERT' THEN
+        UPDATE departments
+        SET total_salary = total_salary + NEW.salary
+        WHERE department_id = NEW.department_id;
+    ELSIF TG_OP = 'UPDATE' THEN
+        UPDATE departments
+        SET total_salary = total_salary - OLD.salary + NEW.salary
+        WHERE department_id = NEW.department_id;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER maintain_dept_salary_total
+AFTER INSERT OR UPDATE OR DELETE ON employees
+FOR EACH ROW
+EXECUTE FUNCTION update_department_total();</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="managing-triggers">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#managing-triggers">#</doc-anchor-trigger>
+        <span>Managing Triggers</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- List triggers
+SELECT trigger_name, event_manipulation, event_object_schema, event_object_table
+FROM information_schema.triggers;
+
+-- Disable trigger (temporarily)
+ALTER TABLE employees DISABLE TRIGGER ALL;
+
+-- Enable trigger
+ALTER TABLE employees ENABLE TRIGGER ALL;
+
+-- Drop trigger
+DROP TRIGGER trigger_name ON table_name;
+
+-- View trigger definition
+SELECT pg_get_triggerdef(trigger_oid);</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +325,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/sp_udf/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">11 Stored Procedures & User-​Defined Functions</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/views/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">13 Views</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +384,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "12 Triggers", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

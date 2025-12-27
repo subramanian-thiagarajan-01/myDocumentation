@@ -9,29 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>myDocumentation</title>
-    <meta name="title" content="myDocumentation">
+    <title>13 Views</title>
+    <meta name="title" content="13 Views">
+    <meta name="description" content="Views are virtual tables created from queries; they don't store data.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/views/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="og:title" content="myDocumentation">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/views/">
+    <meta property="og:title" content="13 Views">
+    <meta property="og:description" content="Views are virtual tables created from queries; they don't store data.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/">
-    <meta property="twitter:title" content="myDocumentation">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/views/">
+    <meta property="twitter:title" content="13 Views">
+    <meta property="twitter:description" content="Views are virtual tables created from queries; they don't store data.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820156721004" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -46,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -146,12 +150,112 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="mydocumentation" class="break-words">
+<doc-anchor-target id="13-views" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mydocumentation">#</doc-anchor-trigger>
-        <span>myDocumentation</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#13-views">#</doc-anchor-trigger>
+        <span>13 Views</span>
     </h1>
 </doc-anchor-target>
+<p>Views are virtual tables created from queries; they don&#x27;t store data.</p>
+<doc-anchor-target id="create-views">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#create-views">#</doc-anchor-trigger>
+        <span>Create Views</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Basic view
+CREATE VIEW employee_summary AS
+SELECT
+    employee_id,
+    first_name || ' ' || last_name AS full_name,
+    salary,
+    department_id
+FROM employees
+WHERE is_active = TRUE;
+
+-- Use view
+SELECT * FROM employee_summary WHERE salary &gt; 50000;
+
+-- View with joins
+CREATE VIEW emp_dept_view AS
+SELECT
+    e.employee_id,
+    e.first_name,
+    e.salary,
+    d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+-- Updatable view (with simple structure)
+CREATE VIEW active_employees AS
+SELECT employee_id, first_name, salary
+FROM employees
+WHERE is_active = TRUE;
+
+-- Update through view
+UPDATE active_employees SET salary = 60000 WHERE employee_id = 1;  -- Updates source table
+
+-- WITH CHECK OPTION (ensures updated rows still match view criteria)
+CREATE VIEW sales_employees AS
+SELECT employee_id, first_name, department_id
+FROM employees
+WHERE department_id = 3
+WITH CHECK OPTION;  -- Can't update to move employee to different dept
+
+-- View with aggregation (not updatable)
+CREATE VIEW department_summary AS
+SELECT
+    department_id,
+    COUNT(*) AS num_employees,
+    AVG(salary) AS avg_salary,
+    SUM(salary) AS total_salary
+FROM employees
+GROUP BY department_id;
+
+-- Materialized view (stores results for performance)
+CREATE MATERIALIZED VIEW mv_sales_by_month AS
+SELECT
+    DATE_TRUNC('month', order_date)::DATE AS month,
+    SUM(order_amount) AS total_sales,
+    COUNT(*) AS num_orders
+FROM orders
+GROUP BY DATE_TRUNC('month', order_date);
+
+-- Refresh materialized view
+REFRESH MATERIALIZED VIEW mv_sales_by_month;
+REFRESH MATERIALIZED VIEW CONCURRENTLY mv_sales_by_month;  -- Non-blocking</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="modify--drop-views">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#modify--drop-views">#</doc-anchor-trigger>
+        <span>Modify &amp; Drop Views</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Modify view (replace)
+CREATE OR REPLACE VIEW employee_summary AS
+SELECT
+    employee_id,
+    first_name || ' ' || last_name AS full_name,
+    salary,
+    department_id,
+    hire_date  -- New column
+FROM employees
+WHERE is_active = TRUE;
+
+-- ALTER VIEW (modify properties)
+ALTER VIEW employee_summary RENAME TO emp_summary;
+
+-- Drop view
+DROP VIEW employee_summary;
+
+-- Drop with CASCADE (drops dependent objects)
+DROP VIEW employee_summary CASCADE;
+
+-- Drop view if exists
+DROP VIEW IF EXISTS employee_summary;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -159,6 +263,27 @@
                             </div>
                             <footer id="retype-content-footer" class="clear-both">
                             
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/triggers/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">12 Triggers</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/normalization/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">14 Normalization & Database Design</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
                             </footer>
                         </main>
                 
@@ -197,6 +322,6 @@
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "myDocumentation", isRoot: true, level: 0, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "13 Views", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
