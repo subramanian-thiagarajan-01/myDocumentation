@@ -9,24 +9,21 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>01 Overview of Databricks</title>
-    <meta name="title" content="01 Overview of Databricks">
-    <meta name="description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <title>18 Date &amp; Time Functions</title>
+    <meta name="title" content="18 Date & Time Functions">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/sql/date_time/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="og:title" content="01 Overview of Databricks">
-    <meta property="og:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/sql/date_time/">
+    <meta property="og:title" content="18 Date & Time Functions">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="twitter:title" content="01 Overview of Databricks">
-    <meta property="twitter:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/sql/date_time/">
+    <meta property="twitter:title" content="18 Date & Time Functions">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
@@ -35,6 +32,7 @@
     <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820152836873" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
     <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820152836873" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820152836873" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -149,294 +147,151 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="01-overview-of-databricks" class="break-words">
+<doc-anchor-target id="18-date--time-functions" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#01-overview-of-databricks">#</doc-anchor-trigger>
-        <span>01 Overview of Databricks</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#18-date--time-functions">#</doc-anchor-trigger>
+        <span>18 Date &amp; Time Functions</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="-1-what-is-databricks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-what-is-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 1. <strong>What is Databricks?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p><strong>Databricks</strong> is a <strong>cloud-native data analytics platform</strong> built on <strong>Apache Spark</strong> that enables organizations to unify <strong>data engineering, data science, machine learning (ML), and business intelligence (BI)</strong> workloads in one place. It provides a <strong>lakehouse architecture</strong> — combining the flexibility of data lakes with the performance and management features of data warehouses.</p>
-<doc-anchor-target id="key-points">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#key-points">#</doc-anchor-trigger>
-        <span>Key Points</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>It was founded by the original creators of <strong>Apache Spark</strong>, and extends it for cloud-scale analytics.</li>
-<li>Databricks powers ETL, ad-hoc analytics, ML model building, and business dashboards on <em>the same data platform</em>.</li>
-<li>Includes components such as <strong>Delta Lake (transactional storage layer)</strong> and <strong>Databricks SQL</strong> for BI.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-2-why-do-we-need-databricks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-why-do-we-need-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 2. <strong>Why do we need Databricks?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>The landscape of enterprise data has changed:</p>
-<ul>
-<li>Data is <strong>huge</strong> (petabytes).</li>
-<li>Data is <strong>diverse</strong> (structured, semi-structured, unstructured).</li>
-<li>Users range from <strong>engineers and data scientists to analysts and product owners</strong>.</li>
-</ul>
-<p>Databricks is needed because:</p>
-<doc-anchor-target id="-1-unified-platform">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-unified-platform">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 1) <strong>Unified Platform</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Traditionally analytic systems were siloed (data warehouse for BI, data lake for ML). Databricks provides one system that supports:</p>
-<ul>
-<li><strong>ETL/ELT</strong></li>
-<li><strong>Streaming &amp; batch processing</strong></li>
-<li><strong>Machine learning</strong></li>
-<li><strong>SQL analytics and dashboards</strong>
-All on one shared metadata and governance layer.</li>
-</ul>
-<doc-anchor-target id="-2-scalability--cost-efficiency">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-scalability--cost-efficiency">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 2) <strong>Scalability &amp; Cost Efficiency</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>It decouples <strong>storage and compute</strong>, letting companies pay only for processing when needed and use cheap cloud object storage for data.</p>
-<doc-anchor-target id="-3-support-for-diverse-workloads">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-support-for-diverse-workloads">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 3) <strong>Support for Diverse Workloads</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>From <strong>SQL reporting</strong> to <strong>Python/ML notebooks</strong>, to <strong>streaming ingestion</strong>, Databricks supports the full data lifecycle in one platform.</p>
-<doc-anchor-target id="-4-open-standards--no-vendor-lock-in">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-open-standards--no-vendor-lock-in">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 4) <strong>Open Standards &amp; No Vendor Lock-In</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Uses open formats like <strong>Parquet/Delta</strong>, and open projects (Apache Spark, Delta Lake, MLflow), so your data isn’t locked into a proprietary format.</p>
-<hr>
-<doc-anchor-target id="-3-what-is-a-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-what-is-a-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 3. <strong>What is a Lakehouse?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>A <strong>lakehouse</strong> is a modern data architecture that <strong>unifies the best of data lakes and data warehouses</strong>.</p>
-<doc-anchor-target id="at-a-high-level">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#at-a-high-level">#</doc-anchor-trigger>
-        <span>At a high level:</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>Like a <strong>data lake</strong>, it can store <em>all types</em> of data — structured, semi-structured, unstructured — in open formats.</li>
-<li>Like a <strong>data warehouse</strong>, it supports <strong>ACID transactions, schema enforcement, performance optimizations, governance, and BI queries.</strong></li>
-</ul>
-<doc-anchor-target id="what-a-lakehouse-enables">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#what-a-lakehouse-enables">#</doc-anchor-trigger>
-        <span>What a Lakehouse enables</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>One <strong>single source of truth</strong> across analytics and AI workloads.</li>
-<li><strong>Remove redundant copies</strong> between systems (no separate data warehouse + data lake pipelines).</li>
-</ul>
-<hr>
-<doc-anchor-target id="-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 4. <strong>Challenges Traditional Platforms Face (and how Databricks solves them)</strong></span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="-1-data-silos">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-data-silos">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>1) Data Silos</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Traditional architectures often had separate:</p>
-<ul>
-<li>Data lakes (cheap, flexible storage)</li>
-<li>Data warehouses (structured analytics)</li>
-<li>Specialized tools for ML</li>
-</ul>
-<p>This leads to duplicate data and complex ETL between systems.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> A single lakehouse, eliminating the need to move data between systems.</p>
-<hr>
-<doc-anchor-target id="-2-lack-of-governance--quality-in-data-lakes">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-lack-of-governance--quality-in-data-lakes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>2) Lack of Governance &amp; Quality in Data Lakes</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Raw data lakes lack:</p>
-<ul>
-<li>ACID transactions</li>
-<li>Schema enforcement</li>
-<li>Data quality checks</li>
-<li>Unified security controls</li>
-</ul>
-<p>without these, lakes easily become <strong>data swamps</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong></p>
-<ul>
-<li><strong>Delta Lake layer</strong> brings ACID, schema enforcement, time travel.</li>
-<li><strong>Unity Catalog</strong> provides centralized fine-grained governance, access controls, and lineage.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-3-traditional-warehouses-arent-flexible-for-aiml">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-traditional-warehouses-arent-flexible-for-aiml">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>3) Traditional Warehouses Aren’t Flexible for AI/ML</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Data warehouses are optimized for structured SQL but struggle with:</p>
-<ul>
-<li>Semi-structured/unstructured data (images, text, logs)</li>
-<li>Spark/ML workloads
-This creates friction for data scientists.</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Supports rich data types and analytical engines in one platform on open storage.</p>
-<hr>
-<doc-anchor-target id="-4-slow-data-freshness">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-slow-data-freshness">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>4) Slow Data Freshness</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>In traditional architectures, data lakes write raw data → then ETL to warehouse → analytics, which creates <strong>data staleness</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Direct analytics on the same governed lakehouse data, reducing delay and making data ready for analytics and BI sooner.</p>
-<hr>
-<doc-anchor-target id="-5-cost--complexity-of-multiple-tools">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-cost--complexity-of-multiple-tools">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>5) Cost &amp; Complexity of Multiple Tools</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Managing multiple systems increases:</p>
-<ul>
-<li>Operational overhead</li>
-<li>Cost of storage and compute</li>
-<li>Engineering overhead on keeping data in sync</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Reduces operational overhead with one integrated platform and managed services on cloud.</p>
-<hr>
-<doc-anchor-target id="-5-data-lake-vs-data-warehouse-vs-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-data-lake-vs-data-warehouse-vs-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 5. <strong>Data Lake vs Data Warehouse vs Lakehouse</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>Here’s a simple comparison:</p>
-<div class="table-wrapper scrollbar overflow-hidden">
-<table class="comfortable">
-<thead>
-<tr>
-<th>Feature</th>
-<th><strong>Data Lake</strong></th>
-<th><strong>Data Warehouse</strong></th>
-<th><strong>Data Lakehouse</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Data Type</td>
-<td>All (raw)</td>
-<td>Structured only</td>
-<td>All (raw + structured)</td>
-</tr>
-<tr>
-<td>Cost</td>
-<td>Low</td>
-<td>Higher</td>
-<td>Medium / Efficient</td>
-</tr>
-<tr>
-<td>Governance &amp; ACID</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>Analytics Performance</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>ML Support</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x274C;</span> / Limited</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>BI Dashboards</td>
-<td><span class="docs-emoji">&#x274C;</span> (hard)</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-<doc-anchor-target id="quick-definitions">
+<doc-anchor-target id="datetime-types-and-functions">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#quick-definitions">#</doc-anchor-trigger>
-        <span>Quick Definitions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#datetime-types-and-functions">#</doc-anchor-trigger>
+        <span>Date/Time Types and Functions</span>
     </h3>
 </doc-anchor-target>
-<p><strong>Data Lake</strong></p>
-<ul>
-<li>A repository for <em>all kinds</em> of raw data.</li>
-<li>Cheap and scalable, but lacks transactional guarantees and governance.</li>
-</ul>
-<p><strong>Data Warehouse</strong></p>
-<ul>
-<li>A structured system optimized for <strong>BI and SQL analytics</strong>.</li>
-<li>Strong governance and performance but limited in data variety.</li>
-</ul>
-<p><strong>Data Lakehouse</strong></p>
-<ul>
-<li>Merges the <em>best of both</em> — open storage, governance, performance, and analytics in one place.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-final-summary">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-final-summary">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F9E0;</span> Final Summary</span>
-    </h2>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Current date/time functions
+SELECT
+    CURRENT_DATE AS today,              -- Just date
+    CURRENT_TIME AS time,               -- Time with TZ
+    CURRENT_TIMESTAMP AS now,           -- Date + time + TZ
+    NOW() AS now_alias,                 -- Alias for CURRENT_TIMESTAMP
+    LOCALTIME AS local_time,            -- No TZ
+    LOCALTIMESTAMP AS local_timestamp;  -- No TZ
+
+-- Extracting components
+SELECT
+    EXTRACT(YEAR FROM TIMESTAMP '2025-11-09 14:30:00') AS year,      -- 2025
+    EXTRACT(MONTH FROM NOW()) AS month,                               -- 11
+    EXTRACT(DAY FROM NOW()) AS day,                                   -- 9
+    EXTRACT(HOUR FROM NOW()) AS hour,
+    EXTRACT(MINUTE FROM NOW()) AS minute,
+    EXTRACT(SECOND FROM NOW()) AS second,
+    EXTRACT(DOW FROM NOW()) AS day_of_week,                          -- 0=Sunday
+    EXTRACT(QUARTER FROM NOW()) AS quarter;                          -- 1-4
+
+-- DATE_PART alternative syntax
+SELECT
+    DATE_PART('year', hire_date) AS year,
+    DATE_PART('month', hire_date) AS month,
+    DATE_PART('day', hire_date) AS day;
+
+-- Date truncation
+SELECT
+    DATE_TRUNC('year', NOW()) AS year_start,      -- 2025-01-01 00:00:00
+    DATE_TRUNC('month', NOW()) AS month_start,    -- 2025-11-01 00:00:00
+    DATE_TRUNC('day', NOW()) AS day_start,        -- 2025-11-09 00:00:00
+    DATE_TRUNC('hour', NOW()) AS hour_start;      -- 2025-11-09 14:00:00
+
+-- Age calculation
+SELECT
+    AGE(NOW(), hire_date) AS time_employed,
+    AGE(hire_date) AS age_from_epoch;  -- From '1900-01-01'
+
+-- Date arithmetic with INTERVAL
+SELECT
+    NOW() + INTERVAL '1 day' AS tomorrow,
+    NOW() - INTERVAL '1 month' AS last_month,
+    NOW() + INTERVAL '2 hours 30 minutes' AS in_2_5_hours,
+    NOW() + (salary::INTEGER || ' days')::INTERVAL AS future_date;
+
+-- INTERVAL types
+SELECT
+    INTERVAL '1 day' AS one_day,
+    INTERVAL '1 week' AS one_week,
+    INTERVAL '1 month' AS one_month,
+    INTERVAL '1 year' AS one_year,
+    INTERVAL '1 day 02:03:04' AS complex_interval;
+
+-- Convert string to timestamp
+SELECT
+    TO_TIMESTAMP('2025-11-09', 'YYYY-MM-DD') AS date_converted,
+    TO_TIMESTAMP('2025-11-09 14:30:00', 'YYYY-MM-DD HH24:MI:SS') AS full_timestamp,
+    TO_DATE('09/11/2025', 'DD/MM/YYYY') AS european_date;
+
+-- Format timestamp to string
+SELECT
+    TO_CHAR(NOW(), 'YYYY-MM-DD') AS date_format,
+    TO_CHAR(NOW(), 'Day, Month DD, YYYY') AS long_format,  -- Saturday, November 09, 2025
+    TO_CHAR(NOW(), 'MM/DD/YY HH24:MI:SS') AS time_format;
+
+-- Date comparison
+SELECT * FROM events
+WHERE event_date &gt;= CURRENT_DATE - INTERVAL '30 days'
+  AND event_date &lt; CURRENT_DATE + INTERVAL '1 day';
+
+-- Business day calculation
+SELECT
+    hire_date,
+    hire_date + (working_days || ' days')::INTERVAL AS end_date
+FROM employees;
+
+-- Time zone handling
+SELECT
+    NOW() AT TIME ZONE 'America/New_York' AS ny_time,
+    NOW() AT TIME ZONE 'Europe/London' AS london_time,
+    NOW() AT TIME ZONE 'Asia/Tokyo' AS tokyo_time;
+
+-- Interview trick: Date edge cases
+SELECT
+    DATE_TRUNC('month', NOW())::DATE + INTERVAL '1 month' - INTERVAL '1 day' AS last_day_of_month,
+    EXTRACT(DAYS FROM INTERVAL '1 month') AS month_length,  -- NULL (variable)
+    EXTRACT(DAYS FROM (DATE_TRUNC('month', NOW()) + INTERVAL '1 month' - DATE_TRUNC('month', NOW()))) AS days_in_month;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="common-datetime-patterns">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-datetime-patterns">#</doc-anchor-trigger>
+        <span>Common Date/Time Patterns</span>
+    </h3>
 </doc-anchor-target>
-<doc-anchor-target id="why-databricks-matters">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#why-databricks-matters">#</doc-anchor-trigger>
-        <span><strong>Why Databricks matters</strong></span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>It solves <strong>data complexity, governance, and analytics fragmentation</strong> by unifying storage and compute in a managed, scalable cloud platform.</li>
-<li>It enables <strong>BI, ML, and advanced analytics on the <em>same data platform</em></strong> saving cost and reducing engineering overhead.</li>
-</ul>
-<doc-anchor-target id="lakehouse-advantages">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#lakehouse-advantages">#</doc-anchor-trigger>
-        <span><strong>Lakehouse Advantages</strong></span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li><strong>Single source of truth</strong></li>
-<li><strong>Open formats &amp; multi-engine access</strong></li>
-<li><strong>ACID transactions</strong></li>
-<li><strong>Governance &amp; lineage</strong></li>
-<li><strong>Support for real-time streaming and dashboards</strong></li>
-</ul>
-<p>These capabilities are essential for <strong>modern AI and analytics workloads</strong> that traditional systems struggle to handle efficiently.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Last day of month
+SELECT DATE_TRUNC('month', NOW())::DATE + INTERVAL '1 month' - INTERVAL '1 day';
+
+-- First day of month
+SELECT DATE_TRUNC('month', NOW())::DATE;
+
+-- Last day of quarter
+SELECT DATE_TRUNC('quarter', NOW())::DATE + INTERVAL '3 months' - INTERVAL '1 day';
+
+-- Next Monday
+SELECT
+    DATE_TRUNC('week', NOW() + INTERVAL '1 day')::DATE + INTERVAL '1 day' AS next_monday;
+
+-- Number of days between dates
+SELECT DATE_PART('day', end_date - start_date) AS days_difference;
+
+-- Business days (excluding weekends)
+SELECT
+    COUNT(*) FILTER (WHERE EXTRACT(DOW FROM date) NOT IN (0, 6)) AS business_days
+FROM (
+    SELECT DATE_TRUNC('day', generate_series(start_date, end_date, '1 day'))::DATE AS date
+) t;
+
+-- Month-over-month comparison
+SELECT
+    EXTRACT(MONTH FROM order_date) AS month,
+    COUNT(*) AS orders,
+    LAG(COUNT(*)) OVER (ORDER BY EXTRACT(MONTH FROM order_date)) AS prev_month_orders
+FROM orders
+GROUP BY EXTRACT(MONTH FROM order_date);
+
+-- Year-to-date totals
+SELECT
+    SUM(order_amount) FILTER (WHERE order_date &gt;= DATE_TRUNC('year', NOW())) AS ytd_sales,
+    SUM(order_amount) FILTER (WHERE order_date &lt; DATE_TRUNC('year', NOW())) AS prior_year_sales
+FROM orders;</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -446,13 +301,20 @@ This creates friction for data scientists.</li>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../sql/security/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">17 Security & Permissions</span>
+                                            </span>
+                                        </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/architecture/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../sql/misc/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">02 Databricks Architecture & Core Roles</span>
+                                                <span class="block mt-1">19 Misc</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -496,6 +358,6 @@ This creates friction for data scientists.</li>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "01 Overview of Databricks", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "18 Date & Time Functions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

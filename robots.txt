@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://docs.example.com/sitemap.xml.gz
+Sitemap: https://subramanian-thiagarajan-01.github.io/sitemap.xml.gz

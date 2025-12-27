@@ -9,24 +9,24 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>01 Overview of Databricks</title>
-    <meta name="title" content="01 Overview of Databricks">
-    <meta name="description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <title>05 Joins: The Complete Deep-Dive</title>
+    <meta name="title" content="05 Joins: The Complete Deep-Dive">
+    <meta name="description" content="Joins combine rows from multiple tables based on related columns.">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/sql/joins/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="og:title" content="01 Overview of Databricks">
-    <meta property="og:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/sql/joins/">
+    <meta property="og:title" content="05 Joins: The Complete Deep-Dive">
+    <meta property="og:description" content="Joins combine rows from multiple tables based on related columns.">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="twitter:title" content="01 Overview of Databricks">
-    <meta property="twitter:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/sql/joins/">
+    <meta property="twitter:title" content="05 Joins: The Complete Deep-Dive">
+    <meta property="twitter:description" content="Joins combine rows from multiple tables based on related columns.">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
@@ -35,6 +35,7 @@
     <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820152836873" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
     <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820152836873" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820152836873" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -149,294 +150,265 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="01-overview-of-databricks" class="break-words">
+<doc-anchor-target id="05-joins-the-complete-deep-dive" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#01-overview-of-databricks">#</doc-anchor-trigger>
-        <span>01 Overview of Databricks</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#05-joins-the-complete-deep-dive">#</doc-anchor-trigger>
+        <span>05 Joins: The Complete Deep-Dive</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="-1-what-is-databricks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-what-is-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 1. <strong>What is Databricks?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p><strong>Databricks</strong> is a <strong>cloud-native data analytics platform</strong> built on <strong>Apache Spark</strong> that enables organizations to unify <strong>data engineering, data science, machine learning (ML), and business intelligence (BI)</strong> workloads in one place. It provides a <strong>lakehouse architecture</strong> — combining the flexibility of data lakes with the performance and management features of data warehouses.</p>
-<doc-anchor-target id="key-points">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#key-points">#</doc-anchor-trigger>
-        <span>Key Points</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>It was founded by the original creators of <strong>Apache Spark</strong>, and extends it for cloud-scale analytics.</li>
-<li>Databricks powers ETL, ad-hoc analytics, ML model building, and business dashboards on <em>the same data platform</em>.</li>
-<li>Includes components such as <strong>Delta Lake (transactional storage layer)</strong> and <strong>Databricks SQL</strong> for BI.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-2-why-do-we-need-databricks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-why-do-we-need-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 2. <strong>Why do we need Databricks?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>The landscape of enterprise data has changed:</p>
-<ul>
-<li>Data is <strong>huge</strong> (petabytes).</li>
-<li>Data is <strong>diverse</strong> (structured, semi-structured, unstructured).</li>
-<li>Users range from <strong>engineers and data scientists to analysts and product owners</strong>.</li>
-</ul>
-<p>Databricks is needed because:</p>
-<doc-anchor-target id="-1-unified-platform">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-unified-platform">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 1) <strong>Unified Platform</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Traditionally analytic systems were siloed (data warehouse for BI, data lake for ML). Databricks provides one system that supports:</p>
-<ul>
-<li><strong>ETL/ELT</strong></li>
-<li><strong>Streaming &amp; batch processing</strong></li>
-<li><strong>Machine learning</strong></li>
-<li><strong>SQL analytics and dashboards</strong>
-All on one shared metadata and governance layer.</li>
-</ul>
-<doc-anchor-target id="-2-scalability--cost-efficiency">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-scalability--cost-efficiency">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 2) <strong>Scalability &amp; Cost Efficiency</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>It decouples <strong>storage and compute</strong>, letting companies pay only for processing when needed and use cheap cloud object storage for data.</p>
-<doc-anchor-target id="-3-support-for-diverse-workloads">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-support-for-diverse-workloads">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 3) <strong>Support for Diverse Workloads</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>From <strong>SQL reporting</strong> to <strong>Python/ML notebooks</strong>, to <strong>streaming ingestion</strong>, Databricks supports the full data lifecycle in one platform.</p>
-<doc-anchor-target id="-4-open-standards--no-vendor-lock-in">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-open-standards--no-vendor-lock-in">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 4) <strong>Open Standards &amp; No Vendor Lock-In</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Uses open formats like <strong>Parquet/Delta</strong>, and open projects (Apache Spark, Delta Lake, MLflow), so your data isn’t locked into a proprietary format.</p>
-<hr>
-<doc-anchor-target id="-3-what-is-a-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-what-is-a-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 3. <strong>What is a Lakehouse?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>A <strong>lakehouse</strong> is a modern data architecture that <strong>unifies the best of data lakes and data warehouses</strong>.</p>
-<doc-anchor-target id="at-a-high-level">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#at-a-high-level">#</doc-anchor-trigger>
-        <span>At a high level:</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>Like a <strong>data lake</strong>, it can store <em>all types</em> of data — structured, semi-structured, unstructured — in open formats.</li>
-<li>Like a <strong>data warehouse</strong>, it supports <strong>ACID transactions, schema enforcement, performance optimizations, governance, and BI queries.</strong></li>
-</ul>
-<doc-anchor-target id="what-a-lakehouse-enables">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#what-a-lakehouse-enables">#</doc-anchor-trigger>
-        <span>What a Lakehouse enables</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>One <strong>single source of truth</strong> across analytics and AI workloads.</li>
-<li><strong>Remove redundant copies</strong> between systems (no separate data warehouse + data lake pipelines).</li>
-</ul>
-<hr>
-<doc-anchor-target id="-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 4. <strong>Challenges Traditional Platforms Face (and how Databricks solves them)</strong></span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="-1-data-silos">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-data-silos">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>1) Data Silos</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Traditional architectures often had separate:</p>
-<ul>
-<li>Data lakes (cheap, flexible storage)</li>
-<li>Data warehouses (structured analytics)</li>
-<li>Specialized tools for ML</li>
-</ul>
-<p>This leads to duplicate data and complex ETL between systems.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> A single lakehouse, eliminating the need to move data between systems.</p>
-<hr>
-<doc-anchor-target id="-2-lack-of-governance--quality-in-data-lakes">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-lack-of-governance--quality-in-data-lakes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>2) Lack of Governance &amp; Quality in Data Lakes</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Raw data lakes lack:</p>
-<ul>
-<li>ACID transactions</li>
-<li>Schema enforcement</li>
-<li>Data quality checks</li>
-<li>Unified security controls</li>
-</ul>
-<p>without these, lakes easily become <strong>data swamps</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong></p>
-<ul>
-<li><strong>Delta Lake layer</strong> brings ACID, schema enforcement, time travel.</li>
-<li><strong>Unity Catalog</strong> provides centralized fine-grained governance, access controls, and lineage.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-3-traditional-warehouses-arent-flexible-for-aiml">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-traditional-warehouses-arent-flexible-for-aiml">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>3) Traditional Warehouses Aren’t Flexible for AI/ML</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Data warehouses are optimized for structured SQL but struggle with:</p>
-<ul>
-<li>Semi-structured/unstructured data (images, text, logs)</li>
-<li>Spark/ML workloads
-This creates friction for data scientists.</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Supports rich data types and analytical engines in one platform on open storage.</p>
-<hr>
-<doc-anchor-target id="-4-slow-data-freshness">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-slow-data-freshness">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>4) Slow Data Freshness</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>In traditional architectures, data lakes write raw data → then ETL to warehouse → analytics, which creates <strong>data staleness</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Direct analytics on the same governed lakehouse data, reducing delay and making data ready for analytics and BI sooner.</p>
-<hr>
-<doc-anchor-target id="-5-cost--complexity-of-multiple-tools">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-cost--complexity-of-multiple-tools">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>5) Cost &amp; Complexity of Multiple Tools</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Managing multiple systems increases:</p>
-<ul>
-<li>Operational overhead</li>
-<li>Cost of storage and compute</li>
-<li>Engineering overhead on keeping data in sync</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Reduces operational overhead with one integrated platform and managed services on cloud.</p>
-<hr>
-<doc-anchor-target id="-5-data-lake-vs-data-warehouse-vs-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-data-lake-vs-data-warehouse-vs-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 5. <strong>Data Lake vs Data Warehouse vs Lakehouse</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>Here’s a simple comparison:</p>
-<div class="table-wrapper scrollbar overflow-hidden">
-<table class="comfortable">
-<thead>
-<tr>
-<th>Feature</th>
-<th><strong>Data Lake</strong></th>
-<th><strong>Data Warehouse</strong></th>
-<th><strong>Data Lakehouse</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Data Type</td>
-<td>All (raw)</td>
-<td>Structured only</td>
-<td>All (raw + structured)</td>
-</tr>
-<tr>
-<td>Cost</td>
-<td>Low</td>
-<td>Higher</td>
-<td>Medium / Efficient</td>
-</tr>
-<tr>
-<td>Governance &amp; ACID</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>Analytics Performance</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>ML Support</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x274C;</span> / Limited</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>BI Dashboards</td>
-<td><span class="docs-emoji">&#x274C;</span> (hard)</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-<doc-anchor-target id="quick-definitions">
+<p>Joins combine rows from multiple tables based on related columns.</p>
+<doc-anchor-target id="1-inner-join-intersection">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#quick-definitions">#</doc-anchor-trigger>
-        <span>Quick Definitions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-inner-join-intersection">#</doc-anchor-trigger>
+        <span>1. INNER JOIN (Intersection)</span>
     </h3>
 </doc-anchor-target>
-<p><strong>Data Lake</strong></p>
-<ul>
-<li>A repository for <em>all kinds</em> of raw data.</li>
-<li>Cheap and scalable, but lacks transactional guarantees and governance.</li>
-</ul>
-<p><strong>Data Warehouse</strong></p>
-<ul>
-<li>A structured system optimized for <strong>BI and SQL analytics</strong>.</li>
-<li>Strong governance and performance but limited in data variety.</li>
-</ul>
-<p><strong>Data Lakehouse</strong></p>
-<ul>
-<li>Merges the <em>best of both</em> — open storage, governance, performance, and analytics in one place.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-final-summary">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-final-summary">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F9E0;</span> Final Summary</span>
-    </h2>
+<p>Returns only matching rows from both tables.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Basic INNER JOIN
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.department_id;
+
+-- Multiple INNER JOINs
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name,
+    j.job_title
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.department_id
+INNER JOIN jobs j ON e.job_id = j.job_id;
+
+-- INNER JOIN with WHERE clause
+SELECT e.*, d.department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.department_id
+WHERE d.department_name = 'Sales';
+
+-- Self INNER JOIN (joining table to itself)
+SELECT
+    e1.employee_id,
+    e1.first_name AS employee,
+    e2.first_name AS manager
+FROM employees e1
+INNER JOIN employees e2 ON e1.manager_id = e2.employee_id;</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Question:</strong> <em>What rows does INNER JOIN return if the join column contains NULL values?</em>
+<strong>Answer:</strong> INNER JOIN does NOT return rows where the join condition is NULL, because NULL != NULL (NULL comparisons are always UNKNOWN). This is a common gotcha!</p>
+<doc-anchor-target id="2-left-join-left-outer-join">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-left-join-left-outer-join">#</doc-anchor-trigger>
+        <span>2. LEFT JOIN (LEFT OUTER JOIN)</span>
+    </h3>
 </doc-anchor-target>
-<doc-anchor-target id="why-databricks-matters">
+<p>Returns all rows from left table + matching rows from right table (NULLs for non-matches).</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Basic LEFT JOIN
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.department_id;
+
+-- Finding unmatched rows (LEFT JOIN with WHERE IS NULL)
+SELECT e.*
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.department_id
+WHERE d.department_id IS NULL;  -- Employees with no valid department
+
+-- Multiple LEFT JOINs (common pattern)
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name,
+    m.first_name AS manager_name
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.department_id
+LEFT JOIN employees m ON e.manager_id = m.employee_id;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="3-right-join-right-outer-join">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-right-join-right-outer-join">#</doc-anchor-trigger>
+        <span>3. RIGHT JOIN (RIGHT OUTER JOIN)</span>
+    </h3>
+</doc-anchor-target>
+<p>Returns all rows from right table + matching rows from left table (NULLs for non-matches).</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- RIGHT JOIN (equivalent to LEFT JOIN with tables reversed)
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name
+FROM employees e
+RIGHT JOIN departments d ON e.department_id = d.department_id;
+
+-- This is typically rewritten as LEFT JOIN for consistency:
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_name
+FROM departments d
+LEFT JOIN employees e ON e.department_id = d.department_id;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="4-full-outer-join-full-join">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-full-outer-join-full-join">#</doc-anchor-trigger>
+        <span>4. FULL OUTER JOIN (FULL JOIN)</span>
+    </h3>
+</doc-anchor-target>
+<p>Returns all rows from both tables (NULLs where no match).</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- FULL OUTER JOIN
+SELECT
+    COALESCE(e.employee_id, 0) AS employee_id,
+    e.first_name,
+    d.department_id,
+    d.department_name
+FROM employees e
+FULL OUTER JOIN departments d ON e.department_id = d.department_id;
+
+-- Finding unmatched rows in either table
+SELECT
+    e.employee_id,
+    e.first_name,
+    d.department_id,
+    d.department_name
+FROM employees e
+FULL OUTER JOIN departments d ON e.department_id = d.department_id
+WHERE e.employee_id IS NULL OR d.department_id IS NULL;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="5-cross-join">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#5-cross-join">#</doc-anchor-trigger>
+        <span>5. CROSS JOIN</span>
+    </h3>
+</doc-anchor-target>
+<p>Cartesian product: combines every row from left table with every row from right table.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- CROSS JOIN (no ON clause)
+SELECT * FROM employees CROSS JOIN departments;
+-- Returns: rows_in_employees * rows_in_departments
+
+-- Use cases (rare but important):
+-- 1. Generate all combinations
+SELECT e.employee_id, d.department_id
+FROM employees e
+CROSS JOIN departments d
+LIMIT 10;
+
+-- 2. Generate dates
+SELECT
+    d::DATE,
+    (d + INTERVAL '1 day')::DATE
+FROM GENERATE_SERIES('2025-01-01', '2025-12-31', '1 day'::INTERVAL) d;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="6-self-join">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#6-self-join">#</doc-anchor-trigger>
+        <span>6. Self-Join</span>
+    </h3>
+</doc-anchor-target>
+<p>Joining a table to itself for hierarchical or comparative data.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Manager-Employee hierarchy (most common)
+SELECT
+    e.employee_id,
+    e.first_name || ' ' || e.last_name AS employee,
+    m.employee_id AS manager_id,
+    m.first_name || ' ' || m.last_name AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id
+ORDER BY m.employee_id, e.first_name;
+
+-- Finding colleagues in the same department
+SELECT
+    e1.employee_id,
+    e1.first_name AS employee1,
+    e2.employee_id,
+    e2.first_name AS employee2
+FROM employees e1
+INNER JOIN employees e2
+    ON e1.department_id = e2.department_id
+    AND e1.employee_id &lt; e2.employee_id;  -- Avoid duplicates</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="join-tricky-interview-scenarios">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#join-tricky-interview-scenarios">#</doc-anchor-trigger>
+        <span>JOIN Tricky Interview Scenarios</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="scenario-1-join-on-null-values">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#why-databricks-matters">#</doc-anchor-trigger>
-        <span><strong>Why Databricks matters</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scenario-1-join-on-null-values">#</doc-anchor-trigger>
+        <span>Scenario 1: Join on NULL values</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li>It solves <strong>data complexity, governance, and analytics fragmentation</strong> by unifying storage and compute in a managed, scalable cloud platform.</li>
-<li>It enables <strong>BI, ML, and advanced analytics on the <em>same data platform</em></strong> saving cost and reducing engineering overhead.</li>
-</ul>
-<doc-anchor-target id="lakehouse-advantages">
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Tables with NULLs in join column
+CREATE TABLE table_a (id INT, value VARCHAR);
+CREATE TABLE table_b (id INT, description VARCHAR);
+
+INSERT INTO table_a VALUES (1, 'A'), (2, 'B'), (NULL, 'C');
+INSERT INTO table_b VALUES (1, 'Desc1'), (2, 'Desc2'), (NULL, 'Desc3');
+
+-- INNER JOIN result: only (1, 'A', 'Desc1') and (2, 'B', 'Desc2')
+-- NULL row is NOT matched with NULL row (NULL = NULL is UNKNOWN, not TRUE)
+SELECT a.*, b.description
+FROM table_a a
+INNER JOIN table_b b ON a.id = b.id;
+
+-- LEFT JOIN result: includes (NULL, 'C', NULL)
+SELECT a.*, b.description
+FROM table_a a
+LEFT JOIN table_b b ON a.id = b.id;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="scenario-2-duplicate-join-keys">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#lakehouse-advantages">#</doc-anchor-trigger>
-        <span><strong>Lakehouse Advantages</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scenario-2-duplicate-join-keys">#</doc-anchor-trigger>
+        <span>Scenario 2: Duplicate join keys</span>
     </h4>
 </doc-anchor-target>
-<ul>
-<li><strong>Single source of truth</strong></li>
-<li><strong>Open formats &amp; multi-engine access</strong></li>
-<li><strong>ACID transactions</strong></li>
-<li><strong>Governance &amp; lineage</strong></li>
-<li><strong>Support for real-time streaming and dashboards</strong></li>
-</ul>
-<p>These capabilities are essential for <strong>modern AI and analytics workloads</strong> that traditional systems struggle to handle efficiently.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE TABLE orders (order_id INT, customer_id INT);
+CREATE TABLE order_items (order_id INT, item_id INT, quantity INT);
+
+INSERT INTO orders VALUES (1, 100), (2, 100);
+INSERT INTO order_items VALUES (1, 'A', 2), (1, 'B', 1), (2, 'C', 3);
+
+-- RESULT: Cartesian product within each order
+-- Order 1 has 2 items, creates 2 rows
+SELECT o.*, oi.item_id
+FROM orders o
+INNER JOIN order_items oi ON o.order_id = oi.order_id;
+-- 3 rows total (not 2!)</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="scenario-3-multiple-join-conditions">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scenario-3-multiple-join-conditions">#</doc-anchor-trigger>
+        <span>Scenario 3: Multiple join conditions</span>
+    </h4>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Joining on multiple columns
+SELECT a.*, b.data
+FROM table_a a
+INNER JOIN table_b b
+    ON a.col1 = b.col1
+    AND a.col2 = b.col2;  -- Both conditions must be true
+
+-- Asymmetric join conditions
+SELECT a.*, b.data
+FROM table_a a
+INNER JOIN table_b b
+    ON a.id = b.a_id
+    AND b.status = 'active'  -- Can include non-join columns in ON clause
+WHERE a.department = 'Sales';</code></pre>
+</doc-codeblock></div>
 
                                 
                                 <!-- Required only on API pages -->
@@ -446,13 +418,20 @@ This creates friction for data scientists.</li>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../sql/data_aggregation/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">04 Data Aggregation Functions</span>
+                                            </span>
+                                        </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/architecture/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../sql/subqueries/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">02 Databricks Architecture & Core Roles</span>
+                                                <span class="block mt-1">06 Subqueries & Correlated Subqueries</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -496,6 +475,6 @@ This creates friction for data scientists.</li>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "01 Overview of Databricks", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "05 Joins: The Complete Deep-Dive", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
