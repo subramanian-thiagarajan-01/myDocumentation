@@ -1,4 +1,4 @@
-# 1 Delta Lake Interview Preparation Notes
+# 1. Delta Lake Interview Preparation Notes
 
 ## 1. Delta Lake / Delta Format Introduction
 

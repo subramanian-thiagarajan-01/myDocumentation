@@ -1,4 +1,4 @@
-# 3 Delta Lake / Delta Format Code
+# 3. Delta Lake / Delta Format Code
 
 ## 1. Creating Delta Tables
 

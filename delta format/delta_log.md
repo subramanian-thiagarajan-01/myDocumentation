@@ -1,4 +1,4 @@
-# 2 Delta Lake Transaction Log & ACID Implementation
+# 2. Delta Lake Transaction Log & ACID Implementation
 
 ## Delta Log Overview
 

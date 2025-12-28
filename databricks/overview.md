@@ -1,177 +1,450 @@
-# 01 Overview of Databricks
+# 1. Databricks Platform & Core Architecture
 
-## ✅ 1. **What is Databricks?**
+## 1.1 Databricks Overview
 
-**Databricks** is a **cloud-native data analytics platform** built on **Apache Spark** that enables organizations to unify **data engineering, data science, machine learning (ML), and business intelligence (BI)** workloads in one place. It provides a **lakehouse architecture** — combining the flexibility of data lakes with the performance and management features of data warehouses.
+### What is Databricks?
 
-#### Key Points
+Databricks is a **cloud-native Data Intelligence Platform** that unifies:
 
-- It was founded by the original creators of **Apache Spark**, and extends it for cloud-scale analytics.
-- Databricks powers ETL, ad-hoc analytics, ML model building, and business dashboards on _the same data platform_.
-- Includes components such as **Delta Lake (transactional storage layer)** and **Databricks SQL** for BI.
+- Data engineering
+- Data warehousing (SQL analytics)
+- Machine learning
+- Governance
 
----
+on top of **Apache Spark + Delta Lake**, delivered as a **managed service**.
 
-## ✅ 2. **Why do we need Databricks?**
+Key characteristics:
 
-The landscape of enterprise data has changed:
-
-- Data is **huge** (petabytes).
-- Data is **diverse** (structured, semi-structured, unstructured).
-- Users range from **engineers and data scientists to analysts and product owners**.
-
-Databricks is needed because:
-
-#### 🌟 1) **Unified Platform**
-
-Traditionally analytic systems were siloed (data warehouse for BI, data lake for ML). Databricks provides one system that supports:
-
-- **ETL/ELT**
-- **Streaming & batch processing**
-- **Machine learning**
-- **SQL analytics and dashboards**
-  All on one shared metadata and governance layer.
-
-#### 🌟 2) **Scalability & Cost Efficiency**
-
-It decouples **storage and compute**, letting companies pay only for processing when needed and use cheap cloud object storage for data.
-
-#### 🌟 3) **Support for Diverse Workloads**
-
-From **SQL reporting** to **Python/ML notebooks**, to **streaming ingestion**, Databricks supports the full data lifecycle in one platform.
-
-#### 🌟 4) **Open Standards & No Vendor Lock-In**
-
-Uses open formats like **Parquet/Delta**, and open projects (Apache Spark, Delta Lake, MLflow), so your data isn’t locked into a proprietary format.
+- Built around **open data formats** (Parquet, Delta)
+- Separates **storage and compute**
+- Strong focus on **end-to-end lifecycle** (ingestion → analytics → ML → BI)
 
 ---
 
-## ✅ 3. **What is a Lakehouse?**
+### Why Databricks vs Traditional Systems
 
-A **lakehouse** is a modern data architecture that **unifies the best of data lakes and data warehouses**.
+#### vs Traditional Data Warehouses
 
-#### At a high level:
+| Traditional DW              | Databricks                     |
+| --------------------------- | ------------------------------ |
+| Proprietary storage formats | Open formats (Delta Lake)      |
+| Schema-on-write only        | Schema enforcement + evolution |
+| Expensive scaling           | Elastic, cloud-native          |
+| SQL-only                    | SQL + Python + Scala + ML      |
 
-- Like a **data lake**, it can store _all types_ of data — structured, semi-structured, unstructured — in open formats.
-- Like a **data warehouse**, it supports **ACID transactions, schema enforcement, performance optimizations, governance, and BI queries.**
+Interview angle:
 
-#### What a Lakehouse enables
-
-- One **single source of truth** across analytics and AI workloads.
-- **Remove redundant copies** between systems (no separate data warehouse + data lake pipelines).
-
----
-
-## ✅ 4. **Challenges Traditional Platforms Face (and how Databricks solves them)**
-
-#### 🚫 **1) Data Silos**
-
-Traditional architectures often had separate:
-
-- Data lakes (cheap, flexible storage)
-- Data warehouses (structured analytics)
-- Specialized tools for ML
-
-This leads to duplicate data and complex ETL between systems.
-
-📌 **Databricks Solution:** A single lakehouse, eliminating the need to move data between systems.
+- Databricks eliminates **data duplication** between lake + warehouse.
+- Same data serves **BI + ML**.
 
 ---
 
-#### 🚫 **2) Lack of Governance & Quality in Data Lakes**
+#### vs Hadoop
 
-Raw data lakes lack:
+| Hadoop                 | Databricks        |
+| ---------------------- | ----------------- |
+| Heavy ops (YARN, HDFS) | Fully managed     |
+| Batch-oriented         | Batch + Streaming |
+| On-prem focused        | Cloud-native      |
+
+Key interview phrase:
+
+> Databricks removed Hadoop’s operational complexity while retaining Spark’s scale.
+
+---
+
+#### vs Spark Standalone
+
+Spark standalone:
+
+- You manage clusters, configs, upgrades
+- No governance, no orchestration, no lineage
+
+Databricks:
+
+- Managed Spark runtimes
+- Built-in jobs, monitoring, security, SQL, MLflow
+
+---
+
+### Databricks as a **Data Intelligence Platform**
+
+Interviewers increasingly expect this framing (2024+).
+
+“Data Intelligence” =
+**Data + AI + Governance + Cost Control**
+
+Key pillars:
+
+- Lakehouse (Delta Lake)
+- Photon (performance)
+- Unity Catalog (governance – later topic)
+- AI-assisted analytics (AI/BI, ML integration)
+
+---
+
+## 1.2 Lakehouse Architecture
+
+### Definition
+
+A **Lakehouse** is an architecture that:
+
+- Uses **data lakes as the single source of truth**
+- Adds **warehouse-like guarantees** directly on the lake
+
+---
+
+### Core Principles
+
+- Open storage formats
+- Decoupled compute
+- Transactional guarantees
+- Unified analytics + ML
+
+---
+
+### How Lakehouse Combines Both Worlds
+
+#### Data Lake Traits
+
+- Object storage (S3 / ADLS / GCS)
+- Cheap, scalable
+- Open formats (Parquet)
+
+#### Data Warehouse Traits
 
 - ACID transactions
-- Schema enforcement
-- Data quality checks
-- Unified security controls
+- Indexing / metadata
+- Performance optimization
+- Governance
 
-without these, lakes easily become **data swamps**.
-
-📌 **Databricks Solution:**
-
-- **Delta Lake layer** brings ACID, schema enforcement, time travel.
-- **Unity Catalog** provides centralized fine-grained governance, access controls, and lineage.
+Databricks Lakehouse =
+**Delta Lake + Optimized Spark execution**
 
 ---
 
-#### 🚫 **3) Traditional Warehouses Aren’t Flexible for AI/ML**
+### Role of Delta Lake
 
-Data warehouses are optimized for structured SQL but struggle with:
+Delta Lake is **non-negotiable** in interviews.
 
-- Semi-structured/unstructured data (images, text, logs)
-- Spark/ML workloads
-  This creates friction for data scientists.
+Delta provides:
 
-📌 **Databricks Solution:** Supports rich data types and analytical engines in one platform on open storage.
+- **ACID transactions** on object storage
+- Schema enforcement & evolution
+- Time travel
+- Efficient metadata (transaction log)
 
----
+Without Delta:
 
-#### 🚫 **4) Slow Data Freshness**
+- Lakehouse does not exist
+- Spark reads are eventually consistent
+- No reliable incremental pipelines
 
-In traditional architectures, data lakes write raw data → then ETL to warehouse → analytics, which creates **data staleness**.
+Key interview soundbite:
 
-📌 **Databricks Solution:** Direct analytics on the same governed lakehouse data, reducing delay and making data ready for analytics and BI sooner.
-
----
-
-#### 🚫 **5) Cost & Complexity of Multiple Tools**
-
-Managing multiple systems increases:
-
-- Operational overhead
-- Cost of storage and compute
-- Engineering overhead on keeping data in sync
-
-📌 **Databricks Solution:** Reduces operational overhead with one integrated platform and managed services on cloud.
+> Delta Lake is the foundation that makes the Lakehouse reliable.
 
 ---
 
-## ✅ 5. **Data Lake vs Data Warehouse vs Lakehouse**
+## 1.3 Control Plane vs Data Plane
 
-Here’s a simple comparison:
+### Control Plane
 
-| Feature               | **Data Lake** | **Data Warehouse** | **Data Lakehouse**     |
-| --------------------- | ------------- | ------------------ | ---------------------- |
-| Data Type             | All (raw)     | Structured only    | All (raw + structured) |
-| Cost                  | Low           | Higher             | Medium / Efficient     |
-| Governance & ACID     | ❌            | ✔️                 | ✔️                     |
-| Analytics Performance | ❌            | ✔️                 | ✔️                     |
-| ML Support            | ✔️            | ❌ / Limited       | ✔️                     |
-| BI Dashboards         | ❌ (hard)     | ✔️                 | ✔️                     |
+Managed by Databricks.
 
-### Quick Definitions
+Includes:
 
-**Data Lake**
+- Workspace metadata
+- Notebooks, repos
+- Jobs orchestration
+- Cluster definitions
+- User & group management
 
-- A repository for _all kinds_ of raw data.
-- Cheap and scalable, but lacks transactional guarantees and governance.
-
-**Data Warehouse**
-
-- A structured system optimized for **BI and SQL analytics**.
-- Strong governance and performance but limited in data variety.
-
-**Data Lakehouse**
-
-- Merges the _best of both_ — open storage, governance, performance, and analytics in one place.
+**No customer data** stored here.
 
 ---
 
-## 🧠 Final Summary
+### Data Plane
 
-#### **Why Databricks matters**
+Runs in **customer’s cloud account**.
 
-- It solves **data complexity, governance, and analytics fragmentation** by unifying storage and compute in a managed, scalable cloud platform.
-- It enables **BI, ML, and advanced analytics on the _same data platform_** saving cost and reducing engineering overhead.
+Includes:
 
-#### **Lakehouse Advantages**
+- Compute (VMs)
+- Customer data
+- Object storage
+- Network traffic
 
-- **Single source of truth**
-- **Open formats & multi-engine access**
-- **ACID transactions**
-- **Governance & lineage**
-- **Support for real-time streaming and dashboards**
+Databricks deploys compute **inside your VPC/VNet**.
 
-These capabilities are essential for **modern AI and analytics workloads** that traditional systems struggle to handle efficiently.
+---
+
+### Security Implications (Very High Yield)
+
+- Databricks **cannot access your raw data**
+- Data never leaves your cloud account
+- Control plane compromise ≠ data access
+
+Interview pitfall:
+
+- Saying Databricks “hosts your data” → **incorrect**
+
+---
+
+## 1.4 Compute Architecture
+
+### Databricks Compute Types
+
+#### 1. All-Purpose Clusters
+
+- Interactive
+- Multi-user
+- Used for:
+
+  - Notebooks
+  - Ad-hoc analysis
+  - Development
+
+Trade-off:
+
+- More expensive
+- Long-running
+
+---
+
+#### 2. Job Clusters
+
+- Ephemeral
+- One job run = one cluster lifecycle
+- Used for:
+
+  - Production pipelines
+  - ETL jobs
+
+Interview expectation:
+
+> Prefer job clusters for production due to isolation + cost efficiency.
+
+---
+
+#### 3. SQL Warehouses
+
+- Optimized for SQL
+- Used by:
+
+  - DBSQL
+  - Dashboards
+  - BI tools
+
+Variants covered later (Serverless / Pro / Classic).
+
+---
+
+### Access Modes
+
+#### Single User
+
+- One user identity
+- Required for:
+
+  - Unity Catalog write access (non-shared)
+
+- Best isolation
+
+---
+
+#### Shared
+
+- Multiple users
+- User isolation via Spark
+- Some features restricted
+
+---
+
+#### No Isolation
+
+- Legacy
+- Least secure
+- Generally discouraged
+
+Interview note:
+
+- Unity Catalog **restricts access modes intentionally**.
+
+---
+
+### Cluster Permissions
+
+Controls:
+
+- Who can attach
+- Who can restart
+- Who can terminate
+
+Used to:
+
+- Prevent accidental cluster misuse
+- Enforce least privilege
+
+---
+
+### Cluster Policies
+
+Declarative rules:
+
+- Limit instance types
+- Enforce auto-termination
+- Control DBU cost
+
+Common interview use case:
+
+> Prevent developers from creating oversized clusters.
+
+---
+
+### Instance Pools
+
+- Pre-warmed VMs
+- Faster startup
+- Lower cost for frequent jobs
+
+Trade-off:
+
+- Idle pool capacity costs money
+
+---
+
+## 1.5 Serverless Compute
+
+### Serverless SQL Warehouses
+
+- Fully managed
+- Instant startup
+- Auto-scaling
+- No cluster visibility
+
+Best for:
+
+- BI
+- Dashboards
+- Ad-hoc SQL
+
+---
+
+### Serverless Notebooks
+
+- No cluster management
+- Elastic compute
+- Ideal for exploration
+
+Limitations:
+
+- Less control
+- Not all Spark configs exposed
+
+---
+
+### Interview Angle
+
+Serverless =
+**Operational simplicity over configurability**
+
+---
+
+## 1.6 Photon Engine
+
+### What is Photon?
+
+- Vectorized execution engine
+- Written in **C++**
+- Replaces parts of Spark execution engine
+
+---
+
+### When Photon Is Used
+
+- SQL workloads
+- DataFrame APIs
+- Automatic (no code change)
+
+Not used for:
+
+- RDD-based logic
+- Some UDF-heavy workloads
+
+---
+
+### Performance Implications
+
+- 2–10x faster SQL
+- Lower DBU cost for same workload
+- Better CPU cache utilization
+
+Interview trap:
+
+- Photon is **not a separate cluster**
+- Photon is **not optional at runtime** (auto-enabled when supported)
+
+---
+
+## 1.7 Databricks Roles & Administration
+
+### Account Console
+
+Account-level management:
+
+- Users
+- Workspaces
+- Identity federation
+- Unity Catalog metastore
+
+---
+
+### Workspace vs Account Level
+
+| Workspace | Account           |
+| --------- | ----------------- |
+| Notebooks | Users             |
+| Jobs      | Metastores        |
+| Clusters  | Cloud credentials |
+
+Interview emphasis:
+
+> Governance lives at account level, not workspace level.
+
+---
+
+### Databricks Roles & Personas
+
+- Data Engineers
+- Analytics Engineers
+- Data Scientists
+- Platform Admins
+
+Each persona maps to:
+
+- Different compute
+- Different access modes
+- Different tools
+
+---
+
+### Identity Federation Basics
+
+- SSO via:
+
+  - Azure AD
+  - Okta
+  - IAM federation
+
+- Centralized identity
+- Enables auditability
+
+---
+
+### Interview Red Flags to Avoid
+
+- Confusing control plane with data plane
+- Treating Databricks as a proprietary warehouse
+- Ignoring Delta Lake’s role
+- Overusing all-purpose clusters in production
