@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.820259292147">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.11.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Databricks Declarative Pipelines - Interview Preparation Notes</title>
+    <meta name="title" content="Databricks Declarative Pipelines - Interview Preparation Notes">
+    <meta name="description" content="Knowledge Current Through: December 2025">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/sdp/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/sdp/">
+    <meta property="og:title" content="Databricks Declarative Pipelines - Interview Preparation Notes">
+    <meta property="og:description" content="Knowledge Current Through: December 2025">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/sdp/">
+    <meta property="twitter:title" content="Databricks Declarative Pipelines - Interview Preparation Notes">
+    <meta property="twitter:description" content="Knowledge Current Through: December 2025">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link href="../../resources/css/retype.css?v=3.11.0.820259292147" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820259292147" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820259292147" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820259292147" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+        <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+    
+        <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
+                            <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
+                        </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav id="retype-header-nav" class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-search-placeholder transition-colors duration-200 ease-in bg-search-bg border border-transparent rounded md:text-sm hover:border-search-border-hover focus:outline-none focus:border-search-border-focus" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="retype-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+    
+        <div id="retype-container" class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+            
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded shadow-none text-sm focus:outline-none focus:border-filter-border-focus" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                    <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 bg-body-bg">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="retype-markdown" id="retype-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="retype-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="databricks-declarative-pipelines---interview-preparation-notes" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#databricks-declarative-pipelines---interview-preparation-notes">#</doc-anchor-trigger>
+        <span>Databricks Declarative Pipelines - Interview Preparation Notes</span>
+    </h1>
+</doc-anchor-target>
+<p><strong>Knowledge Current Through:</strong> December 2025</p>
+<hr>
+<doc-anchor-target id="61-sdp-overview">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#61-sdp-overview">#</doc-anchor-trigger>
+        <span>6.1 SDP Overview</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-is-sdp">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-sdp">#</doc-anchor-trigger>
+        <span>What is SDP?</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Lakeflow Spark Declarative Pipelines (SDP)</strong> is a declarative framework for building batch and streaming data pipelines in SQL and Python.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Runs on performance-optimized Databricks Runtime</li>
+<li>Extends and is interoperable with Apache Spark Declarative Pipelines (available in Spark 4.1+)</li>
+<li>Code written for open-source Apache Spark pipelines runs without modification on Databricks</li>
+<li>Formerly known as Delta Live Tables (DLT) — <strong>no migration required</strong> for existing DLT code</li>
+<li>Requires <strong>Premium plan</strong> on Databricks</li>
+</ul>
+<p><strong>Relationship to DLT:</strong></p>
+<ul>
+<li>DLT was rebranded/evolved into Lakeflow SDP</li>
+<li>Old <code v-pre>dlt</code> module → new <code v-pre>pyspark.pipelines</code> module (alias <code v-pre>dp</code>)</li>
+<li>Existing DLT pipelines run seamlessly within Lakeflow SDP</li>
+<li>Classic SKUs still begin with &quot;DLT&quot; prefix</li>
+<li>Event log schemas with &quot;dlt&quot; name unchanged</li>
+</ul>
+<doc-anchor-target id="why-sdp">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-sdp">#</doc-anchor-trigger>
+        <span>Why SDP?</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Core benefits over manual Spark/Structured Streaming:</strong></p>
+<ol>
+<li><p><strong>Automatic Orchestration</strong></p>
+<ul>
+<li>Analyzes dependencies automatically</li>
+<li>Determines optimal execution order</li>
+<li>Maximizes parallelism for performance</li>
+<li>Hierarchical retry logic: Spark task → Flow → Pipeline</li>
+<li>No manual orchestration via Lakeflow Jobs required</li>
+</ul>
+</li>
+<li><p><strong>Declarative Processing</strong></p>
+<ul>
+<li>Reduces hundreds/thousands of lines to just a few</li>
+<li>Focus on <strong>what</strong> to compute, not <strong>how</strong></li>
+<li>Built-in best practices</li>
+</ul>
+</li>
+<li><p><strong>Incremental Processing</strong></p>
+<ul>
+<li>Materialized views process only new data/changes when possible</li>
+<li>Eliminates manual incremental processing code</li>
+<li>Automatic watermark management (no manual watermark configuration needed)</li>
+</ul>
+</li>
+<li><p><strong>Simplified CDC</strong></p>
+<ul>
+<li>AUTO CDC API handles out-of-order events automatically</li>
+<li>Supports SCD Type 1 and Type 2 out-of-the-box</li>
+<li>No complex merge logic required</li>
+</ul>
+</li>
+</ol>
+<p><strong>Common use cases:</strong></p>
+<ul>
+<li>Incremental data ingestion from cloud storage (S3, ADLS Gen2, GCS)</li>
+<li>Message bus ingestion (Kafka, Kinesis, EventHub, Pub/Sub, Pulsar)</li>
+<li>Incremental batch and streaming transformations</li>
+<li>Real-time stream processing between message buses and databases</li>
+</ul>
+<doc-anchor-target id="sdp-package-introduction">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sdp-package-introduction">#</doc-anchor-trigger>
+        <span>SDP Package Introduction</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Python Module:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from pyspark import pipelines as dp</code></pre>
+</doc-codeblock></div>
+<p><strong>Critical constraints:</strong></p>
+<ul>
+<li><code v-pre>pyspark.pipelines</code> module only available <strong>within pipeline execution context</strong></li>
+<li>Cannot be used in notebooks/scripts outside pipelines</li>
+<li>Code is evaluated <strong>multiple times</strong> during planning and execution</li>
+</ul>
+<p><strong>SQL Interface:</strong></p>
+<ul>
+<li>New keywords: <code v-pre>CREATE OR REFRESH</code>, <code v-pre>STREAM</code>, <code v-pre>CONSTRAINT EXPECT</code></li>
+<li>Syntax: <code v-pre>CREATE OR REFRESH STREAMING TABLE</code> / <code v-pre>MATERIALIZED VIEW</code></li>
+</ul>
+<p><strong>Architecture:</strong></p>
+<ul>
+<li>Pipelines separate dataset definitions from update processing</li>
+<li>Not intended for interactive execution</li>
+<li>Source files stored in Databricks workspace or synced from local IDE</li>
+</ul>
+<p><strong>Databricks-only features (not in Apache Spark):</strong></p>
+<ul>
+<li>AUTO CDC flows</li>
+<li>AUTO CDC FROM SNAPSHOT</li>
+<li>Sinks (Kafka, EventHub, custom)</li>
+<li>ForEachBatch sink</li>
+<li>Enhanced expectation actions</li>
+</ul>
+<hr>
+<doc-anchor-target id="62-core-components">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#62-core-components">#</doc-anchor-trigger>
+        <span>6.2 Core Components</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="pipelines">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#pipelines">#</doc-anchor-trigger>
+        <span>Pipelines</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+A pipeline is the <strong>unit of development and execution</strong> in SDP.</p>
+<p><strong>Contains:</strong></p>
+<ul>
+<li>Flows (streaming and batch)</li>
+<li>Streaming tables</li>
+<li>Materialized views</li>
+<li>Sinks</li>
+</ul>
+<p><strong>Execution mechanics:</strong></p>
+<ol>
+<li>Starts a cluster with correct configuration</li>
+<li>Discovers all defined tables/views</li>
+<li>Checks for analysis errors (invalid columns, missing dependencies, syntax)</li>
+<li>Creates or updates tables/views with latest data</li>
+</ol>
+<p><strong>Pipeline source code:</strong></p>
+<ul>
+<li>Python or SQL (can mix both in one pipeline)</li>
+<li>Each file contains only one language</li>
+<li>Evaluated to build dataflow graph <strong>before</strong> query execution</li>
+<li>Order in files defines <strong>evaluation order</strong>, not <strong>execution order</strong></li>
+</ul>
+<p><strong>Configuration categories:</strong></p>
+<ol>
+<li>Source code collection definition</li>
+<li>Infrastructure, dependencies, update processing, table storage</li>
+</ol>
+<p><strong>Critical configurations:</strong></p>
+<ul>
+<li><strong>Target schema</strong> (Hive metastore) or <strong>catalog + schema</strong> (Unity Catalog) — required for external data access</li>
+<li>Storage location</li>
+<li>Compute settings</li>
+<li>Dependency management</li>
+</ul>
+<p><strong>Key interview insight:</strong></p>
+<ul>
+<li>Pipeline orchestration is <strong>automatic</strong> — SDP analyzes dependencies and parallelizes optimally</li>
+<li>Unlike Lakeflow Jobs, no manual task dependencies required</li>
+</ul>
+<doc-anchor-target id="flows">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#flows">#</doc-anchor-trigger>
+        <span>Flows</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+A flow is the <strong>foundational data processing concept</strong> in SDP — reads data from source, applies transformations, writes to target.</p>
+<p><strong>Flow types:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Flow Type</th>
+<th>Semantics</th>
+<th>Target</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Append</strong></td>
+<td>Streaming</td>
+<td>Streaming table or sink</td>
+<td>Continuous streaming ingestion</td>
+</tr>
+<tr>
+<td><strong>AUTO CDC</strong></td>
+<td>Streaming</td>
+<td>Streaming table only</td>
+<td>CDC with SCD Type 1/2</td>
+</tr>
+<tr>
+<td><strong>Materialized View</strong></td>
+<td>Batch</td>
+<td>Materialized view</td>
+<td>Incremental batch processing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Append Flow characteristics:</strong></p>
+<ul>
+<li>Uses Spark Structured Streaming append mode</li>
+<li>Writes to streaming tables or sinks</li>
+<li>Can be defined explicitly (separate from target) or implicitly (within table definition)</li>
+<li>Supports <code v-pre>once=True</code> parameter for one-time backfills</li>
+</ul>
+<p><strong>AUTO CDC Flow characteristics:</strong></p>
+<ul>
+<li><strong>Databricks-only</strong> (not in Apache Spark)</li>
+<li>Handles out-of-order events automatically</li>
+<li>Requires sequencing column (monotonically increasing)</li>
+<li>Only writes to streaming tables</li>
+</ul>
+<p><strong>Materialized View Flow characteristics:</strong></p>
+<ul>
+<li>Batch semantics</li>
+<li>Incremental processing engine — processes only new data/changes</li>
+<li>Always defined implicitly within materialized view definition</li>
+<li>No separate flow object</li>
+</ul>
+<p><strong>Flow retry logic:</strong></p>
+<ol>
+<li>Spark task level (most granular)</li>
+<li>Flow level</li>
+<li>Pipeline level (entire pipeline)</li>
+</ol>
+<p><strong>Python example - Explicit append flow:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from pyspark import pipelines as dp
+
+dp.create_streaming_table(&quot;bronze_table&quot;)
+
+@dp.append_flow(
+    target=&quot;bronze_table&quot;,
+    name=&quot;ingestion_flow&quot;
+)
+def ingest_data():
+    return (
+        spark.readStream
+        .format(&quot;cloudFiles&quot;)
+        .option(&quot;cloudFiles.format&quot;, &quot;json&quot;)
+        .load(&quot;/path/to/data&quot;)
+    )</code></pre>
+</doc-codeblock></div>
+<p><strong>Python example - Implicit flow in streaming table:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.table(
+    name=&quot;silver_table&quot;,
+    comment=&quot;Cleansed data&quot;
+)
+def silver_data():
+    return spark.readStream.table(&quot;bronze_table&quot;).filter(&quot;id IS NOT NULL&quot;)</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="63-datasets">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#63-datasets">#</doc-anchor-trigger>
+        <span>6.3 Datasets</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="streaming-tables">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#streaming-tables">#</doc-anchor-trigger>
+        <span>Streaming Tables</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Unity Catalog managed table that serves as a <strong>streaming target</strong> for SDP flows.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Can have <strong>one or more</strong> streaming flows (Append, AUTO CDC) writing to it</li>
+<li>Supports both <strong>explicit</strong> and <strong>implicit</strong> flow definitions</li>
+<li>Always backed by Delta format</li>
+<li>Created with <code v-pre>CREATE OR REFRESH STREAMING TABLE</code> (SQL) or <code v-pre>dp.create_streaming_table()</code> / <code v-pre>@dp.table()</code> (Python)</li>
+</ul>
+<p><strong>Use the <code v-pre>STREAM</code> keyword to read with streaming semantics:</strong></p>
+<ul>
+<li>Throws error if source has changes/deletions to existing records</li>
+</ul>
+<p><strong>SQL - Explicit creation:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH STREAMING TABLE bronze_events
+COMMENT 'Raw event data';
+
+CREATE FLOW bronze_ingest AS
+  SELECT *
+  FROM STREAM read_files(
+    '/path/to/data',
+    format =&gt; 'json'
+  );</code></pre>
+</doc-codeblock></div>
+<p><strong>SQL - Implicit creation:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH STREAMING TABLE silver_events
+COMMENT 'Cleansed events'
+AS
+  SELECT event_id, event_type, timestamp
+  FROM STREAM(bronze_events)
+  WHERE event_id IS NOT NULL;</code></pre>
+</doc-codeblock></div>
+<p><strong>Python - Explicit:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(
+    name=&quot;bronze_events&quot;,
+    comment=&quot;Raw event data&quot;
+)
+
+@dp.append_flow(target=&quot;bronze_events&quot;, name=&quot;ingest_flow&quot;)
+def ingest():
+    return spark.readStream.format(&quot;json&quot;).load(&quot;/path/to/data&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Python - Implicit:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.table(
+    name=&quot;silver_events&quot;,
+    comment=&quot;Cleansed events&quot;
+)
+def silver_data():
+    return (
+        spark.readStream.table(&quot;bronze_events&quot;)
+        .filter(&quot;event_id IS NOT NULL&quot;)
+    )</code></pre>
+</doc-codeblock></div>
+<p><strong>Critical interview points:</strong></p>
+<ul>
+<li>Streaming tables are <strong>always streaming</strong> — use streaming semantics for reads</li>
+<li>Changes/deletions to records in source cause <strong>errors</strong></li>
+<li>Support AUTO CDC flows (Databricks-only feature)</li>
+</ul>
+<doc-anchor-target id="materialized-views">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#materialized-views">#</doc-anchor-trigger>
+        <span>Materialized Views</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Unity Catalog managed table that serves as a <strong>batch target</strong> with <strong>incremental processing</strong>.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Batch semantics (not streaming)</li>
+<li><strong>Incremental processing engine</strong> — only processes new data/changes when possible</li>
+<li>Flows always defined <strong>implicitly</strong> within view definition</li>
+<li>Write transformation logic with batch semantics; engine handles incremental processing</li>
+<li>Created with <code v-pre>CREATE OR REFRESH MATERIALIZED VIEW</code> (SQL) or <code v-pre>@dp.materialized_view()</code> (Python)</li>
+</ul>
+<p><strong>SQL syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH MATERIALIZED VIEW gold_aggregates
+COMMENT 'Daily aggregates'
+AS
+  SELECT
+    date,
+    event_type,
+    COUNT(*) as event_count,
+    AVG(duration) as avg_duration
+  FROM silver_events
+  GROUP BY date, event_type;</code></pre>
+</doc-codeblock></div>
+<p><strong>Python syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.materialized_view(
+    name=&quot;gold_aggregates&quot;,
+    comment=&quot;Daily aggregates&quot;
+)
+def aggregate_events():
+    return (
+        spark.read.table(&quot;silver_events&quot;)
+        .groupBy(&quot;date&quot;, &quot;event_type&quot;)
+        .agg(
+            count(&quot;*&quot;).alias(&quot;event_count&quot;),
+            avg(&quot;duration&quot;).alias(&quot;avg_duration&quot;)
+        )
+    )</code></pre>
+</doc-codeblock></div>
+<p><strong>Incremental processing mechanics:</strong></p>
+<ul>
+<li>Automatically detects changes in source tables</li>
+<li>Processes only modified partitions/data</li>
+<li>Eliminates need for manual change tracking</li>
+<li>Reduces cost and latency vs. full recomputation</li>
+</ul>
+<p><strong>When materialized views recompute fully:</strong></p>
+<ul>
+<li>Source schema changes</li>
+<li>View definition changes</li>
+<li>Full refresh update triggered</li>
+<li>Source doesn&#x27;t support change tracking</li>
+</ul>
+<p><strong>Critical interview points:</strong></p>
+<ul>
+<li>Write <strong>batch</strong> logic; SDP handles incremental execution</li>
+<li>Cannot be target of explicit flows (always implicit)</li>
+<li>Best for aggregations, joins, complex transformations with batch semantics</li>
+</ul>
+<doc-anchor-target id="views">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#views">#</doc-anchor-trigger>
+        <span>Views</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Temporary datasets within a pipeline — not persisted as tables.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Exist only during pipeline execution</li>
+<li>Not stored in metastore</li>
+<li>Used for intermediate transformations</li>
+<li>Save compute/storage for ephemeral data</li>
+<li>Cannot have expectations applied (only streaming tables and materialized views support expectations)</li>
+</ul>
+<p><strong>SQL syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH VIEW cleaned_data
+AS
+  SELECT
+    id,
+    TRIM(name) as name,
+    CAST(age AS INT) as age
+  FROM STREAM(raw_data)
+  WHERE id IS NOT NULL;</code></pre>
+</doc-codeblock></div>
+<p><strong>Python syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.view(name=&quot;cleaned_data&quot;)
+def clean_data():
+    return (
+        spark.readStream.table(&quot;raw_data&quot;)
+        .filter(&quot;id IS NOT NULL&quot;)
+        .select(&quot;id&quot;, trim(col(&quot;name&quot;)).alias(&quot;name&quot;))
+    )</code></pre>
+</doc-codeblock></div>
+<p><strong>Use cases:</strong></p>
+<ul>
+<li>Intermediate transformations before loading to target</li>
+<li>Data quality filtering</li>
+<li>Schema transformations</li>
+<li>Deduplication logic</li>
+</ul>
+<p><strong>Comparison:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Streaming Table</th>
+<th>Materialized View</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Persisted</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Processing</td>
+<td>Streaming</td>
+<td>Batch (incremental)</td>
+<td>Either</td>
+</tr>
+<tr>
+<td>Expectations</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Unity Catalog</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Real-time data</td>
+<td>Aggregations, batch</td>
+<td>Intermediate steps</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<doc-anchor-target id="64-data-movement">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#64-data-movement">#</doc-anchor-trigger>
+        <span>6.4 Data Movement</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="sinks">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sinks">#</doc-anchor-trigger>
+        <span>Sinks</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Streaming targets for writing data <strong>outside</strong> Databricks managed tables.</p>
+<p><strong>Supported sink types:</strong></p>
+<ol>
+<li>Delta tables (external Unity Catalog tables)</li>
+<li>Apache Kafka topics</li>
+<li>Azure EventHub topics</li>
+<li>Google Pub/Sub topics</li>
+<li>Custom Python data sources (via <code v-pre>ForEachBatch</code>)</li>
+</ol>
+<p><strong>Critical constraints:</strong></p>
+<ul>
+<li>Only <strong>append_flow</strong> can write to sinks</li>
+<li>AUTO CDC flows <strong>not supported</strong> for sinks</li>
+<li>Cannot use sink in dataset definition (only as target)</li>
+<li>Python-only API (no SQL support for sink creation)</li>
+<li>Full refresh <strong>does not clean up</strong> sink data (appends only)</li>
+</ul>
+<p><strong>Python - Delta sink:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">from pyspark import pipelines as dp
+
+# By path
+dp.create_sink(
+    name=&quot;external_delta_sink&quot;,
+    format=&quot;delta&quot;,
+    options={&quot;path&quot;: &quot;/Volumes/catalog/schema/volume/data&quot;}
+)
+
+# By table name (fully qualified)
+dp.create_sink(
+    name=&quot;uc_delta_sink&quot;,
+    format=&quot;delta&quot;,
+    options={&quot;tableName&quot;: &quot;catalog.schema.table&quot;}
+)
+
+@dp.append_flow(target=&quot;external_delta_sink&quot;, name=&quot;to_delta&quot;)
+def write_to_delta():
+    return spark.readStream.table(&quot;silver_events&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Python - Kafka sink:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_sink(
+    name=&quot;kafka_sink&quot;,
+    format=&quot;kafka&quot;,
+    options={
+        &quot;kafka.bootstrap.servers&quot;: &quot;broker:9092&quot;,
+        &quot;topic&quot;: &quot;events_topic&quot;
+    }
+)
+
+@dp.append_flow(target=&quot;kafka_sink&quot;, name=&quot;to_kafka&quot;)
+def write_to_kafka():
+    return (
+        spark.readStream.table(&quot;silver_events&quot;)
+        .selectExpr(
+            &quot;event_id as key&quot;,
+            &quot;to_json(struct(*)) as value&quot;
+        )
+    )</code></pre>
+</doc-codeblock></div>
+<p><strong>Kafka/EventHub required columns:</strong></p>
+<ul>
+<li><code v-pre>value</code> — <strong>mandatory</strong> (message payload)</li>
+<li><code v-pre>key</code> — optional</li>
+<li><code v-pre>partition</code> — optional</li>
+<li><code v-pre>headers</code> — optional</li>
+<li><code v-pre>topic</code> — optional (overrides sink-level topic)</li>
+</ul>
+<p><strong>Python - EventHub sink:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">eh_namespace = &quot;my-eventhub&quot;
+bootstrap = f&quot;{eh_namespace}.servicebus.windows.net:9093&quot;
+
+dp.create_sink(
+    name=&quot;eventhub_sink&quot;,
+    format=&quot;kafka&quot;,  # EventHub uses Kafka protocol
+    options={
+        &quot;kafka.bootstrap.servers&quot;: bootstrap,
+        &quot;kafka.sasl.mechanism&quot;: &quot;PLAIN&quot;,
+        &quot;kafka.security.protocol&quot;: &quot;SASL_SSL&quot;,
+        &quot;kafka.sasl.jaas.config&quot;: f'org.apache.kafka.common.security.plain.PlainLoginModule required username=&quot;$ConnectionString&quot; password=&quot;{connection_string}&quot;;',
+        &quot;topic&quot;: &quot;events-topic&quot;
+    }
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>ForEachBatch custom sink:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">def process_batch(batch_df, batch_id):
+    # Custom logic: merge, write to multiple targets, etc.
+    batch_df.write.format(&quot;jdbc&quot;).options(...).save()
+
+dp.create_foreach_batch_sink(
+    name=&quot;custom_sink&quot;,
+    foreach_batch_function=process_batch
+)
+
+@dp.append_flow(target=&quot;custom_sink&quot;, name=&quot;custom_flow&quot;)
+def write_custom():
+    return spark.readStream.table(&quot;silver_events&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>ForEachBatch characteristics:</strong></p>
+<ul>
+<li>Processes stream as micro-batches</li>
+<li>Full Spark DataFrame API available per batch</li>
+<li>Supports merge, upsert, multi-target writes</li>
+<li>Checkpoints managed per-flow automatically</li>
+<li>Not compatible with Databricks Connect</li>
+</ul>
+<doc-anchor-target id="append-flows">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#append-flows">#</doc-anchor-trigger>
+        <span>Append Flows</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Streaming flows that continuously append new data to targets.</p>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>Target: streaming tables or sinks</li>
+<li>Semantics: Spark Structured Streaming append output mode</li>
+<li>Can be explicit (separate decorator) or implicit (within table)</li>
+<li>Supports one-time execution with <code v-pre>once=True</code></li>
+</ul>
+<p><strong>Explicit append flow:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(&quot;target_table&quot;)
+
+@dp.append_flow(
+    target=&quot;target_table&quot;,
+    name=&quot;append_data&quot;,
+    once=False,  # Continuous streaming (default)
+    spark_conf={&quot;spark.sql.shuffle.partitions&quot;: &quot;200&quot;},
+    comment=&quot;Appends events continuously&quot;
+)
+def append_events():
+    return spark.readStream.table(&quot;source_table&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>One-time backfill:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.append_flow(
+    target=&quot;target_table&quot;,
+    name=&quot;backfill&quot;,
+    once=True  # Executes once then stops
+)
+def backfill_historical():
+    return spark.read.format(&quot;delta&quot;).load(&quot;/historical/data&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Multiple append flows to same table:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Streaming flow
+@dp.append_flow(target=&quot;combined_table&quot;, name=&quot;streaming_data&quot;)
+def stream_data():
+    return spark.readStream.table(&quot;live_source&quot;)
+
+# One-time backfill
+@dp.append_flow(target=&quot;combined_table&quot;, name=&quot;backfill&quot;, once=True)
+def backfill_data():
+    return spark.read.table(&quot;historical_source&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Critical interview points:</strong></p>
+<ul>
+<li>Multiple append flows can write to same streaming table</li>
+<li>Useful for backfilling + continuous streaming scenarios</li>
+<li>Use <code v-pre>once=True</code> for one-time historical loads</li>
+<li>Append mode only — no updates or deletes</li>
+</ul>
+<doc-anchor-target id="jobs">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#jobs">#</doc-anchor-trigger>
+        <span>Jobs</span>
+    </h3>
+</doc-anchor-target>
+<p>SDP pipelines are <strong>orchestrated automatically</strong> — no manual Lakeflow Jobs configuration for internal dependencies.</p>
+<p><strong>When to use Lakeflow Jobs with SDP:</strong></p>
+<ul>
+<li>Scheduling pipeline updates (daily, hourly, triggered)</li>
+<li>Coordinating pipelines with other workflows (notebooks, SQL queries, ML models)</li>
+<li>Conditional logic (if/else, for-each loops)</li>
+<li>Notifications and alerting</li>
+<li>Multi-pipeline orchestration</li>
+</ul>
+<p><strong>Key distinction:</strong></p>
+<ul>
+<li><strong>Within pipeline:</strong> Flows orchestrated automatically by SDP</li>
+<li><strong>Across pipelines:</strong> Use Lakeflow Jobs for coordination</li>
+</ul>
+<p><strong>Example Lakeflow Job with pipeline:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-json"><code v-pre class="language-json">{
+  &quot;name&quot;: &quot;ETL Pipeline Job&quot;,
+  &quot;tasks&quot;: [
+    {
+      &quot;task_key&quot;: &quot;run_sdp_pipeline&quot;,
+      &quot;pipeline_task&quot;: {
+        &quot;pipeline_id&quot;: &quot;abc123&quot;,
+        &quot;full_refresh&quot;: false
+      }
+    },
+    {
+      &quot;task_key&quot;: &quot;send_notification&quot;,
+      &quot;depends_on&quot;: [{&quot;task_key&quot;: &quot;run_sdp_pipeline&quot;}],
+      &quot;notebook_task&quot;: {...}
+    }
+  ]
+}</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="65-data-quality">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#65-data-quality">#</doc-anchor-trigger>
+        <span>6.5 Data Quality</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="expectations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#expectations">#</doc-anchor-trigger>
+        <span>Expectations</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Optional clauses in dataset definitions that apply <strong>data quality checks</strong> on each record.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Use standard SQL Boolean expressions</li>
+<li>Can combine multiple expectations per dataset</li>
+<li>Collect metrics on pass/fail rates</li>
+<li><strong>Only supported on streaming tables and materialized views</strong> (not views)</li>
+<li>Three actions: retain (default), drop, fail</li>
+</ul>
+<p><strong>Expectation components:</strong></p>
+<ol>
+<li><strong>Name</strong> — identifies the constraint</li>
+<li><strong>Constraint</strong> — SQL Boolean expression</li>
+<li><strong>Action</strong> — what to do when constraint violated</li>
+</ol>
+<doc-anchor-target id="actions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#actions">#</doc-anchor-trigger>
+        <span>Actions</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Action</th>
+<th>SQL Syntax</th>
+<th>Python Syntax</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Retain</strong> (default)</td>
+<td><code v-pre>EXPECT (expr)</code></td>
+<td><code v-pre>@dp.expect(&quot;name&quot;, &quot;expr&quot;)</code></td>
+<td>Keep invalid records, log metrics</td>
+</tr>
+<tr>
+<td><strong>Drop</strong></td>
+<td><code v-pre>EXPECT (expr) ON VIOLATION DROP ROW</code></td>
+<td><code v-pre>@dp.expect_or_drop(&quot;name&quot;, &quot;expr&quot;)</code></td>
+<td>Drop invalid records</td>
+</tr>
+<tr>
+<td><strong>Fail</strong></td>
+<td><code v-pre>EXPECT (expr) ON VIOLATION FAIL UPDATE</code></td>
+<td><code v-pre>@dp.expect_or_fail(&quot;name&quot;, &quot;expr&quot;)</code></td>
+<td>Fail entire update</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SQL examples:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Simple constraint
+CONSTRAINT non_negative_price
+EXPECT (price &gt;= 0)
+
+-- With drop action
+CONSTRAINT valid_email
+EXPECT (email LIKE '%@%.%')
+ON VIOLATION DROP ROW
+
+-- Multiple constraints
+CONSTRAINT valid_dates
+EXPECT (start_date &lt;= end_date AND end_date &lt;= current_date()),
+CONSTRAINT non_null_id
+EXPECT (id IS NOT NULL)
+ON VIOLATION FAIL UPDATE
+
+-- Complex business logic
+CONSTRAINT valid_order_state
+EXPECT (
+  (status = 'ACTIVE' AND balance &gt; 0)
+  OR (status = 'PENDING' AND created_date &gt; current_date() - INTERVAL 7 DAYS)
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>Python examples:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">@dp.table(
+    name=&quot;validated_table&quot;,
+    expect={&quot;valid_id&quot;: &quot;id IS NOT NULL&quot;},
+    expect_or_drop={&quot;valid_email&quot;: &quot;email LIKE '%@%.%'&quot;}
+)
+def validated_data():
+    return spark.readStream.table(&quot;source&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Python - Grouped expectations (Python-only):</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Retain all invalid records
+@dp.table(
+    name=&quot;table1&quot;,
+    expect_all={
+        &quot;non_negative_price&quot;: &quot;price &gt;= 0&quot;,
+        &quot;valid_date&quot;: &quot;order_date &lt;= current_date()&quot;
+    }
+)
+def data1():
+    return spark.readStream.table(&quot;source&quot;)
+
+# Drop all invalid records
+@dp.table(
+    name=&quot;table2&quot;,
+    expect_all_or_drop={
+        &quot;valid_id&quot;: &quot;id IS NOT NULL&quot;,
+        &quot;valid_email&quot;: &quot;email LIKE '%@%.%'&quot;
+    }
+)
+def data2():
+    return spark.readStream.table(&quot;source&quot;)
+
+# Fail on any invalid record
+@dp.table(
+    name=&quot;table3&quot;,
+    expect_all_or_fail={
+        &quot;critical_field&quot;: &quot;amount &gt; 0&quot;,
+        &quot;required_status&quot;: &quot;status IN ('ACTIVE', 'PENDING')&quot;
+    }
+)
+def data3():
+    return spark.readStream.table(&quot;source&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Advanced pattern - Centralized expectation repository:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Define rules in a table or dict
+expectation_rules = {
+    &quot;validity&quot;: {
+        &quot;non_null_id&quot;: &quot;id IS NOT NULL&quot;,
+        &quot;valid_email&quot;: &quot;email LIKE '%@%.%'&quot;
+    },
+    &quot;accuracy&quot;: {
+        &quot;positive_amount&quot;: &quot;amount &gt; 0&quot;,
+        &quot;recent_date&quot;: &quot;date &gt;= '2020-01-01'&quot;
+    }
+}
+
+@dp.table(
+    name=&quot;validated_data&quot;,
+    expect_all_or_drop=expectation_rules[&quot;validity&quot;]
+)
+def apply_expectations():
+    return spark.readStream.table(&quot;source&quot;)</code></pre>
+</doc-codeblock></div>
+<p><strong>Viewing data quality metrics:</strong></p>
+<ul>
+<li>UI: Pipeline → Dataset → &quot;Data quality&quot; tab</li>
+<li>API: Query SDP event log (Delta table)</li>
+</ul>
+<p><strong>When expectations don&#x27;t generate metrics:</strong></p>
+<ul>
+<li>No expectations defined</li>
+<li>Flow doesn&#x27;t support expectations (e.g., sinks)</li>
+<li>Flow type doesn&#x27;t support expectations</li>
+<li>No updates to table/materialized view in flow run</li>
+<li>Metrics reporting disabled in pipeline config</li>
+</ul>
+<p><strong>Critical interview points:</strong></p>
+<ul>
+<li>Expectations are <strong>soft constraints</strong> (unlike CHECK constraints in databases)</li>
+<li>Default behavior: retain invalid records (enables processing messy data)</li>
+<li>Only streaming tables and materialized views support expectations</li>
+<li>Python provides <code v-pre>expect_all*</code> decorators for grouping (SQL doesn&#x27;t)</li>
+</ul>
+<hr>
+<doc-anchor-target id="66-change-data-capture">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#66-change-data-capture">#</doc-anchor-trigger>
+        <span>6.6 Change Data Capture</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="auto-cdc">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#auto-cdc">#</doc-anchor-trigger>
+        <span>Auto CDC</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Databricks-only streaming flow that processes CDC events with automatic out-of-order handling.</p>
+<p><strong>Key capabilities:</strong></p>
+<ul>
+<li>Handles out-of-order events automatically</li>
+<li>Supports SCD Type 1 and Type 2</li>
+<li>Eliminates need for complex merge logic</li>
+<li>Requires sequencing column (monotonically increasing)</li>
+<li><strong>Only available in Lakeflow SDP</strong> (not Apache Spark)</li>
+<li><strong>Only writes to streaming tables</strong></li>
+</ul>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Sequencing column — represents proper ordering of source data</li>
+<li>One distinct update per key at each sequencing value</li>
+<li>NULL sequencing values unsupported</li>
+<li>Sortable data type for sequencing column</li>
+</ul>
+<p><strong>Sequencing column characteristics:</strong></p>
+<ul>
+<li>Must be monotonically increasing</li>
+<li>Can be timestamp, sequence number, version, etc.</li>
+<li>For multiple columns, use STRUCT: orders by first field, then second on ties</li>
+</ul>
+<p><strong>SQL syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH STREAMING TABLE target;
+
+CREATE FLOW cdc_flow AS
+AUTO CDC INTO target
+FROM stream(source_table)
+KEYS (user_id)
+SEQUENCE BY sequence_num
+COLUMNS * EXCEPT (operation, sequence_num)
+APPLY AS DELETE WHEN operation = &quot;DELETE&quot;
+STORED AS SCD TYPE 1;  -- or TYPE 2</code></pre>
+</doc-codeblock></div>
+<p><strong>Python syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(name=&quot;target&quot;)
+
+dp.create_auto_cdc_flow(
+    name=&quot;cdc_flow&quot;,
+    target=&quot;target&quot;,
+    source=&quot;source_table&quot;,
+    keys=[&quot;user_id&quot;],
+    sequence_by=col(&quot;sequence_num&quot;),
+    except_column_list=[&quot;operation&quot;, &quot;sequence_num&quot;],
+    apply_as_deletes=expr(&quot;operation = 'DELETE'&quot;),
+    stored_as_scd_type=&quot;1&quot;  # or &quot;2&quot;
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>APPLY AS DELETE clause:</strong></p>
+<ul>
+<li>Specifies condition for treating event as DELETE</li>
+<li>If omitted, no deletes processed (only inserts/updates)</li>
+</ul>
+<p><strong>COLUMNS clause:</strong></p>
+<ul>
+<li><code v-pre>COLUMNS *</code> — include all columns</li>
+<li><code v-pre>COLUMNS * EXCEPT (col1, col2)</code> — exclude specific columns</li>
+<li>Excluded columns typically: operation, sequence number</li>
+</ul>
+<doc-anchor-target id="scd-type-1">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scd-type-1">#</doc-anchor-trigger>
+        <span>SCD Type 1</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Overwrite existing records — no history retention.</p>
+<p><strong>Use case:</strong>
+Correcting errors, updating non-critical fields (e.g., email address).</p>
+<p><strong>SQL example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH STREAMING TABLE customers;
+
+CREATE FLOW customers_cdc AS
+AUTO CDC INTO customers
+FROM stream(cdc_feed.customers)
+KEYS (customer_id)
+SEQUENCE BY event_timestamp
+COLUMNS * EXCEPT (operation, event_timestamp)
+APPLY AS DELETE WHEN operation = &quot;DELETE&quot;
+STORED AS SCD TYPE 1;</code></pre>
+</doc-codeblock></div>
+<p><strong>Python example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(&quot;customers&quot;)
+
+dp.create_auto_cdc_flow(
+    name=&quot;customers_cdc&quot;,
+    target=&quot;customers&quot;,
+    source=&quot;cdc_feed.customers&quot;,
+    keys=[&quot;customer_id&quot;],
+    sequence_by=col(&quot;event_timestamp&quot;),
+    except_column_list=[&quot;operation&quot;, &quot;event_timestamp&quot;],
+    apply_as_deletes=expr(&quot;operation = 'DELETE'&quot;),
+    stored_as_scd_type=&quot;1&quot;
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>Behavior:</strong></p>
+<ul>
+<li>New record → INSERT</li>
+<li>Existing record → UPDATE (overwrites all columns)</li>
+<li>Delete event → DELETE</li>
+</ul>
+<p><strong>Example data flow:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Event</th>
+<th>customer_id</th>
+<th>name</th>
+<th>city</th>
+<th>operation</th>
+<th>sequence_num</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>123</td>
+<td>Alice</td>
+<td>NYC</td>
+<td>INSERT</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>123</td>
+<td>Alice</td>
+<td>LA</td>
+<td>UPDATE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>123</td>
+<td>NULL</td>
+<td>NULL</td>
+<td>DELETE</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Resulting table (SCD Type 1):</strong></p>
+<ul>
+<li>After event 1: (123, Alice, NYC)</li>
+<li>After event 2: (123, Alice, LA) — <strong>overwrites</strong></li>
+<li>After event 3: <strong>empty</strong> — deleted</li>
+</ul>
+<doc-anchor-target id="scd-type-2">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scd-type-2">#</doc-anchor-trigger>
+        <span>SCD Type 2</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Retain full history of changes by creating new records for each version.</p>
+<p><strong>Use case:</strong>
+Audit trails, historical analysis, compliance requirements.</p>
+<p><strong>SQL syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE OR REFRESH STREAMING TABLE customers_history;
+
+CREATE FLOW customers_scd2 AS
+AUTO CDC INTO customers_history
+FROM stream(cdc_feed.customers)
+KEYS (customer_id)
+SEQUENCE BY event_timestamp
+COLUMNS * EXCEPT (operation, event_timestamp)
+APPLY AS DELETE WHEN operation = &quot;DELETE&quot;
+STORED AS SCD TYPE 2
+TRACK HISTORY ON *;  -- or TRACK HISTORY ON * EXCEPT (city)</code></pre>
+</doc-codeblock></div>
+<p><strong>Python syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(&quot;customers_history&quot;)
+
+dp.create_auto_cdc_flow(
+    name=&quot;customers_scd2&quot;,
+    target=&quot;customers_history&quot;,
+    source=&quot;cdc_feed.customers&quot;,
+    keys=[&quot;customer_id&quot;],
+    sequence_by=col(&quot;event_timestamp&quot;),
+    except_column_list=[&quot;operation&quot;, &quot;event_timestamp&quot;],
+    apply_as_deletes=expr(&quot;operation = 'DELETE'&quot;),
+    stored_as_scd_type=&quot;2&quot;,
+    track_history_column_list=None  # None = track all columns
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>SCD Type 2 metadata columns:</strong></p>
+<ul>
+<li><code v-pre>__START_AT</code> — sequence value when record became active</li>
+<li><code v-pre>__END_AT</code> — sequence value when record became inactive (NULL = current)</li>
+</ul>
+<p><strong>TRACK HISTORY clause:</strong></p>
+<ul>
+<li><code v-pre>TRACK HISTORY ON *</code> — track changes on all columns</li>
+<li><code v-pre>TRACK HISTORY ON * EXCEPT (col1, col2)</code> — track all except specified</li>
+<li>Only creates new version if tracked columns change</li>
+</ul>
+<p><strong>Example data flow:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Event</th>
+<th>customer_id</th>
+<th>name</th>
+<th>city</th>
+<th>operation</th>
+<th>event_timestamp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>123</td>
+<td>Alice</td>
+<td>NYC</td>
+<td>INSERT</td>
+<td>2024-01-01 10:00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>123</td>
+<td>Alice</td>
+<td>LA</td>
+<td>UPDATE</td>
+<td>2024-01-02 11:00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>123</td>
+<td>Alice Smith</td>
+<td>LA</td>
+<td>UPDATE</td>
+<td>2024-01-03 12:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Resulting table (SCD Type 2, TRACK HISTORY ON *):</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>customer_id</th>
+<th>name</th>
+<th>city</th>
+<th>__START_AT</th>
+<th>__END_AT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>123</td>
+<td>Alice</td>
+<td>NYC</td>
+<td>2024-01-01 10:00</td>
+<td>2024-01-02 11:00</td>
+</tr>
+<tr>
+<td>123</td>
+<td>Alice</td>
+<td>LA</td>
+<td>2024-01-02 11:00</td>
+<td>2024-01-03 12:00</td>
+</tr>
+<tr>
+<td>123</td>
+<td>Alice Smith</td>
+<td>LA</td>
+<td>2024-01-03 12:00</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Resulting table (SCD Type 2, TRACK HISTORY ON * EXCEPT (city)):</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>customer_id</th>
+<th>name</th>
+<th>city</th>
+<th>__START_AT</th>
+<th>__END_AT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>123</td>
+<td>Alice</td>
+<td>LA</td>
+<td>2024-01-01 10:00</td>
+<td>2024-01-03 12:00</td>
+</tr>
+<tr>
+<td>123</td>
+<td>Alice Smith</td>
+<td>LA</td>
+<td>2024-01-03 12:00</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note: City change (NYC → LA) didn&#x27;t create new version because city is excluded from tracking.</p>
+<p><strong>Querying current records only:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SELECT * FROM customers_history WHERE __END_AT IS NULL;</code></pre>
+</doc-codeblock></div>
+<p><strong>Querying as of specific time:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">SELECT *
+FROM customers_history
+WHERE __START_AT &lt;= '2024-01-02 11:30'
+  AND (__END_AT &gt; '2024-01-02 11:30' OR __END_AT IS NULL);</code></pre>
+</doc-codeblock></div>
+<p><strong>Primary key for SCD Type 2:</strong></p>
+<ul>
+<li>Keys + <code v-pre>__START_AT</code> (composite primary key)</li>
+<li>Ensures uniqueness per version</li>
+</ul>
+<doc-anchor-target id="scd-type-3">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#scd-type-3">#</doc-anchor-trigger>
+        <span>SCD Type 3</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Not officially supported in AUTO CDC.</strong></p>
+<p>SCD Type 3 (add columns for previous values) must be implemented manually using:</p>
+<ul>
+<li>Custom merge logic in ForEachBatch sink</li>
+<li>Manual DataFrame operations</li>
+</ul>
+<p><strong>Manual Type 3 pattern:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python"># Not supported natively - requires custom code
+from delta.tables import DeltaTable
+
+def scd_type3_merge(batch_df, batch_id):
+    target = DeltaTable.forName(spark, &quot;target_table&quot;)
+
+    target.alias(&quot;target&quot;).merge(
+        batch_df.alias(&quot;source&quot;),
+        &quot;target.id = source.id&quot;
+    ).whenMatchedUpdate(set={
+        &quot;current_value&quot;: &quot;source.value&quot;,
+        &quot;previous_value&quot;: &quot;target.current_value&quot;,
+        &quot;effective_date&quot;: &quot;source.timestamp&quot;
+    }).whenNotMatchedInsert(values={
+        &quot;id&quot;: &quot;source.id&quot;,
+        &quot;current_value&quot;: &quot;source.value&quot;,
+        &quot;previous_value&quot;: &quot;NULL&quot;,
+        &quot;effective_date&quot;: &quot;source.timestamp&quot;
+    }).execute()
+
+# Use in ForEachBatch sink
+dp.create_foreach_batch_sink(
+    name=&quot;scd3_sink&quot;,
+    foreach_batch_function=scd_type3_merge
+)</code></pre>
+</doc-codeblock></div>
+<hr>
+<doc-anchor-target id="auto-cdc-from-snapshot">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#auto-cdc-from-snapshot">#</doc-anchor-trigger>
+        <span>Auto CDC FROM SNAPSHOT</span>
+    </h2>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Processes CDC from <strong>snapshots</strong> rather than change streams.</p>
+<p><strong>Use case:</strong></p>
+<ul>
+<li>Source system provides periodic full snapshots</li>
+<li>No incremental change feed available</li>
+<li>Historical backfill from snapshots</li>
+</ul>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Snapshots must be in <strong>ascending order by version</strong></li>
+<li>Out-of-order snapshots throw error</li>
+</ul>
+<p><strong>Python syntax:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">dp.create_streaming_table(&quot;target_from_snapshot&quot;)
+
+dp.create_auto_cdc_from_snapshot_flow(
+    name=&quot;snapshot_cdc&quot;,
+    target=&quot;target_from_snapshot&quot;,
+    snapshot=spark.read.table(&quot;snapshots&quot;),  # DataFrame
+    keys=[&quot;user_id&quot;],
+    sequence_by=col(&quot;snapshot_version&quot;),
+    stored_as_scd_type=&quot;2&quot;
+)</code></pre>
+</doc-codeblock></div>
+<p><strong>Critical difference vs. AUTO CDC:</strong></p>
+<ul>
+<li>AUTO CDC: processes change events (INSERT/UPDATE/DELETE)</li>
+<li>AUTO CDC FROM SNAPSHOT: compares snapshots to infer changes</li>
+</ul>
+<hr>
+<doc-anchor-target id="critical-interview-insights">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#critical-interview-insights">#</doc-anchor-trigger>
+        <span>Critical Interview Insights</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="sdp-vs-manual-spark">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#sdp-vs-manual-spark">#</doc-anchor-trigger>
+        <span>SDP vs. Manual Spark</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>SDP</th>
+<th>Manual Spark/Streaming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orchestration</td>
+<td>Automatic</td>
+<td>Manual (Lakeflow Jobs)</td>
+</tr>
+<tr>
+<td>Dependency management</td>
+<td>Automatic</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td>Retry logic</td>
+<td>Hierarchical (task→flow→pipeline)</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td>Incremental processing</td>
+<td>Built-in (materialized views)</td>
+<td>Manual code</td>
+</tr>
+<tr>
+<td>CDC handling</td>
+<td>AUTO CDC API</td>
+<td>Complex merge logic</td>
+</tr>
+<tr>
+<td>Watermarks</td>
+<td>Automatic</td>
+<td>Manual configuration</td>
+</tr>
+<tr>
+<td>Code volume</td>
+<td>10-100 lines</td>
+<td>100-1000+ lines</td>
+</tr>
+</tbody>
+</table>
+</div>
+<doc-anchor-target id="when-not-to-use-sdp">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#when-not-to-use-sdp">#</doc-anchor-trigger>
+        <span>When NOT to Use SDP</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Need non-Delta outputs (use sinks or ForEachBatch)</li>
+<li>Complex custom stateful operations (use manual Structured Streaming)</li>
+<li>Interactive/ad-hoc queries (use notebooks)</li>
+<li>Batch-only with no incremental processing needs</li>
+<li>Need fine-grained control over checkpoints/watermarks</li>
+</ul>
+<doc-anchor-target id="common-pitfalls">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-pitfalls">#</doc-anchor-trigger>
+        <span>Common Pitfalls</span>
+    </h3>
+</doc-anchor-target>
+<ol>
+<li><p><strong>Using <code v-pre>dlt</code> module instead of <code v-pre>pyspark.pipelines</code></strong></p>
+<ul>
+<li>Old: <code v-pre>import dlt</code></li>
+<li>New: <code v-pre>from pyspark import pipelines as dp</code></li>
+</ul>
+</li>
+<li><p><strong>Applying expectations to views</strong></p>
+<ul>
+<li>Only streaming tables and materialized views support expectations</li>
+</ul>
+</li>
+<li><p><strong>Using AUTO CDC with sinks</strong></p>
+<ul>
+<li>AUTO CDC only writes to streaming tables</li>
+<li>Use append_flow for sinks</li>
+</ul>
+</li>
+<li><p><strong>Running pipeline code interactively</strong></p>
+<ul>
+<li><code v-pre>pyspark.pipelines</code> only available in pipeline context</li>
+<li>Test logic separately, not pipeline decorators</li>
+</ul>
+</li>
+<li><p><strong>Forgetting STREAM keyword in SQL</strong></p>
+<ul>
+<li>Streaming reads require <code v-pre>STREAM(table)</code> or <code v-pre>STREAM read_files(...)</code></li>
+</ul>
+</li>
+<li><p><strong>Multiple flows to materialized views</strong></p>
+<ul>
+<li>Materialized views only support implicit flows (within definition)</li>
+<li>Use streaming tables for multiple explicit flows</li>
+</ul>
+</li>
+<li><p><strong>Not handling NULL sequencing values</strong></p>
+<ul>
+<li>AUTO CDC requires non-NULL sequencing column</li>
+<li>Filter or handle NULLs before CDC processing</li>
+</ul>
+</li>
+</ol>
+<hr>
+<doc-anchor-target id="performance-considerations">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#performance-considerations">#</doc-anchor-trigger>
+        <span>Performance Considerations</span>
+    </h2>
+</doc-anchor-target>
+<p><strong>Materialized view optimization:</strong></p>
+<ul>
+<li>Incremental processing most effective with:
+<ul>
+<li>Partitioned source tables</li>
+<li>Append-only or low-update-rate sources</li>
+<li>Delta change data feed enabled</li>
+</ul>
+</li>
+<li>Full recomputation triggers:
+<ul>
+<li>Schema changes</li>
+<li>Definition changes</li>
+<li>Non-trackable sources</li>
+</ul>
+</li>
+</ul>
+<p><strong>Streaming table optimization:</strong></p>
+<ul>
+<li>Use Auto Loader for cloud storage ingestion</li>
+<li>Enable schema evolution when needed</li>
+<li>Monitor streaming metrics (latency, throughput)</li>
+</ul>
+<p><strong>Expectation performance:</strong></p>
+<ul>
+<li>Expectations evaluated per-record (can impact throughput)</li>
+<li>Use <code v-pre>expect_or_drop</code> to reduce downstream processing</li>
+<li>Complex constraints increase evaluation time</li>
+</ul>
+<p><strong>CDC performance:</strong></p>
+<ul>
+<li>Sequencing column should be indexed in source</li>
+<li>Minimize tracked columns in SCD Type 2</li>
+<li>Use appropriate key cardinality (not too fine-grained)</li>
+</ul>
+<hr>
+<doc-anchor-target id="december-2025-updates-summary">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#december-2025-updates-summary">#</doc-anchor-trigger>
+        <span>December 2025 Updates Summary</span>
+    </h2>
+</doc-anchor-target>
+<ul>
+<li><strong>Lakeflow SDP</strong> is the current name (formerly DLT)</li>
+<li><code v-pre>pyspark.pipelines</code> module (alias <code v-pre>dp</code>) replaces <code v-pre>dlt</code> module</li>
+<li>Apache Spark 4.1+ includes open-source declarative pipelines</li>
+<li>Databricks extends with AUTO CDC, sinks, ForEachBatch</li>
+<li>Full backward compatibility — no migration required</li>
+<li>Enhanced Lakeflow integration for end-to-end workflows</li>
+<li>Premium plan required for Lakeflow SDP</li>
+</ul>
+<hr>
+<p><strong>End of Interview Preparation Notes</strong></p>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer id="retype-content-footer" class="clear-both">
+                            
+                                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/misc/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">16. Misc</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/introduction/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                                <span class="block mt-1">01 Introduction & Core Concepts</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                                <div id="retype-footer-links" class="print:hidden">
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link-weight text-sm leading-relaxed"></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="retype-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "Databricks Declarative Pipelines - Interview Preparation Notes", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>
