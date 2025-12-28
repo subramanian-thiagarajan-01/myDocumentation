@@ -1,7 +1,8 @@
 input: .
 output: .retype
 
-url: https://subramanian-thiagarajan-01.github.io/
+url: https://subramanian-thiagarajan-01.github.io
+baseUrl: myDocumentation/
 
 branding:
   title: My Documentation
@@ -10,5 +11,5 @@ branding:
 navigation:
   collapse: true
 
-footer:
-  copyright: "&copy; {{ year }} My Company. All rights reserved."
+search:
+  enabled: true
