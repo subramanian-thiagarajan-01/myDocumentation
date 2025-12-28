@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.820156721004">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.11.0.820256008584">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>01 Overview of Databricks</title>
-    <meta name="title" content="01 Overview of Databricks">
-    <meta name="description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <title>1. Databricks Platform &amp; Core Architecture</title>
+    <meta name="title" content="1. Databricks Platform & Core Architecture">
+    <meta name="description" content="Databricks is a cloud-native Data Intelligence Platform that unifies:">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
@@ -19,22 +19,22 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="og:title" content="01 Overview of Databricks">
-    <meta property="og:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="og:title" content="1. Databricks Platform & Core Architecture">
+    <meta property="og:description" content="Databricks is a cloud-native Data Intelligence Platform that unifies:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/overview/">
-    <meta property="twitter:title" content="01 Overview of Databricks">
-    <meta property="twitter:description" content="Databricks is a cloud-native data analytics platform built on Apache Spark that enables organizations to unify ">
+    <meta property="twitter:title" content="1. Databricks Platform & Core Architecture">
+    <meta property="twitter:description" content="Databricks is a cloud-native Data Intelligence Platform that unifies:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="../../resources/css/retype.css?v=3.11.0.820156721004" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.11.0.820256008584" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820156721004" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -149,294 +149,679 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="01-overview-of-databricks" class="break-words">
+<doc-anchor-target id="1-databricks-platform--core-architecture" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#01-overview-of-databricks">#</doc-anchor-trigger>
-        <span>01 Overview of Databricks</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-databricks-platform--core-architecture">#</doc-anchor-trigger>
+        <span>1. Databricks Platform &amp; Core Architecture</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="-1-what-is-databricks">
+<doc-anchor-target id="11-databricks-overview">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-what-is-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 1. <strong>What is Databricks?</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#11-databricks-overview">#</doc-anchor-trigger>
+        <span>1.1 Databricks Overview</span>
     </h2>
 </doc-anchor-target>
-<p><strong>Databricks</strong> is a <strong>cloud-native data analytics platform</strong> built on <strong>Apache Spark</strong> that enables organizations to unify <strong>data engineering, data science, machine learning (ML), and business intelligence (BI)</strong> workloads in one place. It provides a <strong>lakehouse architecture</strong> — combining the flexibility of data lakes with the performance and management features of data warehouses.</p>
-<doc-anchor-target id="key-points">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#key-points">#</doc-anchor-trigger>
-        <span>Key Points</span>
-    </h4>
+<doc-anchor-target id="what-is-databricks">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-databricks">#</doc-anchor-trigger>
+        <span>What is Databricks?</span>
+    </h3>
 </doc-anchor-target>
+<p>Databricks is a <strong>cloud-native Data Intelligence Platform</strong> that unifies:</p>
 <ul>
-<li>It was founded by the original creators of <strong>Apache Spark</strong>, and extends it for cloud-scale analytics.</li>
-<li>Databricks powers ETL, ad-hoc analytics, ML model building, and business dashboards on <em>the same data platform</em>.</li>
-<li>Includes components such as <strong>Delta Lake (transactional storage layer)</strong> and <strong>Databricks SQL</strong> for BI.</li>
+<li>Data engineering</li>
+<li>Data warehousing (SQL analytics)</li>
+<li>Machine learning</li>
+<li>Governance</li>
+</ul>
+<p>on top of <strong>Apache Spark + Delta Lake</strong>, delivered as a <strong>managed service</strong>.</p>
+<p>Key characteristics:</p>
+<ul>
+<li>Built around <strong>open data formats</strong> (Parquet, Delta)</li>
+<li>Separates <strong>storage and compute</strong></li>
+<li>Strong focus on <strong>end-to-end lifecycle</strong> (ingestion → analytics → ML → BI)</li>
 </ul>
 <hr>
-<doc-anchor-target id="-2-why-do-we-need-databricks">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-why-do-we-need-databricks">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 2. <strong>Why do we need Databricks?</strong></span>
-    </h2>
+<doc-anchor-target id="why-databricks-vs-traditional-systems">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-databricks-vs-traditional-systems">#</doc-anchor-trigger>
+        <span>Why Databricks vs Traditional Systems</span>
+    </h3>
 </doc-anchor-target>
-<p>The landscape of enterprise data has changed:</p>
-<ul>
-<li>Data is <strong>huge</strong> (petabytes).</li>
-<li>Data is <strong>diverse</strong> (structured, semi-structured, unstructured).</li>
-<li>Users range from <strong>engineers and data scientists to analysts and product owners</strong>.</li>
-</ul>
-<p>Databricks is needed because:</p>
-<doc-anchor-target id="-1-unified-platform">
+<doc-anchor-target id="vs-traditional-data-warehouses">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-unified-platform">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 1) <strong>Unified Platform</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#vs-traditional-data-warehouses">#</doc-anchor-trigger>
+        <span>vs Traditional Data Warehouses</span>
     </h4>
 </doc-anchor-target>
-<p>Traditionally analytic systems were siloed (data warehouse for BI, data lake for ML). Databricks provides one system that supports:</p>
-<ul>
-<li><strong>ETL/ELT</strong></li>
-<li><strong>Streaming &amp; batch processing</strong></li>
-<li><strong>Machine learning</strong></li>
-<li><strong>SQL analytics and dashboards</strong>
-All on one shared metadata and governance layer.</li>
-</ul>
-<doc-anchor-target id="-2-scalability--cost-efficiency">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-scalability--cost-efficiency">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 2) <strong>Scalability &amp; Cost Efficiency</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>It decouples <strong>storage and compute</strong>, letting companies pay only for processing when needed and use cheap cloud object storage for data.</p>
-<doc-anchor-target id="-3-support-for-diverse-workloads">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-support-for-diverse-workloads">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 3) <strong>Support for Diverse Workloads</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>From <strong>SQL reporting</strong> to <strong>Python/ML notebooks</strong>, to <strong>streaming ingestion</strong>, Databricks supports the full data lifecycle in one platform.</p>
-<doc-anchor-target id="-4-open-standards--no-vendor-lock-in">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-open-standards--no-vendor-lock-in">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F31F;</span> 4) <strong>Open Standards &amp; No Vendor Lock-In</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Uses open formats like <strong>Parquet/Delta</strong>, and open projects (Apache Spark, Delta Lake, MLflow), so your data isn’t locked into a proprietary format.</p>
-<hr>
-<doc-anchor-target id="-3-what-is-a-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-what-is-a-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 3. <strong>What is a Lakehouse?</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>A <strong>lakehouse</strong> is a modern data architecture that <strong>unifies the best of data lakes and data warehouses</strong>.</p>
-<doc-anchor-target id="at-a-high-level">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#at-a-high-level">#</doc-anchor-trigger>
-        <span>At a high level:</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>Like a <strong>data lake</strong>, it can store <em>all types</em> of data — structured, semi-structured, unstructured — in open formats.</li>
-<li>Like a <strong>data warehouse</strong>, it supports <strong>ACID transactions, schema enforcement, performance optimizations, governance, and BI queries.</strong></li>
-</ul>
-<doc-anchor-target id="what-a-lakehouse-enables">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#what-a-lakehouse-enables">#</doc-anchor-trigger>
-        <span>What a Lakehouse enables</span>
-    </h4>
-</doc-anchor-target>
-<ul>
-<li>One <strong>single source of truth</strong> across analytics and AI workloads.</li>
-<li><strong>Remove redundant copies</strong> between systems (no separate data warehouse + data lake pipelines).</li>
-</ul>
-<hr>
-<doc-anchor-target id="-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-challenges-traditional-platforms-face-and-how-databricks-solves-them">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 4. <strong>Challenges Traditional Platforms Face (and how Databricks solves them)</strong></span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="-1-data-silos">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-1-data-silos">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>1) Data Silos</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Traditional architectures often had separate:</p>
-<ul>
-<li>Data lakes (cheap, flexible storage)</li>
-<li>Data warehouses (structured analytics)</li>
-<li>Specialized tools for ML</li>
-</ul>
-<p>This leads to duplicate data and complex ETL between systems.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> A single lakehouse, eliminating the need to move data between systems.</p>
-<hr>
-<doc-anchor-target id="-2-lack-of-governance--quality-in-data-lakes">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-2-lack-of-governance--quality-in-data-lakes">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>2) Lack of Governance &amp; Quality in Data Lakes</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Raw data lakes lack:</p>
-<ul>
-<li>ACID transactions</li>
-<li>Schema enforcement</li>
-<li>Data quality checks</li>
-<li>Unified security controls</li>
-</ul>
-<p>without these, lakes easily become <strong>data swamps</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong></p>
-<ul>
-<li><strong>Delta Lake layer</strong> brings ACID, schema enforcement, time travel.</li>
-<li><strong>Unity Catalog</strong> provides centralized fine-grained governance, access controls, and lineage.</li>
-</ul>
-<hr>
-<doc-anchor-target id="-3-traditional-warehouses-arent-flexible-for-aiml">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-3-traditional-warehouses-arent-flexible-for-aiml">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>3) Traditional Warehouses Aren’t Flexible for AI/ML</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Data warehouses are optimized for structured SQL but struggle with:</p>
-<ul>
-<li>Semi-structured/unstructured data (images, text, logs)</li>
-<li>Spark/ML workloads
-This creates friction for data scientists.</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Supports rich data types and analytical engines in one platform on open storage.</p>
-<hr>
-<doc-anchor-target id="-4-slow-data-freshness">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-4-slow-data-freshness">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>4) Slow Data Freshness</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>In traditional architectures, data lakes write raw data → then ETL to warehouse → analytics, which creates <strong>data staleness</strong>.</p>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Direct analytics on the same governed lakehouse data, reducing delay and making data ready for analytics and BI sooner.</p>
-<hr>
-<doc-anchor-target id="-5-cost--complexity-of-multiple-tools">
-    <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-cost--complexity-of-multiple-tools">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F6AB;</span> <strong>5) Cost &amp; Complexity of Multiple Tools</strong></span>
-    </h4>
-</doc-anchor-target>
-<p>Managing multiple systems increases:</p>
-<ul>
-<li>Operational overhead</li>
-<li>Cost of storage and compute</li>
-<li>Engineering overhead on keeping data in sync</li>
-</ul>
-<p><span class="docs-emoji">&#x1F4CC;</span> <strong>Databricks Solution:</strong> Reduces operational overhead with one integrated platform and managed services on cloud.</p>
-<hr>
-<doc-anchor-target id="-5-data-lake-vs-data-warehouse-vs-lakehouse">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-5-data-lake-vs-data-warehouse-vs-lakehouse">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x2705;</span> 5. <strong>Data Lake vs Data Warehouse vs Lakehouse</strong></span>
-    </h2>
-</doc-anchor-target>
-<p>Here’s a simple comparison:</p>
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
 <tr>
-<th>Feature</th>
-<th><strong>Data Lake</strong></th>
-<th><strong>Data Warehouse</strong></th>
-<th><strong>Data Lakehouse</strong></th>
+<th>Traditional DW</th>
+<th>Databricks</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Data Type</td>
-<td>All (raw)</td>
-<td>Structured only</td>
-<td>All (raw + structured)</td>
+<td>Proprietary storage formats</td>
+<td>Open formats (Delta Lake)</td>
 </tr>
 <tr>
-<td>Cost</td>
-<td>Low</td>
-<td>Higher</td>
-<td>Medium / Efficient</td>
+<td>Schema-on-write only</td>
+<td>Schema enforcement + evolution</td>
 </tr>
 <tr>
-<td>Governance &amp; ACID</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
+<td>Expensive scaling</td>
+<td>Elastic, cloud-native</td>
 </tr>
 <tr>
-<td>Analytics Performance</td>
-<td><span class="docs-emoji">&#x274C;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>ML Support</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x274C;</span> / Limited</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-</tr>
-<tr>
-<td>BI Dashboards</td>
-<td><span class="docs-emoji">&#x274C;</span> (hard)</td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
-<td><span class="docs-emoji">&#x2714;&#xFE0F;</span></td>
+<td>SQL-only</td>
+<td>SQL + Python + Scala + ML</td>
 </tr>
 </tbody>
 </table>
 </div>
-<doc-anchor-target id="quick-definitions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#quick-definitions">#</doc-anchor-trigger>
-        <span>Quick Definitions</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Data Lake</strong></p>
+<p>Interview angle:</p>
 <ul>
-<li>A repository for <em>all kinds</em> of raw data.</li>
-<li>Cheap and scalable, but lacks transactional guarantees and governance.</li>
-</ul>
-<p><strong>Data Warehouse</strong></p>
-<ul>
-<li>A structured system optimized for <strong>BI and SQL analytics</strong>.</li>
-<li>Strong governance and performance but limited in data variety.</li>
-</ul>
-<p><strong>Data Lakehouse</strong></p>
-<ul>
-<li>Merges the <em>best of both</em> — open storage, governance, performance, and analytics in one place.</li>
+<li>Databricks eliminates <strong>data duplication</strong> between lake + warehouse.</li>
+<li>Same data serves <strong>BI + ML</strong>.</li>
 </ul>
 <hr>
-<doc-anchor-target id="-final-summary">
+<doc-anchor-target id="vs-hadoop">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#vs-hadoop">#</doc-anchor-trigger>
+        <span>vs Hadoop</span>
+    </h4>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Hadoop</th>
+<th>Databricks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Heavy ops (YARN, HDFS)</td>
+<td>Fully managed</td>
+</tr>
+<tr>
+<td>Batch-oriented</td>
+<td>Batch + Streaming</td>
+</tr>
+<tr>
+<td>On-prem focused</td>
+<td>Cloud-native</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Key interview phrase:</p>
+<blockquote>
+<p>Databricks removed Hadoop’s operational complexity while retaining Spark’s scale.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="vs-spark-standalone">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#vs-spark-standalone">#</doc-anchor-trigger>
+        <span>vs Spark Standalone</span>
+    </h4>
+</doc-anchor-target>
+<p>Spark standalone:</p>
+<ul>
+<li>You manage clusters, configs, upgrades</li>
+<li>No governance, no orchestration, no lineage</li>
+</ul>
+<p>Databricks:</p>
+<ul>
+<li>Managed Spark runtimes</li>
+<li>Built-in jobs, monitoring, security, SQL, MLflow</li>
+</ul>
+<hr>
+<doc-anchor-target id="databricks-as-a-data-intelligence-platform">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#databricks-as-a-data-intelligence-platform">#</doc-anchor-trigger>
+        <span>Databricks as a <strong>Data Intelligence Platform</strong></span>
+    </h3>
+</doc-anchor-target>
+<p>Interviewers increasingly expect this framing (2024+).</p>
+<p>“Data Intelligence” =
+<strong>Data + AI + Governance + Cost Control</strong></p>
+<p>Key pillars:</p>
+<ul>
+<li>Lakehouse (Delta Lake)</li>
+<li>Photon (performance)</li>
+<li>Unity Catalog (governance – later topic)</li>
+<li>AI-assisted analytics (AI/BI, ML integration)</li>
+</ul>
+<hr>
+<doc-anchor-target id="12-lakehouse-architecture">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#-final-summary">#</doc-anchor-trigger>
-        <span><span class="docs-emoji">&#x1F9E0;</span> Final Summary</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#12-lakehouse-architecture">#</doc-anchor-trigger>
+        <span>1.2 Lakehouse Architecture</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="why-databricks-matters">
+<doc-anchor-target id="definition">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#definition">#</doc-anchor-trigger>
+        <span>Definition</span>
+    </h3>
+</doc-anchor-target>
+<p>A <strong>Lakehouse</strong> is an architecture that:</p>
+<ul>
+<li>Uses <strong>data lakes as the single source of truth</strong></li>
+<li>Adds <strong>warehouse-like guarantees</strong> directly on the lake</li>
+</ul>
+<hr>
+<doc-anchor-target id="core-principles">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#core-principles">#</doc-anchor-trigger>
+        <span>Core Principles</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Open storage formats</li>
+<li>Decoupled compute</li>
+<li>Transactional guarantees</li>
+<li>Unified analytics + ML</li>
+</ul>
+<hr>
+<doc-anchor-target id="how-lakehouse-combines-both-worlds">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#how-lakehouse-combines-both-worlds">#</doc-anchor-trigger>
+        <span>How Lakehouse Combines Both Worlds</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="data-lake-traits">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#why-databricks-matters">#</doc-anchor-trigger>
-        <span><strong>Why Databricks matters</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-lake-traits">#</doc-anchor-trigger>
+        <span>Data Lake Traits</span>
     </h4>
 </doc-anchor-target>
 <ul>
-<li>It solves <strong>data complexity, governance, and analytics fragmentation</strong> by unifying storage and compute in a managed, scalable cloud platform.</li>
-<li>It enables <strong>BI, ML, and advanced analytics on the <em>same data platform</em></strong> saving cost and reducing engineering overhead.</li>
+<li>Object storage (S3 / ADLS / GCS)</li>
+<li>Cheap, scalable</li>
+<li>Open formats (Parquet)</li>
 </ul>
-<doc-anchor-target id="lakehouse-advantages">
+<doc-anchor-target id="data-warehouse-traits">
     <h4>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#lakehouse-advantages">#</doc-anchor-trigger>
-        <span><strong>Lakehouse Advantages</strong></span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-warehouse-traits">#</doc-anchor-trigger>
+        <span>Data Warehouse Traits</span>
     </h4>
 </doc-anchor-target>
 <ul>
-<li><strong>Single source of truth</strong></li>
-<li><strong>Open formats &amp; multi-engine access</strong></li>
-<li><strong>ACID transactions</strong></li>
-<li><strong>Governance &amp; lineage</strong></li>
-<li><strong>Support for real-time streaming and dashboards</strong></li>
+<li>ACID transactions</li>
+<li>Indexing / metadata</li>
+<li>Performance optimization</li>
+<li>Governance</li>
 </ul>
-<p>These capabilities are essential for <strong>modern AI and analytics workloads</strong> that traditional systems struggle to handle efficiently.</p>
+<p>Databricks Lakehouse =
+<strong>Delta Lake + Optimized Spark execution</strong></p>
+<hr>
+<doc-anchor-target id="role-of-delta-lake">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#role-of-delta-lake">#</doc-anchor-trigger>
+        <span>Role of Delta Lake</span>
+    </h3>
+</doc-anchor-target>
+<p>Delta Lake is <strong>non-negotiable</strong> in interviews.</p>
+<p>Delta provides:</p>
+<ul>
+<li><strong>ACID transactions</strong> on object storage</li>
+<li>Schema enforcement &amp; evolution</li>
+<li>Time travel</li>
+<li>Efficient metadata (transaction log)</li>
+</ul>
+<p>Without Delta:</p>
+<ul>
+<li>Lakehouse does not exist</li>
+<li>Spark reads are eventually consistent</li>
+<li>No reliable incremental pipelines</li>
+</ul>
+<p>Key interview soundbite:</p>
+<blockquote>
+<p>Delta Lake is the foundation that makes the Lakehouse reliable.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="13-control-plane-vs-data-plane">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#13-control-plane-vs-data-plane">#</doc-anchor-trigger>
+        <span>1.3 Control Plane vs Data Plane</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="control-plane">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#control-plane">#</doc-anchor-trigger>
+        <span>Control Plane</span>
+    </h3>
+</doc-anchor-target>
+<p>Managed by Databricks.</p>
+<p>Includes:</p>
+<ul>
+<li>Workspace metadata</li>
+<li>Notebooks, repos</li>
+<li>Jobs orchestration</li>
+<li>Cluster definitions</li>
+<li>User &amp; group management</li>
+</ul>
+<p><strong>No customer data</strong> stored here.</p>
+<hr>
+<doc-anchor-target id="data-plane">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-plane">#</doc-anchor-trigger>
+        <span>Data Plane</span>
+    </h3>
+</doc-anchor-target>
+<p>Runs in <strong>customer’s cloud account</strong>.</p>
+<p>Includes:</p>
+<ul>
+<li>Compute (VMs)</li>
+<li>Customer data</li>
+<li>Object storage</li>
+<li>Network traffic</li>
+</ul>
+<p>Databricks deploys compute <strong>inside your VPC/VNet</strong>.</p>
+<hr>
+<doc-anchor-target id="security-implications-very-high-yield">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#security-implications-very-high-yield">#</doc-anchor-trigger>
+        <span>Security Implications (Very High Yield)</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Databricks <strong>cannot access your raw data</strong></li>
+<li>Data never leaves your cloud account</li>
+<li>Control plane compromise ≠ data access</li>
+</ul>
+<p>Interview pitfall:</p>
+<ul>
+<li>Saying Databricks “hosts your data” → <strong>incorrect</strong></li>
+</ul>
+<hr>
+<doc-anchor-target id="14-compute-architecture">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#14-compute-architecture">#</doc-anchor-trigger>
+        <span>1.4 Compute Architecture</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="databricks-compute-types">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#databricks-compute-types">#</doc-anchor-trigger>
+        <span>Databricks Compute Types</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="1-all-purpose-clusters">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#1-all-purpose-clusters">#</doc-anchor-trigger>
+        <span>1. All-Purpose Clusters</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Interactive</li>
+<li>Multi-user</li>
+<li>Used for:
+<ul>
+<li>Notebooks</li>
+<li>Ad-hoc analysis</li>
+<li>Development</li>
+</ul>
+</li>
+</ul>
+<p>Trade-off:</p>
+<ul>
+<li>More expensive</li>
+<li>Long-running</li>
+</ul>
+<hr>
+<doc-anchor-target id="2-job-clusters">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#2-job-clusters">#</doc-anchor-trigger>
+        <span>2. Job Clusters</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Ephemeral</li>
+<li>One job run = one cluster lifecycle</li>
+<li>Used for:
+<ul>
+<li>Production pipelines</li>
+<li>ETL jobs</li>
+</ul>
+</li>
+</ul>
+<p>Interview expectation:</p>
+<blockquote>
+<p>Prefer job clusters for production due to isolation + cost efficiency.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="3-sql-warehouses">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-sql-warehouses">#</doc-anchor-trigger>
+        <span>3. SQL Warehouses</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Optimized for SQL</li>
+<li>Used by:
+<ul>
+<li>DBSQL</li>
+<li>Dashboards</li>
+<li>BI tools</li>
+</ul>
+</li>
+</ul>
+<p>Variants covered later (Serverless / Pro / Classic).</p>
+<hr>
+<doc-anchor-target id="access-modes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#access-modes">#</doc-anchor-trigger>
+        <span>Access Modes</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="single-user">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#single-user">#</doc-anchor-trigger>
+        <span>Single User</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>One user identity</li>
+<li>Required for:
+<ul>
+<li>Unity Catalog write access (non-shared)</li>
+</ul>
+</li>
+<li>Best isolation</li>
+</ul>
+<hr>
+<doc-anchor-target id="shared">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#shared">#</doc-anchor-trigger>
+        <span>Shared</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Multiple users</li>
+<li>User isolation via Spark</li>
+<li>Some features restricted</li>
+</ul>
+<hr>
+<doc-anchor-target id="no-isolation">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#no-isolation">#</doc-anchor-trigger>
+        <span>No Isolation</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Legacy</li>
+<li>Least secure</li>
+<li>Generally discouraged</li>
+</ul>
+<p>Interview note:</p>
+<ul>
+<li>Unity Catalog <strong>restricts access modes intentionally</strong>.</li>
+</ul>
+<hr>
+<doc-anchor-target id="cluster-permissions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cluster-permissions">#</doc-anchor-trigger>
+        <span>Cluster Permissions</span>
+    </h3>
+</doc-anchor-target>
+<p>Controls:</p>
+<ul>
+<li>Who can attach</li>
+<li>Who can restart</li>
+<li>Who can terminate</li>
+</ul>
+<p>Used to:</p>
+<ul>
+<li>Prevent accidental cluster misuse</li>
+<li>Enforce least privilege</li>
+</ul>
+<hr>
+<doc-anchor-target id="cluster-policies">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#cluster-policies">#</doc-anchor-trigger>
+        <span>Cluster Policies</span>
+    </h3>
+</doc-anchor-target>
+<p>Declarative rules:</p>
+<ul>
+<li>Limit instance types</li>
+<li>Enforce auto-termination</li>
+<li>Control DBU cost</li>
+</ul>
+<p>Common interview use case:</p>
+<blockquote>
+<p>Prevent developers from creating oversized clusters.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="instance-pools">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#instance-pools">#</doc-anchor-trigger>
+        <span>Instance Pools</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Pre-warmed VMs</li>
+<li>Faster startup</li>
+<li>Lower cost for frequent jobs</li>
+</ul>
+<p>Trade-off:</p>
+<ul>
+<li>Idle pool capacity costs money</li>
+</ul>
+<hr>
+<doc-anchor-target id="15-serverless-compute">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#15-serverless-compute">#</doc-anchor-trigger>
+        <span>1.5 Serverless Compute</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="serverless-sql-warehouses">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#serverless-sql-warehouses">#</doc-anchor-trigger>
+        <span>Serverless SQL Warehouses</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Fully managed</li>
+<li>Instant startup</li>
+<li>Auto-scaling</li>
+<li>No cluster visibility</li>
+</ul>
+<p>Best for:</p>
+<ul>
+<li>BI</li>
+<li>Dashboards</li>
+<li>Ad-hoc SQL</li>
+</ul>
+<hr>
+<doc-anchor-target id="serverless-notebooks">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#serverless-notebooks">#</doc-anchor-trigger>
+        <span>Serverless Notebooks</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>No cluster management</li>
+<li>Elastic compute</li>
+<li>Ideal for exploration</li>
+</ul>
+<p>Limitations:</p>
+<ul>
+<li>Less control</li>
+<li>Not all Spark configs exposed</li>
+</ul>
+<hr>
+<doc-anchor-target id="interview-angle">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#interview-angle">#</doc-anchor-trigger>
+        <span>Interview Angle</span>
+    </h3>
+</doc-anchor-target>
+<p>Serverless =
+<strong>Operational simplicity over configurability</strong></p>
+<hr>
+<doc-anchor-target id="16-photon-engine">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#16-photon-engine">#</doc-anchor-trigger>
+        <span>1.6 Photon Engine</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-is-photon">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-photon">#</doc-anchor-trigger>
+        <span>What is Photon?</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Vectorized execution engine</li>
+<li>Written in <strong>C++</strong></li>
+<li>Replaces parts of Spark execution engine</li>
+</ul>
+<hr>
+<doc-anchor-target id="when-photon-is-used">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#when-photon-is-used">#</doc-anchor-trigger>
+        <span>When Photon Is Used</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>SQL workloads</li>
+<li>DataFrame APIs</li>
+<li>Automatic (no code change)</li>
+</ul>
+<p>Not used for:</p>
+<ul>
+<li>RDD-based logic</li>
+<li>Some UDF-heavy workloads</li>
+</ul>
+<hr>
+<doc-anchor-target id="performance-implications">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#performance-implications">#</doc-anchor-trigger>
+        <span>Performance Implications</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>2–10x faster SQL</li>
+<li>Lower DBU cost for same workload</li>
+<li>Better CPU cache utilization</li>
+</ul>
+<p>Interview trap:</p>
+<ul>
+<li>Photon is <strong>not a separate cluster</strong></li>
+<li>Photon is <strong>not optional at runtime</strong> (auto-enabled when supported)</li>
+</ul>
+<hr>
+<doc-anchor-target id="17-databricks-roles--administration">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#17-databricks-roles--administration">#</doc-anchor-trigger>
+        <span>1.7 Databricks Roles &amp; Administration</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="account-console">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#account-console">#</doc-anchor-trigger>
+        <span>Account Console</span>
+    </h3>
+</doc-anchor-target>
+<p>Account-level management:</p>
+<ul>
+<li>Users</li>
+<li>Workspaces</li>
+<li>Identity federation</li>
+<li>Unity Catalog metastore</li>
+</ul>
+<hr>
+<doc-anchor-target id="workspace-vs-account-level">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#workspace-vs-account-level">#</doc-anchor-trigger>
+        <span>Workspace vs Account Level</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Workspace</th>
+<th>Account</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Notebooks</td>
+<td>Users</td>
+</tr>
+<tr>
+<td>Jobs</td>
+<td>Metastores</td>
+</tr>
+<tr>
+<td>Clusters</td>
+<td>Cloud credentials</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Interview emphasis:</p>
+<blockquote>
+<p>Governance lives at account level, not workspace level.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="databricks-roles--personas">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#databricks-roles--personas">#</doc-anchor-trigger>
+        <span>Databricks Roles &amp; Personas</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Data Engineers</li>
+<li>Analytics Engineers</li>
+<li>Data Scientists</li>
+<li>Platform Admins</li>
+</ul>
+<p>Each persona maps to:</p>
+<ul>
+<li>Different compute</li>
+<li>Different access modes</li>
+<li>Different tools</li>
+</ul>
+<hr>
+<doc-anchor-target id="identity-federation-basics">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#identity-federation-basics">#</doc-anchor-trigger>
+        <span>Identity Federation Basics</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>SSO via:
+<ul>
+<li>Azure AD</li>
+<li>Okta</li>
+<li>IAM federation</li>
+</ul>
+</li>
+<li>Centralized identity</li>
+<li>Enables auditability</li>
+</ul>
+<hr>
+<doc-anchor-target id="interview-red-flags-to-avoid">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#interview-red-flags-to-avoid">#</doc-anchor-trigger>
+        <span>Interview Red Flags to Avoid</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Confusing control plane with data plane</li>
+<li>Treating Databricks as a proprietary warehouse</li>
+<li>Ignoring Delta Lake’s role</li>
+<li>Overusing all-purpose clusters in production</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -446,13 +831,20 @@ This creates friction for data scientists.</li>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/unity-catalog/misc/">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                                <span class="block mt-1">06 Misc</span>
+                                            </span>
+                                        </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/architecture/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/lakeflow/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">02 Databricks Architecture & Core Roles</span>
+                                                <span class="block mt-1">3. Data Engineering & ETL (Lakeflow Era)</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -496,6 +888,6 @@ This creates friction for data scientists.</li>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "01 Overview of Databricks", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "1. Databricks Platform & Core Architecture", level: 2, icon: "file", hasPrism: false, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

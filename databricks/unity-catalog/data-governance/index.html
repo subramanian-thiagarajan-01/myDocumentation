@@ -9,30 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>17 Security &amp; Permissions</title>
-    <meta name="title" content="17 Security & Permissions">
+    <title>04 Data Governance, Lineage, Observability, Lakehouse Federation</title>
+    <meta name="title" content="04 Data Governance, Lineage, Observability, Lakehouse Federation">
+    <meta name="description" content="Grant Syntax:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/data-governance/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
-    <meta property="og:title" content="17 Security & Permissions">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/data-governance/">
+    <meta property="og:title" content="04 Data Governance, Lineage, Observability, Lakehouse Federation">
+    <meta property="og:description" content="Grant Syntax:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
-    <meta property="twitter:title" content="17 Security & Permissions">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/data-governance/">
+    <meta property="twitter:title" content="04 Data Governance, Lineage, Observability, Lakehouse Federation">
+    <meta property="twitter:description" content="Grant Syntax:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="../../resources/css/retype.css?v=3.11.0.820256008584" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.820256008584" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820256008584" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.820256008584" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -47,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -147,162 +150,345 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="17-security--permissions" class="break-words">
+<doc-anchor-target id="04-data-governance-lineage-observability-lakehouse-federation" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#17-security--permissions">#</doc-anchor-trigger>
-        <span>17 Security &amp; Permissions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#04-data-governance-lineage-observability-lakehouse-federation">#</doc-anchor-trigger>
+        <span>04 Data Governance, Lineage, Observability, Lakehouse Federation</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="user-and-role-management">
+<doc-anchor-target id="8-data-governance-features">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#8-data-governance-features">#</doc-anchor-trigger>
+        <span>8. Data Governance Features</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="81-object-level-permissions">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#user-and-role-management">#</doc-anchor-trigger>
-        <span>User and Role Management</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#81-object-level-permissions">#</doc-anchor-trigger>
+        <span>8.1 Object-Level Permissions</span>
     </h3>
 </doc-anchor-target>
+<p><strong>Grant Syntax:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create user (role without login)
-CREATE ROLE data_analyst;
-
--- Create user (role with login)
-CREATE USER app_user WITH PASSWORD 'secure_password';
-
--- Create user with additional options
-CREATE USER report_user WITH
-    PASSWORD 'temp_password'
-    VALID UNTIL '2026-12-31'
-    CREATEDB;  -- Can create databases
-
--- Change password
-ALTER USER app_user WITH PASSWORD 'new_password';
-
--- Grant login privilege
-ALTER ROLE data_analyst WITH LOGIN;
-
--- Drop user
-DROP USER app_user;
-
--- List users
-SELECT * FROM pg_user;
-\du  -- In psql</code></pre>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">GRANT &lt;privilege&gt; ON &lt;object_type&gt; &lt;object_name&gt; TO &lt;principal&gt;;</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="grant-permissions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#grant-permissions">#</doc-anchor-trigger>
-        <span>GRANT Permissions</span>
-    </h3>
-</doc-anchor-target>
+<p><strong>Common Privileges:</strong></p>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Privilege</th>
+<th>Applies To</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code v-pre>USE CATALOG</code></td>
+<td>Catalog</td>
+<td>View catalog, traverse to schemas</td>
+</tr>
+<tr>
+<td><code v-pre>USE SCHEMA</code></td>
+<td>Schema</td>
+<td>View schema, traverse to tables</td>
+</tr>
+<tr>
+<td><code v-pre>SELECT</code></td>
+<td>Table/View</td>
+<td>Query data</td>
+</tr>
+<tr>
+<td><code v-pre>MODIFY</code></td>
+<td>Table</td>
+<td>Insert/Update/Delete data</td>
+</tr>
+<tr>
+<td><code v-pre>CREATE TABLE</code></td>
+<td>Schema</td>
+<td>Create tables in schema</td>
+</tr>
+<tr>
+<td><code v-pre>CREATE SCHEMA</code></td>
+<td>Catalog</td>
+<td>Create schemas in catalog</td>
+</tr>
+<tr>
+<td><code v-pre>ALL PRIVILEGES</code></td>
+<td>Any object</td>
+<td>All permissions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Grant SELECT on table
-GRANT SELECT ON employees TO app_user;
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Grant read access to table
+GRANT SELECT ON TABLE prod_catalog.sales.orders TO marketing_group;
 
--- Grant SELECT and UPDATE
-GRANT SELECT, UPDATE ON employees TO app_user;
+-- Grant write access to schema
+GRANT CREATE TABLE, USE SCHEMA ON SCHEMA prod_catalog.sales TO data_engineers;
 
--- Grant all privileges
-GRANT ALL PRIVILEGES ON employees TO app_user;
+-- Grant full access to catalog
+GRANT ALL PRIVILEGES ON CATALOG prod_catalog TO admin_group;
 
--- Grant on schema
-GRANT USAGE ON SCHEMA public TO app_user;
-
--- Grant on all tables in schema
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO app_user;
-
--- Grant default privileges (for future objects)
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-GRANT SELECT ON TABLES TO app_user;
-
--- Grant execution on functions
-GRANT EXECUTE ON FUNCTION calculate_bonus(INT, NUMERIC) TO app_user;
-
--- Grant create privilege
-GRANT CREATE ON DATABASE mydb TO app_user;</code></pre>
+-- Show grants
+SHOW GRANTS ON TABLE prod_catalog.sales.orders;</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="revoke-permissions">
+<doc-anchor-target id="82-row-level-security-dynamic-views">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#revoke-permissions">#</doc-anchor-trigger>
-        <span>REVOKE Permissions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#82-row-level-security-dynamic-views">#</doc-anchor-trigger>
+        <span>8.2 Row-Level Security (Dynamic Views)</span>
     </h3>
 </doc-anchor-target>
+<p><strong>Mechanism:</strong>
+Use <code v-pre>current_user()</code> or <code v-pre>is_member()</code> functions in view definition to filter rows.</p>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Revoke specific privilege
-REVOKE UPDATE ON employees FROM app_user;
-
--- Revoke all privileges
-REVOKE ALL PRIVILEGES ON employees FROM app_user;
-
--- Revoke with cascade (revokes dependent grants)
-REVOKE SELECT ON employees FROM app_user CASCADE;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="row-level-security-postgresql-specific">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#row-level-security-postgresql-specific">#</doc-anchor-trigger>
-        <span>Row-Level Security (PostgreSQL specific)</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table
-CREATE TABLE employees (
-    employee_id INT PRIMARY KEY,
-    first_name VARCHAR(50),
-    salary NUMERIC,
-    department_id INT
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Base table (restricted access)
+CREATE TABLE prod_catalog.hr.employees (
+  emp_id INT,
+  name STRING,
+  department STRING,
+  salary DECIMAL(10,2)
 );
 
--- Create policy: employees can only see their own records
-CREATE POLICY emp_select_policy ON employees
-    FOR SELECT
-    USING (employee_id = CURRENT_USER_ID);  -- Requires user tracking
+-- Dynamic view (row-level filtering)
+CREATE VIEW prod_catalog.hr.employees_filtered AS
+SELECT emp_id, name, department, salary
+FROM prod_catalog.hr.employees
+WHERE
+  CASE
+    WHEN is_member('hr_admins') THEN TRUE
+    WHEN is_member('managers') THEN department = current_user()
+    ELSE emp_id = CAST(current_user() AS INT)
+  END;
 
--- Enable RLS on table
-ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
-
--- Create policy for management (can see all)
-CREATE ROLE manager;
-CREATE POLICY manager_policy ON employees
-    FOR SELECT
-    TO manager
-    USING (TRUE);  -- Managers see all rows</code></pre>
+-- Grant access to view, not base table
+GRANT SELECT ON VIEW prod_catalog.hr.employees_filtered TO all_users;</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="auditing-and-logging">
+<p><strong>Interview Question:</strong> <em>How does row-level security work?</em></p>
+<ul>
+<li>View evaluates user context at query time</li>
+<li><code v-pre>current_user()</code> returns logged-in user email</li>
+<li><code v-pre>is_member('group')</code> checks group membership</li>
+<li>Base table should be restricted; grant access to view only</li>
+</ul>
+<doc-anchor-target id="83-column-level-masking-uc-functions">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#auditing-and-logging">#</doc-anchor-trigger>
-        <span>Auditing and Logging</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#83-column-level-masking-uc-functions">#</doc-anchor-trigger>
+        <span>8.3 Column-Level Masking (UC Functions)</span>
     </h3>
 </doc-anchor-target>
+<p><strong>Mechanism:</strong>
+Create SQL UDF that applies masking logic, use in views or enforce via policies.</p>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Enable statement logging
-SET log_statement = 'all';  -- or 'mod' for modifications only
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create masking function
+CREATE FUNCTION prod_catalog.security.mask_ssn(ssn STRING)
+RETURNS STRING
+RETURN CONCAT('XXX-XX-', SUBSTRING(ssn, -4));
 
--- Log slow queries
-SET log_min_duration_statement = 1000;  -- Log queries &gt; 1 second
-
--- Log connection attempts
-SET log_connections = on;
-SET log_disconnections = on;
-
--- View logs (typically in data directory/log/)
--- Or use pg_log_*() functions
-
--- Application-level auditing (via triggers)
-CREATE TABLE audit_log (
-    audit_id SERIAL PRIMARY KEY,
-    table_name VARCHAR(50),
-    operation VARCHAR(10),
-    user_name VARCHAR(50),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    old_values JSONB,
-    new_values JSONB
-);
-
-CREATE OR REPLACE FUNCTION audit_function()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO audit_log (table_name, operation, user_name, old_values, new_values)
-    VALUES (TG_TABLE_NAME, TG_OP, CURRENT_USER, row_to_json(OLD), row_to_json(NEW));
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;</code></pre>
+-- Create view with column masking
+CREATE VIEW prod_catalog.hr.employees_masked AS
+SELECT
+  emp_id,
+  name,
+  CASE
+    WHEN is_member('hr_admins') THEN ssn
+    ELSE prod_catalog.security.mask_ssn(ssn)
+  END AS ssn,
+  salary
+FROM prod_catalog.hr.employees;</code></pre>
 </doc-codeblock></div>
+<p><strong>Databricks Runtime 13.3+ Feature:</strong>
+Column-level access control via <code v-pre>GRANT SELECT(column)</code> (limited preview as of 2025).</p>
+<doc-anchor-target id="84-audit-logging">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#84-audit-logging">#</doc-anchor-trigger>
+        <span>8.4 Audit Logging</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>System Tables:</strong>
+Unity Catalog maintains audit logs in system tables.</p>
+<p><strong>Example Query:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Query audit logs (requires access to system.access)
+SELECT
+  event_time,
+  user_identity.email AS user,
+  action_name,
+  request_params.full_name_arg AS object,
+  response.status_code
+FROM system.access.audit
+WHERE action_name IN ('createTable', 'readTable', 'deleteTable')
+  AND event_date &gt;= current_date() - 7
+ORDER BY event_time DESC;</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Question:</strong> <em>What is logged?</em></p>
+<ul>
+<li>All data access (SELECT, INSERT, UPDATE, DELETE)</li>
+<li>DDL operations (CREATE, ALTER, DROP)</li>
+<li>Permission changes (GRANT, REVOKE)</li>
+<li>User identity, timestamp, object accessed</li>
+</ul>
+<doc-anchor-target id="9-lineage--observability">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#9-lineage--observability">#</doc-anchor-trigger>
+        <span>9. Lineage &amp; Observability</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="91-automated-lineage-capture">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#91-automated-lineage-capture">#</doc-anchor-trigger>
+        <span>9.1 Automated Lineage Capture</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>What Is Captured:</strong></p>
+<ul>
+<li><strong>Table-to-table lineage:</strong> Which tables are used to create other tables</li>
+<li><strong>Column-to-column lineage:</strong> Which source columns feed into target columns</li>
+<li><strong>Notebook/job lineage:</strong> Which notebooks/jobs accessed data</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create target table with lineage
+CREATE TABLE prod_catalog.analytics.customer_summary AS
+SELECT
+  c.customer_id,
+  c.name,
+  SUM(o.amount) AS total_spent
+FROM prod_catalog.sales.customers c
+JOIN prod_catalog.sales.orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name;
+
+-- UC automatically tracks:
+-- - customer_summary depends on customers and orders
+-- - total_spent column depends on orders.amount</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="92-viewing-lineage">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#92-viewing-lineage">#</doc-anchor-trigger>
+        <span>9.2 Viewing Lineage</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>UI:</strong></p>
+<ul>
+<li>Databricks Data Explorer → Select table → Lineage tab</li>
+<li>Visual graph showing upstream and downstream dependencies</li>
+</ul>
+<p><strong>API/SQL:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Query lineage (system table - Databricks Runtime 13.0+)
+SELECT
+  source_table_full_name,
+  target_table_full_name,
+  source_column_name,
+  target_column_name
+FROM system.access.table_lineage
+WHERE target_table_full_name = 'prod_catalog.analytics.customer_summary';</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="93-column-level-lineage">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#93-column-level-lineage">#</doc-anchor-trigger>
+        <span>9.3 Column-Level Lineage</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Example:</strong>
+If <code v-pre>customer_summary.total_spent</code> is derived from <code v-pre>orders.amount</code>, UC tracks this relationship.</p>
+<p><strong>Interview Question:</strong> <em>How is lineage captured?</em></p>
+<ul>
+<li>Databricks runtime intercepts Spark operations</li>
+<li>Parses SQL/DataFrame operations to extract dependencies</li>
+<li>Stores lineage metadata in Unity Catalog metastore</li>
+<li><strong>Limitation:</strong> May not capture lineage from external tools (e.g., dbt, Airflow) unless they use Databricks APIs</li>
+</ul>
+<hr>
+<doc-anchor-target id="10-lakehouse-federation">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#10-lakehouse-federation">#</doc-anchor-trigger>
+        <span>10. Lakehouse Federation</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="101-concept">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#101-concept">#</doc-anchor-trigger>
+        <span>10.1 Concept</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Definition:</strong>
+Query external data systems (Snowflake, PostgreSQL, Redshift, MySQL) directly from Databricks without copying data.</p>
+<p><strong>Key Feature:</strong></p>
+<ul>
+<li>Query external system using Spark SQL syntax</li>
+<li>Data stays in source system</li>
+<li>UC governs access via connections</li>
+</ul>
+<p><strong>Supported Systems (as of Databricks Runtime 13.3+):</strong></p>
+<ul>
+<li>Snowflake</li>
+<li>PostgreSQL</li>
+<li>MySQL</li>
+<li>Amazon Redshift</li>
+<li>Azure SQL Database</li>
+<li>Google BigQuery</li>
+</ul>
+<doc-anchor-target id="102-setup-example-postgresql">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#102-setup-example-postgresql">#</doc-anchor-trigger>
+        <span>10.2 Setup Example (PostgreSQL)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Step 1: Create Connection</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE CONNECTION postgres_prod
+TYPE postgresql
+OPTIONS (
+  host 'prod-db.example.com',
+  port '5432',
+  database 'sales_db',
+  user 'readonly_user',
+  password 'encrypted_password'  -- Use secret scope in practice
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>Step 2: Query External Table</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Query PostgreSQL table via federation
+SELECT *
+FROM postgres_prod.public.customer_transactions
+WHERE order_date &gt;= '2025-01-01'
+LIMIT 100;</code></pre>
+</doc-codeblock></div>
+<p><strong>Step 3: Join with Delta Table</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Join external data with UC table
+SELECT
+  t.transaction_id,
+  t.amount,
+  c.customer_name
+FROM postgres_prod.public.customer_transactions t
+JOIN prod_catalog.sales.customers c ON t.customer_id = c.customer_id;</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="103-performance-considerations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#103-performance-considerations">#</doc-anchor-trigger>
+        <span>10.3 Performance Considerations</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Pushdown Optimization:</strong>
+Databricks pushes filters to external system when possible.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Good: Filter pushed to PostgreSQL
+SELECT * FROM postgres_prod.public.orders WHERE status = 'SHIPPED';
+
+-- Bad: All data pulled, then filtered in Spark
+SELECT * FROM postgres_prod.public.orders WHERE UPPER(status) = 'SHIPPED';</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Question:</strong> <em>When to use Federation vs ETL?</em></p>
+<ul>
+<li><strong>Federation:</strong> Real-time queries, small result sets, infrequent access</li>
+<li><strong>ETL:</strong> Large data volumes, frequent queries, complex transformations</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -312,20 +498,20 @@ $$ LANGUAGE plpgsql;</code></pre>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/query_optimization/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../databricks/unity-catalog/volumes-tables/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">16 Query Optimization</span>
+                                                <span class="block mt-1">03 Tables, Volumes, Views and M.​Views</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/date_time/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../databricks/unity-catalog/metrics/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">18 Date & Time Functions</span>
+                                                <span class="block mt-1">05 Metrics, User Identity, Delta Sharing, Secret Management</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -369,6 +555,6 @@ $$ LANGUAGE plpgsql;</code></pre>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "17 Security & Permissions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "04 Data Governance, Lineage, Observability, Lakehouse Federation", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

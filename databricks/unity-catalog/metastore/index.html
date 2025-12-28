@@ -9,30 +9,33 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>17 Security &amp; Permissions</title>
-    <meta name="title" content="17 Security & Permissions">
+    <title>02 Metastore, Metadata</title>
+    <meta name="title" content="02 Metastore, Metadata">
+    <meta name="description" content="What It Is: The metastore is the top-level container for Unity Catalog metadata. It stores:">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/metastore/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
-    <meta property="og:title" content="17 Security & Permissions">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/metastore/">
+    <meta property="og:title" content="02 Metastore, Metadata">
+    <meta property="og:description" content="What It Is: The metastore is the top-level container for Unity Catalog metadata. It stores:">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/structured-query-language/security/">
-    <meta property="twitter:title" content="17 Security & Permissions">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/unity-catalog/metastore/">
+    <meta property="twitter:title" content="02 Metastore, Metadata">
+    <meta property="twitter:description" content="What It Is: The metastore is the top-level container for Unity Catalog metadata. It stores:">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
-    <link href="../../resources/css/retype.css?v=3.11.0.820256008584" rel="stylesheet">
+    <link href="../../../resources/css/retype.css?v=3.11.0.820256008584" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
-    <script data-cfasync="false" src="../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=3.11.0.820256008584" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/config.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../../resources/js/retype.js?v=3.11.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../../resources/js/lunr.js?v=3.11.0.820256008584" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../../resources/js/prism.js?v=3.11.0.820256008584" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -47,7 +50,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-between h-full py-2 md:w-75">
                     <div class="flex items-center px-2 md:px-6">
-                        <a id="retype-branding-logo" href="../../" class="flex items-center leading-snug text-xl">
+                        <a id="retype-branding-logo" href="../../../" class="flex items-center leading-snug text-xl">
                             <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">My Documentation</span>
                         </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
                     </div>
@@ -147,162 +150,196 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="17-security--permissions" class="break-words">
+<doc-anchor-target id="02-metastore-metadata" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#17-security--permissions">#</doc-anchor-trigger>
-        <span>17 Security &amp; Permissions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#02-metastore-metadata">#</doc-anchor-trigger>
+        <span>02 Metastore, Metadata</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="user-and-role-management">
+<doc-anchor-target id="3-metastore-architecture">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-metastore-architecture">#</doc-anchor-trigger>
+        <span>3. Metastore Architecture</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="31-metastore-concept">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#user-and-role-management">#</doc-anchor-trigger>
-        <span>User and Role Management</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#31-metastore-concept">#</doc-anchor-trigger>
+        <span>3.1 Metastore Concept</span>
     </h3>
 </doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create user (role without login)
-CREATE ROLE data_analyst;
-
--- Create user (role with login)
-CREATE USER app_user WITH PASSWORD 'secure_password';
-
--- Create user with additional options
-CREATE USER report_user WITH
-    PASSWORD 'temp_password'
-    VALID UNTIL '2026-12-31'
-    CREATEDB;  -- Can create databases
-
--- Change password
-ALTER USER app_user WITH PASSWORD 'new_password';
-
--- Grant login privilege
-ALTER ROLE data_analyst WITH LOGIN;
-
--- Drop user
-DROP USER app_user;
-
--- List users
-SELECT * FROM pg_user;
-\du  -- In psql</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="grant-permissions">
+<p><strong>What It Is:</strong>
+The metastore is the top-level container for Unity Catalog metadata. It stores:</p>
+<ul>
+<li>Catalog definitions</li>
+<li>Schema definitions</li>
+<li>Table metadata</li>
+<li>Permissions</li>
+<li>Lineage information</li>
+<li>Audit logs</li>
+</ul>
+<p><strong>Key Constraint:</strong> One metastore per region (not per workspace)</p>
+<doc-anchor-target id="32-metastore-creation-azure-example">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#grant-permissions">#</doc-anchor-trigger>
-        <span>GRANT Permissions</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#32-metastore-creation-azure-example">#</doc-anchor-trigger>
+        <span>3.2 Metastore Creation (Azure Example)</span>
     </h3>
 </doc-anchor-target>
+<p><strong>Prerequisites:</strong></p>
+<ol>
+<li>ADLS Gen2 storage account</li>
+<li>Storage container for metastore root</li>
+<li>Access Connector for Azure Databricks (managed identity)</li>
+</ol>
+<p><strong>Creation Steps:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Grant SELECT on table
-GRANT SELECT ON employees TO app_user;
-
--- Grant SELECT and UPDATE
-GRANT SELECT, UPDATE ON employees TO app_user;
-
--- Grant all privileges
-GRANT ALL PRIVILEGES ON employees TO app_user;
-
--- Grant on schema
-GRANT USAGE ON SCHEMA public TO app_user;
-
--- Grant on all tables in schema
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO app_user;
-
--- Grant default privileges (for future objects)
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-GRANT SELECT ON TABLES TO app_user;
-
--- Grant execution on functions
-GRANT EXECUTE ON FUNCTION calculate_bonus(INT, NUMERIC) TO app_user;
-
--- Grant create privilege
-GRANT CREATE ON DATABASE mydb TO app_user;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="revoke-permissions">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#revoke-permissions">#</doc-anchor-trigger>
-        <span>REVOKE Permissions</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Revoke specific privilege
-REVOKE UPDATE ON employees FROM app_user;
-
--- Revoke all privileges
-REVOKE ALL PRIVILEGES ON employees FROM app_user;
-
--- Revoke with cascade (revokes dependent grants)
-REVOKE SELECT ON employees FROM app_user CASCADE;</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="row-level-security-postgresql-specific">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#row-level-security-postgresql-specific">#</doc-anchor-trigger>
-        <span>Row-Level Security (PostgreSQL specific)</span>
-    </h3>
-</doc-anchor-target>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create table
-CREATE TABLE employees (
-    employee_id INT PRIMARY KEY,
-    first_name VARCHAR(50),
-    salary NUMERIC,
-    department_id INT
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Step 1: Create storage credential (links to Access Connector)
+CREATE STORAGE CREDENTIAL adls_credential
+USING AZURE_MANAGED_IDENTITY
+WITH (
+  managed_identity_id = '/subscriptions/{sub-id}/resourceGroups/{rg}/providers/Microsoft.Databricks/accessConnectors/{connector-name}'
 );
 
--- Create policy: employees can only see their own records
-CREATE POLICY emp_select_policy ON employees
-    FOR SELECT
-    USING (employee_id = CURRENT_USER_ID);  -- Requires user tracking
+-- Step 2: Create metastore (done via Databricks Account Console or REST API)
+-- Not directly via SQL - requires account admin privileges
 
--- Enable RLS on table
-ALTER TABLE employees ENABLE ROW LEVEL SECURITY;
-
--- Create policy for management (can see all)
-CREATE ROLE manager;
-CREATE POLICY manager_policy ON employees
-    FOR SELECT
-    TO manager
-    USING (TRUE);  -- Managers see all rows</code></pre>
+-- Step 3: Verify metastore
+DESCRIBE METASTORE;</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="auditing-and-logging">
+<p><strong>Metastore Assignment:</strong></p>
+<ul>
+<li>Multiple workspaces can be assigned to the same metastore</li>
+<li>Workspaces in the same region share the metastore</li>
+<li>Enables cross-workspace data sharing and governance</li>
+</ul>
+<p><strong>Interview Question:</strong> <em>Can you have multiple metastores in one region?</em></p>
+<ul>
+<li><strong>No.</strong> One metastore per region is the design constraint.</li>
+<li>Workspaces in the region must use that metastore or none at all.</li>
+</ul>
+<doc-anchor-target id="33-managed-storage-locations">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#auditing-and-logging">#</doc-anchor-trigger>
-        <span>Auditing and Logging</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#33-managed-storage-locations">#</doc-anchor-trigger>
+        <span>3.3 Managed Storage Locations</span>
     </h3>
 </doc-anchor-target>
+<p><strong>Hierarchy of Managed Storage:</strong></p>
+<ol>
+<li><strong>Metastore-level:</strong> Default location for all catalogs</li>
+<li><strong>Catalog-level:</strong> Overrides metastore default for specific catalog</li>
+<li><strong>Schema-level:</strong> Overrides catalog default for specific schema</li>
+</ol>
+<p><strong>Example:</strong></p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Enable statement logging
-SET log_statement = 'all';  -- or 'mod' for modifications only
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Metastore default: abfss://metastore@storage.dfs.core.windows.net/
 
--- Log slow queries
-SET log_min_duration_statement = 1000;  -- Log queries &gt; 1 second
+-- Create catalog with custom location
+CREATE CATALOG prod_catalog
+MANAGED LOCATION 'abfss://prod@storage.dfs.core.windows.net/';
 
--- Log connection attempts
-SET log_connections = on;
-SET log_disconnections = on;
+-- Create schema with custom location
+CREATE SCHEMA prod_catalog.sales
+MANAGED LOCATION 'abfss://prod@storage.dfs.core.windows.net/sales/';
 
--- View logs (typically in data directory/log/)
--- Or use pg_log_*() functions
-
--- Application-level auditing (via triggers)
-CREATE TABLE audit_log (
-    audit_id SERIAL PRIMARY KEY,
-    table_name VARCHAR(50),
-    operation VARCHAR(10),
-    user_name VARCHAR(50),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    old_values JSONB,
-    new_values JSONB
-);
-
-CREATE OR REPLACE FUNCTION audit_function()
-RETURNS TRIGGER AS $$
-BEGIN
-    INSERT INTO audit_log (table_name, operation, user_name, old_values, new_values)
-    VALUES (TG_TABLE_NAME, TG_OP, CURRENT_USER, row_to_json(OLD), row_to_json(NEW));
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;</code></pre>
+-- Managed table inherits schema location
+CREATE TABLE prod_catalog.sales.orders (...);
+-- Stored at: abfss://prod@storage.dfs.core.windows.net/sales/orders/</code></pre>
 </doc-codeblock></div>
+<p><strong>Interview Pitfall:</strong></p>
+<ul>
+<li>If no location specified, uses parent&#x27;s managed location</li>
+<li>Changing managed location <strong>does not migrate</strong> existing data</li>
+</ul>
+<hr>
+<doc-anchor-target id="4-storage--security-abstractions">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#4-storage--security-abstractions">#</doc-anchor-trigger>
+        <span>4. Storage &amp; Security Abstractions</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="41-storage-credentials">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#41-storage-credentials">#</doc-anchor-trigger>
+        <span>4.1 Storage Credentials</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong>
+Define authentication to cloud storage without exposing secrets in table definitions.</p>
+<p><strong>Types by Cloud:</strong></p>
+<p><strong>Azure:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Managed Identity (recommended)
+CREATE STORAGE CREDENTIAL azure_mi
+USING AZURE_MANAGED_IDENTITY
+WITH (managed_identity_id = '...');
+
+-- Service Principal
+CREATE STORAGE CREDENTIAL azure_sp
+USING AZURE_SERVICE_PRINCIPAL
+WITH (
+  directory_id = 'tenant-id',
+  application_id = 'client-id',
+  client_secret = 'secret'
+);</code></pre>
+</doc-codeblock></div>
+<p><strong>AWS:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- IAM Role
+CREATE STORAGE CREDENTIAL aws_role
+USING AWS_IAM_ROLE
+WITH (role_arn = 'arn:aws:iam::account:role/role-name');</code></pre>
+</doc-codeblock></div>
+<p><strong>GCP:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Service Account
+CREATE STORAGE CREDENTIAL gcp_sa
+USING GCP_SERVICE_ACCOUNT
+WITH (email = 'sa@project.iam.gserviceaccount.com');</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="42-external-locations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#42-external-locations">#</doc-anchor-trigger>
+        <span>4.2 External Locations</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Purpose:</strong>
+Map storage credentials to specific storage paths. Enables governed access to external data.</p>
+<p><strong>Example:</strong></p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">-- Create external location
+CREATE EXTERNAL LOCATION s3_raw_data
+URL 's3://my-bucket/raw-data/'
+WITH (STORAGE CREDENTIAL aws_role);
+
+-- Grant access to external location
+GRANT READ FILES, WRITE FILES ON EXTERNAL LOCATION s3_raw_data TO data_engineers;</code></pre>
+</doc-codeblock></div>
+<p><strong>Interview Question:</strong> <em>Storage Credential vs External Location?</em></p>
+<ul>
+<li><strong>Storage Credential:</strong> Authentication mechanism (HOW to authenticate)</li>
+<li><strong>External Location:</strong> Specific path + credential (WHERE + HOW)</li>
+<li>External Location references a Storage Credential</li>
+</ul>
+<doc-anchor-target id="43-access-connector-azure-specific">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#43-access-connector-azure-specific">#</doc-anchor-trigger>
+        <span>4.3 Access Connector (Azure-Specific)</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>What It Is:</strong>
+Azure-managed identity that Databricks uses to access ADLS Gen2 without storing credentials.</p>
+<p><strong>Setup Flow:</strong></p>
+<ol>
+<li>Create Access Connector in Azure Portal</li>
+<li>Grant Access Connector RBAC permissions on ADLS Gen2 (Storage Blob Data Contributor)</li>
+<li>Create Storage Credential in UC referencing the Access Connector</li>
+<li>Create External Location using the Storage Credential</li>
+</ol>
+<p><strong>Interview Pitfall:</strong></p>
+<ul>
+<li>Access Connector must have proper RBAC on storage account</li>
+<li>Common error: &quot;403 Forbidden&quot; due to missing RBAC</li>
+</ul>
 
                                 
                                 <!-- Required only on API pages -->
@@ -312,20 +349,20 @@ $$ LANGUAGE plpgsql;</code></pre>
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/query_optimization/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../../databricks/unity-catalog/fundamentals/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">16 Query Optimization</span>
+                                                <span class="block mt-1">01 Unity Catalog</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/date_time/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../../databricks/unity-catalog/volumes-tables/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">18 Date & Time Functions</span>
+                                                <span class="block mt-1">03 Tables, Volumes, Views and M.​Views</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -369,6 +406,6 @@ $$ LANGUAGE plpgsql;</code></pre>
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "17 Security & Permissions", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "02 Metastore, Metadata", level: 3, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>

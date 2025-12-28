@@ -9,24 +9,24 @@
     <meta name="generator" content="Retype 3.11.0">
 
     <!-- Primary Meta Tags -->
-    <title>16. Misc</title>
-    <meta name="title" content="16. Misc">
-    <meta name="description" content="Aspect">
+    <title>3. Data Engineering &amp; ETL (Lakeflow Era)</title>
+    <meta name="title" content="3. Data Engineering & ETL (Lakeflow Era)">
+    <meta name="description" content="Context shift (important for interviews) Databricks is moving from imperative Spark pipelines→ declarative, optimized-by-default pipelines">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/misc/">
+    <link rel="canonical" href="https://subramanian-thiagarajan-01.github.io/databricks/lakeflow/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/misc/">
-    <meta property="og:title" content="16. Misc">
-    <meta property="og:description" content="Aspect">
+    <meta property="og:url" content="https://subramanian-thiagarajan-01.github.io/databricks/lakeflow/">
+    <meta property="og:title" content="3. Data Engineering & ETL (Lakeflow Era)">
+    <meta property="og:description" content="Context shift (important for interviews) Databricks is moving from imperative Spark pipelines→ declarative, optimized-by-default pipelines">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/spark-declarative-pipelines/misc/">
-    <meta property="twitter:title" content="16. Misc">
-    <meta property="twitter:description" content="Aspect">
+    <meta property="twitter:url" content="https://subramanian-thiagarajan-01.github.io/databricks/lakeflow/">
+    <meta property="twitter:title" content="3. Data Engineering & ETL (Lakeflow Era)">
+    <meta property="twitter:description" content="Context shift (important for interviews) Databricks is moving from imperative Spark pipelines→ declarative, optimized-by-default pipelines">
 
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
@@ -150,22 +150,410 @@
                                 <!-- Rendered if sidebar right is enabled -->
                                 <div id="retype-sidebar-right-toggle"></div>
                                 <!-- Page content  -->
-<doc-anchor-target id="16-misc" class="break-words">
+<doc-anchor-target id="3-data-engineering--etl-lakeflow-era" class="break-words">
     <h1>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#16-misc">#</doc-anchor-trigger>
-        <span>16. Misc</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#3-data-engineering--etl-lakeflow-era">#</doc-anchor-trigger>
+        <span>3. Data Engineering &amp; ETL (Lakeflow Era)</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="16-comparison--alternatives">
+<blockquote>
+<p><strong>Context shift (important for interviews)</strong>
+Databricks is moving from <em>imperative Spark pipelines</em> → <strong>declarative, optimized-by-default pipelines</strong>.
+<strong>Lakeflow</strong> is the umbrella for this evolution.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="31-lakeflow-2025">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#16-comparison--alternatives">#</doc-anchor-trigger>
-        <span>16. Comparison &amp; Alternatives</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#31-lakeflow-2025">#</doc-anchor-trigger>
+        <span>3.1 Lakeflow (2025+)</span>
     </h2>
 </doc-anchor-target>
-<doc-anchor-target id="161-dlt-vs-traditional-spark-jobs">
+<doc-anchor-target id="what-is-lakeflow">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#161-dlt-vs-traditional-spark-jobs">#</doc-anchor-trigger>
-        <span>16.1 DLT vs Traditional Spark Jobs</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-lakeflow">#</doc-anchor-trigger>
+        <span>What is Lakeflow?</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Lakeflow</strong> is Databricks’ <strong>unified ingestion + transformation + orchestration framework</strong> for data engineering.</p>
+<p>It:</p>
+<ul>
+<li>Standardizes ingestion, ETL, and orchestration</li>
+<li>Uses <strong>declarative definitions</strong></li>
+<li>Automatically applies incremental processing and optimizations</li>
+</ul>
+<p>Lakeflow <strong>does not replace Spark</strong> — it <strong>abstracts execution decisions</strong>.</p>
+<hr>
+<doc-anchor-target id="what-lakeflow-replaces--augments">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-lakeflow-replaces--augments">#</doc-anchor-trigger>
+        <span>What Lakeflow Replaces / Augments</span>
+    </h3>
+</doc-anchor-target>
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Older Tool</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Custom Spark jobs</td>
+<td>Augmented</td>
+</tr>
+<tr>
+<td>DLT (classic)</td>
+<td>Evolved into SDP</td>
+</tr>
+<tr>
+<td>Complex orchestration logic</td>
+<td>Reduced</td>
+</tr>
+<tr>
+<td>Hand-written incremental logic</td>
+<td>Eliminated</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Interview phrasing:</p>
+<blockquote>
+<p>Lakeflow shifts responsibility from developers to the platform.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="key-characteristics">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-characteristics">#</doc-anchor-trigger>
+        <span>Key Characteristics</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Declarative pipelines</li>
+<li>SQL-first, Python-supported</li>
+<li>Built-in quality, lineage, retries</li>
+<li>Tight integration with Jobs &amp; Unity Catalog</li>
+</ul>
+<hr>
+<doc-anchor-target id="32-file-ingestion--auto-loader-cloudfiles">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#32-file-ingestion--auto-loader-cloudfiles">#</doc-anchor-trigger>
+        <span>3.2 File Ingestion – Auto Loader (<code v-pre>cloudFiles</code>)</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-is-auto-loader">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-auto-loader">#</doc-anchor-trigger>
+        <span>What is Auto Loader?</span>
+    </h3>
+</doc-anchor-target>
+<p>Auto Loader is a <strong>structured streaming–based ingestion mechanism</strong> for cloud object storage.</p>
+<p>Supported formats:</p>
+<ul>
+<li>JSON</li>
+<li>CSV</li>
+<li>Parquet</li>
+<li>Avro</li>
+<li>ORC</li>
+<li>Text</li>
+</ul>
+<p>Supported storage:</p>
+<ul>
+<li>AWS S3</li>
+<li>Azure ADLS Gen2</li>
+<li>GCP GCS</li>
+</ul>
+<hr>
+<doc-anchor-target id="notification-mode-vs-directory-listing-mode">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#notification-mode-vs-directory-listing-mode">#</doc-anchor-trigger>
+        <span>Notification Mode vs Directory Listing Mode</span>
+    </h3>
+</doc-anchor-target>
+<doc-anchor-target id="notification-mode-preferred">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#notification-mode-preferred">#</doc-anchor-trigger>
+        <span>Notification Mode (Preferred)</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Uses cloud-native notifications (SQS, Event Grid, Pub/Sub)</li>
+<li>Near real-time</li>
+<li>Scales to millions of files</li>
+</ul>
+<p>Requirements:</p>
+<ul>
+<li>Cloud permissions</li>
+<li>Event infrastructure</li>
+</ul>
+<hr>
+<doc-anchor-target id="directory-listing-mode">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#directory-listing-mode">#</doc-anchor-trigger>
+        <span>Directory Listing Mode</span>
+    </h4>
+</doc-anchor-target>
+<ul>
+<li>Periodic file listing</li>
+<li>Slower</li>
+<li>Higher storage API cost</li>
+</ul>
+<p>Use only when:</p>
+<ul>
+<li>Notifications cannot be configured</li>
+</ul>
+<hr>
+<doc-anchor-target id="example-auto-loader-ingestion-pyspark">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-auto-loader-ingestion-pyspark">#</doc-anchor-trigger>
+        <span>Example: Auto Loader Ingestion (PySpark)</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-python"><code v-pre class="language-python">df = (
+  spark.readStream
+    .format(&quot;cloudFiles&quot;)
+    .option(&quot;cloudFiles.format&quot;, &quot;json&quot;)
+    .option(&quot;cloudFiles.schemaLocation&quot;, &quot;/mnt/schema/events&quot;)
+    .load(&quot;/mnt/raw/events&quot;)
+)
+
+df.writeStream \
+  .format(&quot;delta&quot;) \
+  .option(&quot;checkpointLocation&quot;, &quot;/mnt/chk/events&quot;) \
+  .table(&quot;raw.events&quot;)</code></pre>
+</doc-codeblock></div>
+<p>Key interview points:</p>
+<ul>
+<li>Uses <strong>Structured Streaming</strong></li>
+<li>Schema is tracked externally</li>
+<li>Exactly-once semantics via checkpointing</li>
+</ul>
+<hr>
+<doc-anchor-target id="33-declarative-etl">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#33-declarative-etl">#</doc-anchor-trigger>
+        <span>3.3 Declarative ETL</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="declarative-vs-imperative">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#declarative-vs-imperative">#</doc-anchor-trigger>
+        <span>Declarative vs Imperative</span>
+    </h3>
+</doc-anchor-target>
+<p>Declarative = define <strong>what the table should look like</strong>, not how to compute it.</p>
+<p>Databricks handles:</p>
+<ul>
+<li>Dependency graph</li>
+<li>Incremental recomputation</li>
+<li>Retry logic</li>
+<li>Backfills</li>
+</ul>
+<hr>
+<doc-anchor-target id="supported-languages">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#supported-languages">#</doc-anchor-trigger>
+        <span>Supported Languages</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>SQL (primary)</li>
+<li>Python (secondary)</li>
+</ul>
+<p>SQL-first is intentional:</p>
+<ul>
+<li>Easier lineage</li>
+<li>Easier optimization</li>
+<li>Easier governance</li>
+</ul>
+<hr>
+<doc-anchor-target id="34-data-quality-expectations">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#34-data-quality-expectations">#</doc-anchor-trigger>
+        <span>3.4 Data Quality (Expectations)</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-are-expectations">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-are-expectations">#</doc-anchor-trigger>
+        <span>What are Expectations?</span>
+    </h3>
+</doc-anchor-target>
+<p>Expectations are <strong>data quality rules</strong> enforced at write time.</p>
+<p>They:</p>
+<ul>
+<li>Validate incoming data</li>
+<li>Track violations</li>
+<li>Control failure behavior</li>
+</ul>
+<hr>
+<doc-anchor-target id="example-expectation">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-expectation">#</doc-anchor-trigger>
+        <span>Example Expectation</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CONSTRAINT valid_id
+EXPECT (id IS NOT NULL)
+ON VIOLATION DROP ROW</code></pre>
+</doc-codeblock></div>
+<p>Violation actions:</p>
+<ul>
+<li><code v-pre>DROP ROW</code></li>
+<li><code v-pre>FAIL UPDATE</code></li>
+<li><code v-pre>WARN</code></li>
+</ul>
+<p>Interview insight:</p>
+<blockquote>
+<p>Expectations are enforced <strong>before data is committed</strong>.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="observability">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#observability">#</doc-anchor-trigger>
+        <span>Observability</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Metrics per expectation</li>
+<li>Failures visible in pipeline UI</li>
+<li>Integrated with lineage</li>
+</ul>
+<hr>
+<doc-anchor-target id="35-enzyme-engine-internal">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#35-enzyme-engine-internal">#</doc-anchor-trigger>
+        <span>3.5 Enzyme Engine (Internal)</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-is-enzyme">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-enzyme">#</doc-anchor-trigger>
+        <span>What is Enzyme?</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Enzyme</strong> is Databricks’ internal optimization engine for <strong>incremental processing</strong>.</p>
+<p>It:</p>
+<ul>
+<li>Tracks data dependencies</li>
+<li>Minimizes recomputation</li>
+<li>Applies state-aware optimizations</li>
+</ul>
+<hr>
+<doc-anchor-target id="why-enzyme-matters">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-enzyme-matters">#</doc-anchor-trigger>
+        <span>Why Enzyme Matters</span>
+    </h3>
+</doc-anchor-target>
+<p>Without Enzyme:</p>
+<ul>
+<li>Small upstream changes → full recompute</li>
+</ul>
+<p>With Enzyme:</p>
+<ul>
+<li>Only affected downstream data is recomputed</li>
+</ul>
+<p>Interview phrasing:</p>
+<blockquote>
+<p>Enzyme makes declarative pipelines cost-efficient at scale.</p>
+</blockquote>
+<p>Status:</p>
+<ul>
+<li><strong>Internal</strong></li>
+<li><strong>Not directly configurable</strong></li>
+<li>Interviewers expect conceptual understanding only</li>
+</ul>
+<hr>
+<doc-anchor-target id="36-data-layout-optimization--liquid-clustering--very-high-yield">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#36-data-layout-optimization--liquid-clustering--very-high-yield">#</doc-anchor-trigger>
+        <span>3.6 Data Layout Optimization – Liquid Clustering (<span class="docs-emoji">&#x1F525;</span> Very High Yield)</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="what-is-liquid-clustering">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#what-is-liquid-clustering">#</doc-anchor-trigger>
+        <span>What is Liquid Clustering?</span>
+    </h3>
+</doc-anchor-target>
+<p>Liquid Clustering is a <strong>dynamic, adaptive data layout optimization</strong> for Delta tables.</p>
+<p>It:</p>
+<ul>
+<li>Eliminates static partitioning</li>
+<li>Replaces Z-Ordering</li>
+<li>Continuously optimizes layout</li>
+</ul>
+<hr>
+<doc-anchor-target id="why-partitioning-is-problematic">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#why-partitioning-is-problematic">#</doc-anchor-trigger>
+        <span>Why Partitioning Is Problematic</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Requires choosing columns upfront</li>
+<li>Causes data skew</li>
+<li>Hard to evolve</li>
+</ul>
+<p>Liquid Clustering:</p>
+<ul>
+<li>No fixed partition columns</li>
+<li>Adapts based on query patterns</li>
+<li>Optimizes automatically</li>
+</ul>
+<hr>
+<doc-anchor-target id="key-interview-statement">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#key-interview-statement">#</doc-anchor-trigger>
+        <span>Key Interview Statement</span>
+    </h3>
+</doc-anchor-target>
+<blockquote>
+<p>Liquid Clustering removes the need to design partitions manually.</p>
+</blockquote>
+<hr>
+<doc-anchor-target id="usage-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#usage-example">#</doc-anchor-trigger>
+        <span>Usage Example</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">CREATE TABLE sales
+USING DELTA
+CLUSTER BY (customer_id);</code></pre>
+</doc-codeblock></div>
+<p>Notes:</p>
+<ul>
+<li>Column list is <strong>advisory</strong></li>
+<li>Databricks may change clustering internally</li>
+<li>Works best with large tables</li>
+</ul>
+<hr>
+<doc-anchor-target id="trade-offs">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#trade-offs">#</doc-anchor-trigger>
+        <span>Trade-offs</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Not ideal for very small tables</li>
+<li>Background optimization cost</li>
+</ul>
+<hr>
+<doc-anchor-target id="37-ingestion-patterns">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#37-ingestion-patterns">#</doc-anchor-trigger>
+        <span>3.7 Ingestion Patterns</span>
+    </h2>
+</doc-anchor-target>
+<doc-anchor-target id="copy-into-vs-auto-loader">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#copy-into-vs-auto-loader">#</doc-anchor-trigger>
+        <span>COPY INTO vs Auto Loader</span>
     </h3>
 </doc-anchor-target>
 <div class="table-wrapper scrollbar overflow-hidden">
@@ -173,304 +561,113 @@
 <thead>
 <tr>
 <th>Aspect</th>
-<th>DLT</th>
-<th>Spark Jobs</th>
+<th>COPY INTO</th>
+<th>Auto Loader</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Orchestration</td>
-<td>Automatic (DAG inferred)</td>
-<td>Manual (script order)</td>
+<td>Mode</td>
+<td>Batch</td>
+<td>Streaming</td>
 </tr>
 <tr>
-<td>State management</td>
-<td>Automatic (checkpoints)</td>
-<td>Manual implementation</td>
+<td>Incremental</td>
+<td>Yes</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td>Failure recovery</td>
-<td>Automatic (checkpoint replay)</td>
-<td>Custom logic required</td>
+<td>File tracking</td>
+<td>Metadata</td>
+<td>Checkpoints</td>
 </tr>
 <tr>
-<td>Data quality</td>
-<td>Built-in (Expectations)</td>
-<td>Manual validation</td>
+<td>Latency</td>
+<td>Higher</td>
+<td>Low</td>
 </tr>
 <tr>
-<td>Cost</td>
-<td>Optimized (incremental, autoscaling)</td>
-<td>Depends on implementation</td>
-</tr>
-<tr>
-<td>Learning curve</td>
-<td>Lower (declarative)</td>
-<td>Higher (imperative)</td>
+<td>Complexity</td>
+<td>Low</td>
+<td>Medium</td>
 </tr>
 </tbody>
 </table>
 </div>
-<doc-anchor-target id="162-dlt-vs-databricks-workflows">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#162-dlt-vs-databricks-workflows">#</doc-anchor-trigger>
-        <span>16.2 DLT vs Databricks Workflows</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li><strong>DLT</strong>: Table-to-table dependencies; ideal for pure data pipeline orchestration</li>
-<li><strong>Workflows</strong>: Task orchestration; SQL queries, Python scripts, shell commands; more flexible</li>
-</ul>
-<p>Use <strong>DLT</strong> for ETL pipelines. Use <strong>Workflows</strong> for orchestrating heterogeneous tasks (DLT pipeline + Notebook + SQL query + API call).</p>
-<doc-anchor-target id="163-dlt-vs-airflow">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#163-dlt-vs-airflow">#</doc-anchor-trigger>
-        <span>16.3 DLT vs Airflow</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li><strong>DLT</strong>: Native Databricks; simpler; automatic retry, monitoring, state management</li>
-<li><strong>Airflow</strong>: Open-source; more flexible; requires manual Databricks hook configuration</li>
-</ul>
-<p>DLT is <strong>not a replacement</strong> for Airflow; different abstraction levels.</p>
-<doc-anchor-target id="164-dlt-vs-kafka-streams--flink">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#164-dlt-vs-kafka-streams--flink">#</doc-anchor-trigger>
-        <span>16.4 DLT vs Kafka Streams / Flink</span>
-    </h3>
-</doc-anchor-target>
-<ul>
-<li><strong>DLT</strong>: Batch + stream unified; managed by Databricks</li>
-<li><strong>Kafka Streams / Flink</strong>: Lower-level stream processing; more control, steeper ops burden</li>
-</ul>
-<p>DLT is higher-level; preferred for lakehouse pipelines.</p>
 <hr>
-<doc-anchor-target id="17-interview-specific-scenarios">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#17-interview-specific-scenarios">#</doc-anchor-trigger>
-        <span>17. Interview-Specific Scenarios</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="171-designing-an-end-to-end-pipeline">
+<doc-anchor-target id="when-to-use-copy-into">
     <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#171-designing-an-end-to-end-pipeline">#</doc-anchor-trigger>
-        <span>17.1 Designing an End-to-End Pipeline</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Scenario</strong>: Ingest real-time e-commerce transactions, clean, aggregate hourly revenue.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-python"><code v-pre class="language-python">import dlt
-from pyspark.sql import functions as F
-from datetime import datetime
-
-# Bronze: Raw ingestion
-@dlt.create_streaming_table(name=&quot;transactions_bronze&quot;)
-def transactions_bronze():
-    return spark.readStream.format(&quot;cloudFiles&quot;) \
-        .option(&quot;cloudFiles.format&quot;, &quot;json&quot;) \
-        .option(&quot;cloudFiles.schemaLocation&quot;, &quot;/mnt/schemas/transactions&quot;) \
-        .option(&quot;cloudFiles.inferColumnTypes&quot;, &quot;true&quot;) \
-        .load(&quot;s3://transactions/events/&quot;)
-
-# Silver: Cleaned, with quality expectations
-@dlt.table
-@dlt.expect_or_drop(&quot;non_negative_amount&quot;, &quot;amount &gt;= 0&quot;)
-@dlt.expect_or_drop(&quot;valid_customer_id&quot;, &quot;customer_id IS NOT NULL&quot;)
-@dlt.expect_or_fail(&quot;valid_timestamp&quot;, &quot;transaction_timestamp &lt;= current_timestamp()&quot;)
-def transactions_silver():
-    return dlt.read_stream(&quot;transactions_bronze&quot;) \
-        .withColumn(&quot;transaction_date&quot;, F.to_date(&quot;transaction_timestamp&quot;)) \
-        .filter(&quot;amount &gt; 0&quot;) \
-        .filter(&quot;customer_id IS NOT NULL&quot;)
-
-# Gold: Hourly aggregation (materialized view for cost efficiency)
-@dlt.table
-def revenue_hourly_gold():
-    return dlt.read(&quot;transactions_silver&quot;) \
-        .withColumn(&quot;hour&quot;, F.date_trunc(&quot;hour&quot;, &quot;transaction_timestamp&quot;)) \
-        .groupBy(&quot;hour&quot;) \
-        .agg(
-            F.sum(&quot;amount&quot;).alias(&quot;total_revenue&quot;),
-            F.count(&quot;*&quot;).alias(&quot;transaction_count&quot;),
-            F.approx_percentile(&quot;amount&quot;, 0.5).alias(&quot;median_amount&quot;)
-        ) \
-        .orderBy(&quot;hour&quot;)</code></pre>
-</doc-codeblock></div>
-<p><strong>Interview talking points</strong>:</p>
-<ul>
-<li>Streaming table at Bronze (incremental)</li>
-<li>Expectations at Silver (quality enforcement)</li>
-<li>Materialized view at Gold (cost-effective aggregation)</li>
-<li>Windowing/groupBy automatically handles lateness with watermarks</li>
-</ul>
-<doc-anchor-target id="172-debugging-a-failed-pipeline">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#172-debugging-a-failed-pipeline">#</doc-anchor-trigger>
-        <span>17.2 Debugging a Failed Pipeline</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Scenario</strong>: DLT pipeline fails with &quot;Cannot cast StringType to IntegerType&quot; error.</p>
-<p><strong>Approach</strong>:</p>
-<ol>
-<li><strong>Check event log</strong>: Query <code v-pre>event_log()</code> for <code v-pre>update_status = 'FAILED'</code>, read error details</li>
-<li><strong>Examine source data</strong>: Sample raw table, identify rows with unexpected types</li>
-<li><strong>Add debugging expectations</strong>: Log data quality metrics before transformation</li>
-<li><strong>Use development mode</strong>: Faster iteration for troubleshooting</li>
-<li><strong>Extract problematic step</strong>: Run in separate notebook for interactive debugging</li>
-</ol>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-python"><code v-pre class="language-python"># Debugging notebook
-raw = spark.read.table(&quot;transactions_bronze&quot;)
-raw.filter(&quot;amount LIKE '%text%'&quot;).display()  # Find non-numeric amounts
-
-# Add rescue column to handle bad data
-@dlt.table
-def transactions_silver_robust():
-    return dlt.read(&quot;transactions_bronze&quot;) \
-        .withColumn(&quot;amount_parsed&quot;,
-            F.try_cast(&quot;amount&quot;, &quot;DECIMAL(18,2)&quot;)) \
-        .filter(&quot;amount_parsed IS NOT NULL&quot;)  # Drop unparseable rows</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="173-handling-schema-evolution">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#173-handling-schema-evolution">#</doc-anchor-trigger>
-        <span>17.3 Handling Schema Evolution</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Scenario</strong>: Source system adds new column; existing pipeline breaks.</p>
-<p><strong>Root cause</strong>: Explicit schema definition is too strict.</p>
-<p><strong>Solution</strong>:</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-python"><code v-pre class="language-python"># Before (breaks on new columns)
-@dlt.table(schema=&quot;id LONG, name STRING&quot;)
-def users():
-    return spark.readStream.format(&quot;cloudFiles&quot;).load(&quot;s3://users/&quot;)
-
-# After (allows new columns via rescue)
-@dlt.table
-def users():
-    return spark.readStream.format(&quot;cloudFiles&quot;) \
-        .option(&quot;cloudFiles.schemaLocation&quot;, &quot;/mnt/schemas/users&quot;) \
-        .option(&quot;cloudFiles.schemaEvolutionMode&quot;, &quot;additive&quot;) \
-        .option(&quot;cloudFiles.rescuedDataColumn&quot;, &quot;_rescued_data&quot;) \
-        .load(&quot;s3://users/&quot;)</code></pre>
-</doc-codeblock></div>
-<doc-anchor-target id="174-trade-offs-continuous-vs-triggered">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#174-trade-offs-continuous-vs-triggered">#</doc-anchor-trigger>
-        <span>17.4 Trade-offs: Continuous vs Triggered</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Scenario</strong>: CEO demands real-time dashboard; cost is high.</p>
-<p><strong>Decision matrix</strong>:</p>
-<ul>
-<li><strong>Continuous</strong>: Latency &lt;5 min; cost ~$10k/month (constant cluster)</li>
-<li><strong>Triggered (5-min schedule)</strong>: Latency ~5 min; cost ~$2k/month</li>
-</ul>
-<p><strong>Recommendation</strong>: Triggered pipeline with 5-minute schedule; achieves real-time for most business use cases at 1/5 the cost.</p>
-<doc-anchor-target id="175-cdc-implementation-with-scd-type-2">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#175-cdc-implementation-with-scd-type-2">#</doc-anchor-trigger>
-        <span>17.5 CDC Implementation with SCD Type 2</span>
-    </h3>
-</doc-anchor-target>
-<p><strong>Scenario</strong>: Track customer attribute changes over time; maintain full history.</p>
-<div class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-python"><code v-pre class="language-python">@dlt.create_streaming_table(name=&quot;customer_updates_stream&quot;)
-def customer_updates_stream():
-    return spark.readStream.format(&quot;cloudFiles&quot;) \
-        .option(&quot;cloudFiles.format&quot;, &quot;json&quot;) \
-        .load(&quot;s3://cdc/customers/&quot;)
-    # Schema: customer_id, email, address, change_type, change_timestamp
-
-@dlt.apply_changes(
-    target=&quot;customers_scd2&quot;,
-    source=&quot;customer_updates_stream&quot;,
-    keys=[&quot;customer_id&quot;],
-    sequence_by=&quot;change_timestamp&quot;,
-    stored_as_scd_type=2,
-    apply_as_deletes=expr(&quot;change_type = 'DELETE'&quot;)
-)
-def apply_cdc_scd2():
-    pass
-
-# Query current state
-SELECT * FROM customers_scd2 WHERE __end_at IS NULL
-
-# Query historical state at specific date
-SELECT * FROM customers_scd2 WHERE __start_at &lt;= '2025-06-01' AND __end_at &gt; '2025-06-01'</code></pre>
-</doc-codeblock></div>
-<hr>
-<doc-anchor-target id="critical-knowledge-for-interviews">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#critical-knowledge-for-interviews">#</doc-anchor-trigger>
-        <span>Critical Knowledge for Interviews</span>
-    </h2>
-</doc-anchor-target>
-<doc-anchor-target id="mechanics-you-must-know">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#mechanics-you-must-know">#</doc-anchor-trigger>
-        <span>Mechanics You Must Know</span>
-    </h3>
-</doc-anchor-target>
-<ol>
-<li><strong>Checkpoints are incremental</strong>: Streaming tables store processed offsets; recovery resumes from last offset</li>
-<li><strong>Exactly-once is per-partition</strong>: Kafka/message queues guarantee exactly-once per partition; Auto Loader per file</li>
-<li><strong>Materialized views are deterministic</strong>: Same input always produces same output; safe to recompute fully</li>
-<li><strong>Expectations are real-time</strong>: Metrics logged as data passes through; not post-hoc validation</li>
-<li><strong>DLT infers streaming vs batch</strong>: If source is streaming (readStream), table is streaming; else, it&#x27;s a materialized view</li>
-<li><strong>State is locality-sensitive</strong>: Large state stores benefit from RocksDB; serverless auto-manages</li>
-</ol>
-<doc-anchor-target id="common-pitfalls">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#common-pitfalls">#</doc-anchor-trigger>
-        <span>Common Pitfalls</span>
-    </h3>
-</doc-anchor-target>
-<ol>
-<li><strong>Idempotency</strong>: Streaming + append-only = duplicates on restart</li>
-<li><strong>Circular deps</strong>: Will be caught immediately; design tables bottom-up</li>
-<li><strong>Checkpoint corruption</strong>: Manual recovery required; plan for it</li>
-<li><strong>Schema drift</strong>: Auto Loader rescue column is your friend</li>
-<li><strong>Over-specifying schema</strong>: Avoid explicit schemas in streaming ingestion; use inference + evolution</li>
-<li><strong>Stateful ops without watermarks</strong>: Windows/joins will backlog indefinitely without watermarks</li>
-<li><strong>Confusing EXPECT variants</strong>: EXPECT (logs), EXPECT_OR_DROP (silent removal), EXPECT_OR_FAIL (hard stop)</li>
-</ol>
-<doc-anchor-target id="trade-offs-to-articulate">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#trade-offs-to-articulate">#</doc-anchor-trigger>
-        <span>Trade-offs to Articulate</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#when-to-use-copy-into">#</doc-anchor-trigger>
+        <span>When to Use COPY INTO</span>
     </h3>
 </doc-anchor-target>
 <ul>
-<li><strong>Latency vs Cost</strong>: Streaming continuous (low latency, high cost) vs triggered (higher latency, lower cost)</li>
-<li><strong>Incremental vs Determinism</strong>: Streaming tables are incremental but require idempotent logic; MVs are deterministic but expensive</li>
-<li><strong>Strictness vs Flexibility</strong>: Early schema enforcement prevents bad data; late schema enforcement (rescue columns) allows drift discovery</li>
-<li><strong>Complexity vs Automation</strong>: DLT abstracts away (simpler, less control); Workflows/Spark jobs expose (more control, more work)</li>
+<li>One-time backfills</li>
+<li>Scheduled batch ingestion</li>
+<li>Simple pipelines</li>
 </ul>
 <hr>
-<doc-anchor-target id="references--latest-updates-as-of-dec-2025">
+<doc-anchor-target id="when-to-use-auto-loader">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#when-to-use-auto-loader">#</doc-anchor-trigger>
+        <span>When to Use Auto Loader</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>Continuous ingestion</li>
+<li>Event-driven pipelines</li>
+<li>High file arrival rate</li>
+</ul>
+<hr>
+<doc-anchor-target id="copy-into-example">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#copy-into-example">#</doc-anchor-trigger>
+        <span>COPY INTO Example</span>
+    </h3>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-sql"><code v-pre class="language-sql">COPY INTO bronze.events
+FROM '/mnt/raw/events'
+FILEFORMAT = JSON;</code></pre>
+</doc-codeblock></div>
+<p>Internals:</p>
+<ul>
+<li>Tracks loaded files</li>
+<li>Idempotent</li>
+<li>No streaming state</li>
+</ul>
+<hr>
+<doc-anchor-target id="job-integration">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#job-integration">#</doc-anchor-trigger>
+        <span>Job Integration</span>
+    </h3>
+</doc-anchor-target>
+<ul>
+<li>COPY INTO → scheduled Jobs</li>
+<li>Auto Loader → continuous or triggered Jobs</li>
+</ul>
+<hr>
+<doc-anchor-target id="common-interview-pitfalls-section-3">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#references--latest-updates-as-of-dec-2025">#</doc-anchor-trigger>
-        <span>References &amp; Latest Updates (as of Dec 2025)</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#common-interview-pitfalls-section-3">#</doc-anchor-trigger>
+        <span>Common Interview Pitfalls (Section 3)</span>
     </h2>
 </doc-anchor-target>
 <ul>
-<li><strong>Spark Declarative Pipelines</strong> (Apache Spark 4.1+): Databricks contributing DLT to open-source Spark</li>
-<li><strong>Serverless Incremental MVs</strong>: 6.5x throughput improvement, 85% latency reduction (200B-row benchmark)</li>
-<li><strong>RocksDB state management</strong>: Default for stateful ops; automatically tuned on serverless</li>
-<li><strong>Photon Acceleration</strong>: 2-4x speedup; ~2x DBU cost; skip for I/O-bound workloads</li>
-<li><strong>Unity Catalog</strong>: All DLT tables eligible for row/column security</li>
-<li><strong>Event log querying</strong>: <code v-pre>event_log(table(...))</code> syntax enables centralized monitoring</li>
+<li>Treating Lakeflow as a product, not a framework</li>
+<li>Confusing Liquid Clustering with partitioning</li>
+<li>Overusing directory listing mode</li>
+<li>Writing manual incremental logic when declarative is available</li>
 </ul>
 <hr>
-<doc-anchor-target id="no-fluff-summary">
-    <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#no-fluff-summary">#</doc-anchor-trigger>
-        <span>No-Fluff Summary</span>
-    </h2>
+<doc-anchor-target id="next-section">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#next-section">#</doc-anchor-trigger>
+        <span>Next Section</span>
+    </h3>
 </doc-anchor-target>
-<p>DLT is a declarative ETL framework built on Spark Structured Streaming. You declare tables; DLT handles DAG construction, orchestration, state management, and failure recovery. Streaming tables are incremental; materialized views deterministic. Expectations enforce quality in real-time. APPLY CHANGES handles CDC (SCD1/2) natively. Checkpoints enable exactly-once semantics. Event logs provide deep observability. Biggest pitfall: assuming idempotency; design for it. Trade-offs are latency vs cost, complexity vs control. Master checkpoints, expectations, and the streaming-batch unification; you&#x27;ll ace the interview.</p>
+<p>Reply <strong>“Proceed to Section 4 (Databricks SQL)”</strong> when ready.</p>
 
                                 
                                 <!-- Required only on API pages -->
@@ -480,20 +677,20 @@ SELECT * FROM customers_scd2 WHERE __start_at &lt;= '2025-06-01' AND __end_at &g
                             
                                 <nav id="retype-nextprev" class="print:hidden flex mt-14">
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../spark-declarative-pipelines/advanced/">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../databricks/overview/">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                             <span>
                                                 <span class="block text-xs font-normal text-base-text-muted">Previous</span>
-                                                <span class="block mt-1">15. Advanced & Edge Cases</span>
+                                                <span class="block mt-1">1. Databricks Platform & Core Architecture</span>
                                             </span>
                                         </a>
                                     </div>
                             
                                     <div class="w-1/2">
-                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../structured-query-language/introduction/">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../delta-format/delta_format/">
                                             <span>
                                                 <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
-                                                <span class="block mt-1">01 Introduction & Core Concepts</span>
+                                                <span class="block mt-1">1. Delta Lake Interview Preparation Notes</span>
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
                                         </a>
@@ -537,6 +734,6 @@ SELECT * FROM customers_scd2 WHERE __start_at &lt;= '2025-06-01' AND __end_at &g
 
     <div id="retype-overlay-target"></div>
 
-    <script data-cfasync="false">window.__DOCS__ = { "title": "16. Misc", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+    <script data-cfasync="false">window.__DOCS__ = { "title": "3. Data Engineering & ETL (Lakeflow Era)", level: 2, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
 </body>
 </html>
